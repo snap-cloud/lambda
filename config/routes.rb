@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   scope '/admin' do
     mount Blazer::Engine, at: "analyze"
     mount PgHero::Engine, at: "pghero"
+    get 'users', to: 'dashboards#users', as: 'users_dashboard'
   end
 
   # Public Redirects
