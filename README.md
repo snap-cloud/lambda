@@ -1,7 +1,23 @@
 # λ : lambda
+> TODO: CodeCov, CI, CodeClimate badges
 
 Lambda is an LTI app for autograding [Snap<em>!</em>][1] programs.
 
+It is currently in active development.
+
+## Overview
+
+We have:
+* Problems
+* Submissions
+* Users
+* AG-Interfaces
+
+## API
+
+## Integrations -- TODO
+### edX
+### Canvas (bCourses)
 
 ---
 
