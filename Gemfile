@@ -45,7 +45,6 @@ gem "rack-canonical-host"
 
 gem "simple_form"
 gem "title"
-gem "uglifier"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
