@@ -1,33 +1,31 @@
 fieldset {
-  background-color: $secondary-background-color;
-  border: $base-border;
-  margin: 0 0 $small-spacing;
-  padding: $base-spacing;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  font-weight: 600;
+  margin-bottom: $small-spacing / 2;
+  padding: 0;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: $small-spacing / 2;
 }
 
 input,
-label,
 select {
   display: block;
   font-family: $base-font-family;
   font-size: $base-font-size;
 }
 
-label {
-  font-weight: 600;
-  margin-bottom: $small-spacing / 2;
-
-  &.required::after {
-    content: "*";
-  }
-
-  abbr {
-    display: none;
-  }
-}
-
 #{$all-text-inputs},
-select[multiple=multiple] {
+select[multiple] {
   background-color: $base-background-color;
   border: $base-border;
   border-radius: $base-border-radius;
@@ -64,21 +62,17 @@ textarea {
   resize: vertical;
 }
 
-input[type="search"] {
+[type="search"] {
   appearance: none;
 }
 
-input[type="checkbox"],
-input[type="radio"] {
+[type="checkbox"],
+[type="radio"] {
   display: inline;
   margin-right: $small-spacing / 2;
-
-  + label {
-    display: inline-block;
-  }
 }
 
-input[type="file"] {
+[type="file"] {
   margin-bottom: $small-spacing;
   width: 100%;
 }

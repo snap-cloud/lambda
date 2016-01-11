@@ -7,6 +7,11 @@ gem 'rails', '4.2.5'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+# Thoughtbot Layout Tools
+gem "bourbon", "~> 4.2.0"
+gem "neat", "~> 1.7.0"
+gem "bitters"
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
@@ -29,11 +34,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma'
 
 gem "autoprefixer-rails"
-gem "bourbon", "~> 4.2.0"
 gem "delayed_job_active_record"
 gem "flutie"
 gem "high_voltage"
-gem "neat", "~> 1.7.0"
 # gem "newrelic_rpm", ">= 3.9.8"
 gem "normalize-rails", "~> 3.0.0"
 
