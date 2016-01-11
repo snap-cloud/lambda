@@ -37,7 +37,7 @@ gem "autoprefixer-rails"
 gem "delayed_job_active_record"
 gem "flutie"
 gem "high_voltage"
-# gem "newrelic_rpm", ">= 3.9.8"
+gem "newrelic_rpm", ">= 3.9.8"
 gem "normalize-rails", "~> 3.0.0"
 
 gem "rack-canonical-host"
@@ -47,6 +47,8 @@ gem "rack-canonical-host"
 
 gem "simple_form"
 gem "title"
+
+#
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
