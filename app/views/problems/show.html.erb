@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @problem.title %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @problem.points %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @problem.content %>
+</p>
+
+<p>
+  <strong>Tests:</strong>
+  <%= @problem.tests %>
+</p>
+
+<p>
+  <strong>Initial file:</strong>
+  <%= @problem.initial_file %>
+</p>
+
+<p>
+  <strong>Metadata:</strong>
+  <%= @problem.metadata %>
+</p>
+
+<p>
+  <strong>Tags:</strong>
+  <%= @problem.tags %>
+</p>
+
+<%= link_to 'Edit', edit_problem_path(@problem) %> |
+<%= link_to 'Back', problems_path %>
