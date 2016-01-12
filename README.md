@@ -20,6 +20,16 @@ We have:
 ### Canvas (bCourses)
 
 
+---
+
+## Cloning
+Clone with `git clone --recursive` to download the snap source as a submodule.
+
+If you've already cloned without `--recursive` do:
+
+* `git submodule init`
+* `git submodule update`
+
 ## Getting Started
 
 After you have cloned this repo, run this setup script to set up your machine
@@ -54,8 +64,8 @@ programming in style.
 	* 2.3.0
 * System dependencies
 	* Postgres
-	* 
-	```
+	* OSX Install postgres:
+	```sh
 	brew install postgresql
 	# To have launchd start postgresql at login:
 	ln -sfv /usr/local/opt/postgresql/*plist ~/Library/LaunchAgents
