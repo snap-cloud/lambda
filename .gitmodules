@@ -1,0 +1,3 @@
+[submodule "public/snap"]
+	path = public/snap
+	url = git://github.com/cycomachead/lambda-evaluator.git
