@@ -59,6 +59,8 @@ gem 'pg'
 gem 'dce_lti'
 gem 'activerecord-session_store', '~> 0.1.1'
 
+gem 'dotenv'
+
 group :development do
   gem "quiet_assets"
   gem "refills"

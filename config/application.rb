@@ -7,7 +7,11 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
+
 Bundler.require(*Rails.groups)
+
+Dotenv::Railtie.load
+
 module Lambda
   class Application < Rails::Application
     config.i18n.enforce_available_locales = true
