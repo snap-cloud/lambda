@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => "problems#index"
   resources :problems
   #get 'problem/new'
 
