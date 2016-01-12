@@ -49,12 +49,15 @@ gem "simple_form"
 gem "title"
 
 #
+gem 'pg'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 # LTI
-gem 'ims-lti'
+# gem 'ims-lti'
+gem 'dce_lti'
+gem 'activerecord-session_store', '~> 0.1.1'
 
 group :development do
   gem "quiet_assets"
@@ -83,7 +86,6 @@ group :development, :test do
 end
 
 group :test do
-  gem "pg"
   gem "capybara-webkit"
   gem "database_cleaner"
   gem "formulaic"
@@ -95,7 +97,6 @@ group :test do
 end
 
 group :staging, :production do
-  gem "pg"
   gem "rails_stdout_logging"
   gem "rack-timeout"
 end

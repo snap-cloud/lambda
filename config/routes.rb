@@ -4,4 +4,6 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
+  mount DceLti::Engine => "/lti"
+
 end
