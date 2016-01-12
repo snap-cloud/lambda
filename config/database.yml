@@ -1,8 +1,10 @@
 development: &default
-  adapter: sqlite3
+  adapter: postgresql
   pool: 5
   timeout: 5000
-  database: db/lambda_dev.sqlite3
+  encoding: utf8
+  host: localhost
+  database: lambda_dev
 
 test:
   adapter: postgresql

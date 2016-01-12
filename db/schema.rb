@@ -13,13 +13,16 @@
 
 ActiveRecord::Schema.define(version: 20160112012252) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "dce_lti_nonces", force: :cascade do |t|
     t.string   "nonce"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "dce_lti_nonces", ["nonce"], name: "index_dce_lti_nonces_on_nonce", unique: true
+  add_index "dce_lti_nonces", ["nonce"], name: "index_dce_lti_nonces_on_nonce", unique: true, using: :btree
 
   create_table "dce_lti_users", force: :cascade do |t|
     t.string   "lti_user_id"
@@ -29,7 +32,7 @@ ActiveRecord::Schema.define(version: 20160112012252) do
     t.string   "lis_person_name_given"
     t.string   "lis_person_sourcedid"
     t.string   "user_image"
-    t.string   "roles",                            default: "--- []\n"
+    t.string   "roles",                            default: [], array: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -53,7 +56,7 @@ ActiveRecord::Schema.define(version: 20160112012252) do
     t.datetime "updated_at"
   end
 
-  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
-  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
 end
