@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   mount DceLti::Engine => "/lti"
 
+  # Public Redirects
+  get 'snap', to: 'welcome#snap'
 end

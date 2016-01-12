@@ -4,6 +4,7 @@ class ProblemsController < ApplicationController
   # GET /problems
   # GET /problems.json
   def index
+    puts 'PARAMS', params
     @problems = Problem.all
   end
 
