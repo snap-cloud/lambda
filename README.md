@@ -53,7 +53,16 @@ programming in style.
 * Ruby version
 	* 2.3.0
 * System dependencies
-	*
+	* Postgres
+	* 
+	```
+	brew install postgresql
+	# To have launchd start postgresql at login:
+	ln -sfv /usr/local/opt/postgresql/*plist ~/Library/LaunchAgents
+
+	# Then to load postgresql now:
+	launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+	```
 * Configuration
 * Database creation
 * Database initialization
