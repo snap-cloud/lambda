@@ -74,10 +74,20 @@ programming in style.
 	launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 	```
 	* `ngrok` 2 Mac binary is in `bin/`
+		* Launch with `bin/ngrok http 3000`
+		* Then put that URL in Canvas / wherever.
 * Configuration
 * Database creation
+	* Postgres
+	* rake db:create 
+	* rake db:migrate
 * Database initialization
+	* TODO create seeds file
 * How to run the test suite
 * Services (job queues, cache servers, search engines, etc.)
 * Deployment instructions
+
+
+## Canvas Testing Configuration
+URL: https://bcourses.berkeley.edu/courses/1268501/settings/configurations
 
