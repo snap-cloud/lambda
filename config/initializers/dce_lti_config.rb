@@ -1,6 +1,6 @@
 DceLti::Engine.setup do |lti|
   # "provider_*" attributes are used to describe this tool to the consumer,
-  # where "consumer" is an LMS like canvas. The defaults are below, uncomment
+  # where "consumer" is an LMS like Canvas. The defaults are below, uncomment
   # and modify as necessary or (ideally) configure via environment variables.
   #
   # lti.provider_title = (ENV['LTI_PROVIDER_TITLE'] || 'DCE LTI Provider')
@@ -56,7 +56,7 @@ DceLti::Engine.setup do |lti|
   # * tool_config - An instance of IMS::LTI::ToolConfig
   #
   # It allows you to config LMS-specific extensions. A common example for the
-  # Canvas LMS is included below, see 
+  # Canvas LMS is included below, see
   # https://github.com/instructure/ims-lti/blob/master/lib/ims/lti/extensions/canvas.rb
   # for more canvas-specific configuration options.
 

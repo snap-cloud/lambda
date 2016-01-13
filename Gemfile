@@ -48,18 +48,15 @@ gem "rack-canonical-host"
 gem "simple_form"
 gem "title"
 
-#
+# Always use PG as the db
 gem 'pg'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 # LTI
-# gem 'ims-lti'
 gem 'dce_lti'
 gem 'activerecord-session_store', '~> 0.1.1'
-
-gem 'dotenv-rails'
 
 group :development do
   gem "quiet_assets"
@@ -75,8 +72,6 @@ group :development, :test do
 
   gem 'pry'
 
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
   gem "awesome_print"
   gem "bullet"
   gem "bundler-audit", require: false
@@ -88,6 +83,7 @@ group :development, :test do
 end
 
 group :test do
+  # Note this requires qt on a mac
   gem "capybara-webkit"
   gem "database_cleaner"
   gem "formulaic"

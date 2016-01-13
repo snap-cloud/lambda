@@ -63,10 +63,10 @@ programming in style.
 * Ruby version
 	* 2.3.0
 * System dependencies
-	* Postgres
+	* Postgres, qt, ngrok
+	* `brew install postgres qt ngrok`
 	* OSX Install postgres:
 	```sh
-	brew install postgresql
 	# To have launchd start postgresql at login:
 	ln -sfv /usr/local/opt/postgresql/*plist ~/Library/LaunchAgents
 
