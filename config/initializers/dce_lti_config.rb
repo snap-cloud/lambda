@@ -3,8 +3,8 @@ DceLti::Engine.setup do |lti|
   # where "consumer" is an LMS like Canvas. The defaults are below, uncomment
   # and modify as necessary or (ideally) configure via environment variables.
   #
-  # lti.provider_title = (ENV['LTI_PROVIDER_TITLE'] || 'DCE LTI Provider')
-  # lti.provider_description = (ENV['LTI_PROVIDER_DESCRIPTION'] || 'A description of this')
+  lti.provider_title = (ENV['LTI_PROVIDER_TITLE'] || 'Lambda')
+  lti.provider_description = (ENV['LTI_PROVIDER_DESCRIPTION'] || 'An autograder')
   #
   # Set this to `true` to enable the form and URL-rewriting behavior that
   # allows for the creation of cookieless sessions. The default is `false`,
@@ -16,14 +16,53 @@ DceLti::Engine.setup do |lti|
   # The default post-auth redirect includes the session key and session id so
   # that we can instantiate a successful cookieless session if needed.
   #
-  # lti.redirect_after_successful_auth = ->(controller) {
-  #   session_key_name = Rails.application.config.session_options[:key]
-  #   Rails.application.routes.url_helpers.root_path(session_key_name => controller.session.id)
-  # }
+  lti.redirect_after_successful_auth = ->(controller) {
+    puts controller
+    if controller.params[:problem_id]
+      Rails.application.routes.url_helpers.problem_path controller.params[:problem_id]
+    else
+      session_key_name = Rails.application.config.session_options[:key]
+      Rails.application.routes.url_helpers.root_path(session_key_name => controller.session.id)
+    end
+  }
 
   lti.consumer_secret = (ENV['LTI_CONSUMER_SECRET'] || 'consumer_secret')
   lti.consumer_key = (ENV['LTI_CONSUMER_KEY'] || 'consumer_key')
 
+  lti.copy_launch_attributes_to_session =  %w{
+      auto_create
+      content_item_return_url
+      context_id
+      context_label
+      context_title
+      context_type
+      lis_course_offering_sourcedid
+      lis_course_section_sourcedid
+      lis_outcome_service_url
+      lis_person_contact_email_primary
+      lis_person_name_family
+      lis_person_name_full
+      lis_person_name_given
+      lis_person_sourcedid
+      lis_result_sourcedid
+      lti_message_type
+      lti_version
+      oauth_consumer_key
+      oauth_timestamp
+      resource_link_description
+      resource_link_id
+      resource_link_title
+      roles
+      role_scope_mentor
+      tool_consumer_info_product_family_code
+      tool_consumer_info_version
+      tool_consumer_instance_contact_email
+      tool_consumer_instance_description
+      tool_consumer_instance_guid
+      tool_consumer_instance_name
+      tool_consumer_instance_url
+      user_id
+    }
   # `lti.copy_launch_attributes_to_session` is an array of attributes to copy
   # to the default rails session from the IMS::LTI::ToolProvider instance after
   # a successful launch. The default attributes are defined in
@@ -43,10 +82,10 @@ DceLti::Engine.setup do |lti|
   # object or model proper to find key and secret pairs. Example:
   #
   # lti.consumer_secret = ->(launch_params) {
-  #   Consumer.find_by(context_id: launch_params[:context_id]).consumer_secret
+  #   AppConsumer.find_by(context_id: launch_params[:context_id]).consumer_secret
   # }
   # lti.consumer_key = ->(launch_params) {
-  #   Consumer.find_by(context_id: launch_params[:context_id]).consumer_key
+  #   AppConsumer.find_by(context_id: launch_params[:context_id]).consumer_key
   # }
 
   # The tool_config_extensions lambda runs before the XML Tool Provider config
