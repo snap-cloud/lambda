@@ -1,0 +1,10 @@
+* LTI Keys Table
+	* Domains
+	* Key / Secret
+* Users
+* Submissions
+	* UID
+	* Problem ID
+	* Submission Time
+	* Score
+	* Results

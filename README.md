@@ -64,7 +64,7 @@ programming in style.
 	* 2.3.0
 * System dependencies
 	* Postgres, qt, ngrok
-	* `brew install postgres qt ngrok`
+	* `brew install postgres qt`
 	* OSX Install postgres:
 	```sh
 	# To have launchd start postgresql at login:
@@ -73,6 +73,7 @@ programming in style.
 	# Then to load postgresql now:
 	launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 	```
+	* `ngrok` 2 Mac binary is in `bin/`
 * Configuration
 * Database creation
 * Database initialization
