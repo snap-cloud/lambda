@@ -7,8 +7,6 @@ module DceLti
     skip_before_filter :verify_authenticity_token, :authenticate_via_lti
 
     def create
-      puts 'new session'
-      puts params
       if valid_lti_request?(request)
         user = UserInitializer.find_from(tool_provider)
         session[:current_user_id] = user.id

@@ -17,7 +17,6 @@ DceLti::Engine.setup do |lti|
   # that we can instantiate a successful cookieless session if needed.
   #
   lti.redirect_after_successful_auth = ->(controller) {
-    puts controller
     if controller.params[:problem_id]
       Rails.application.routes.url_helpers.problem_path controller.params[:problem_id]
     else
@@ -29,40 +28,11 @@ DceLti::Engine.setup do |lti|
   lti.consumer_secret = (ENV['LTI_CONSUMER_SECRET'] || 'consumer_secret')
   lti.consumer_key = (ENV['LTI_CONSUMER_KEY'] || 'consumer_key')
 
-  lti.copy_launch_attributes_to_session =  %w{
-      auto_create
-      content_item_return_url
-      context_id
-      context_label
-      context_title
-      context_type
-      lis_course_offering_sourcedid
-      lis_course_section_sourcedid
-      lis_outcome_service_url
-      lis_person_contact_email_primary
-      lis_person_name_family
-      lis_person_name_full
-      lis_person_name_given
-      lis_person_sourcedid
-      lis_result_sourcedid
-      lti_message_type
-      lti_version
-      oauth_consumer_key
-      oauth_timestamp
-      resource_link_description
-      resource_link_id
-      resource_link_title
-      roles
-      role_scope_mentor
-      tool_consumer_info_product_family_code
-      tool_consumer_info_version
-      tool_consumer_instance_contact_email
-      tool_consumer_instance_description
-      tool_consumer_instance_guid
-      tool_consumer_instance_name
-      tool_consumer_instance_url
-      user_id
-    }
+  # Simple function to pass all keys to the next page
+  # TODO: This is only for testing, oauth data should be filtered.
+  lti.copy_launch_attributes_to_session =  -> (params) {
+    params.keys
+  }
   # `lti.copy_launch_attributes_to_session` is an array of attributes to copy
   # to the default rails session from the IMS::LTI::ToolProvider instance after
   # a successful launch. The default attributes are defined in
