@@ -11,18 +11,18 @@ DceLti::Engine.setup do |lti|
   # meaning we don't attempt to use cookieless sessions when a cookie cannot be
   # set - the session just fails.
   #
-  # lti.enable_cookieless_sessions = false
+  lti.enable_cookieless_sessions = true
   #
   # The default post-auth redirect includes the session key and session id so
   # that we can instantiate a successful cookieless session if needed.
   #
   lti.redirect_after_successful_auth = ->(controller) {
-    if controller.params[:problem_id]
-      Rails.application.routes.url_helpers.problem_path controller.params[:problem_id]
-    else
+    # if controller.params[:problem_id]
+    #   Rails.application.routes.url_helpers.problem_path(:id => controller.params[:problem_id], :params => controller.params)
+    # else
       session_key_name = Rails.application.config.session_options[:key]
       Rails.application.routes.url_helpers.root_path(session_key_name => controller.session.id)
-    end
+    # end
   }
 
   lti.consumer_secret = (ENV['LTI_CONSUMER_SECRET'] || 'consumer_secret')
@@ -30,9 +30,9 @@ DceLti::Engine.setup do |lti|
 
   # Simple function to pass all keys to the next page
   # TODO: This is only for testing, oauth data should be filtered.
-  lti.copy_launch_attributes_to_session =  -> (params) {
-    params.keys
-  }
+  # lti.copy_launch_attributes_to_session =  -> (params) {
+#     params.keys
+#   }
   # `lti.copy_launch_attributes_to_session` is an array of attributes to copy
   # to the default rails session from the IMS::LTI::ToolProvider instance after
   # a successful launch. The default attributes are defined in

@@ -1,4 +1,5 @@
 class ProblemsController < ApplicationController
+  # before_filter :authenticate_via_lti
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
   # GET /problems
@@ -11,6 +12,8 @@ class ProblemsController < ApplicationController
   # GET /problems/1
   # GET /problems/1.json
   def show
+    puts 'PARAMS', params
+    debugger
   end
 
   # GET /problems/new

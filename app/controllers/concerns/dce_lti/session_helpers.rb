@@ -43,7 +43,8 @@ module DceLti
         attributes_to_copy = attributes_to_copy.call(params)
       end
       attributes_to_copy.inject({}) do |attributes, att|
-        attributes.merge(att => params[att]) #tool_provider.send(att)
+        #attributes.merge(att => params[att])
+        attributes.merge(att => tool_provider.send(att))
       end
     end
   end
