@@ -13,7 +13,7 @@ class ProblemsController < ApplicationController
   # GET /problems/1.json
   def show
     puts 'PARAMS', params
-    debugger
+    #debugger
   end
 
   # GET /problems/new

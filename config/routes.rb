@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   mount DceLti::Engine => "/lti"
-
+  
+  post 'submission', to: 'submissions#submit_grade'
+  
   # Public Redirects
   get 'snap', to: 'welcome#snap'
 end
