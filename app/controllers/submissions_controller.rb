@@ -4,6 +4,6 @@ class SubmissionsController < ApplicationController
     puts 'SUBMIT GRADE'
     puts 'Params: ', params
     puts 'SESSION:  ', session
-    redirect_to '/', :flash => 'Posted a grade'
+    redirect_to '/', flash[:success] => 'Posted a grade...sorta'
   end
 end

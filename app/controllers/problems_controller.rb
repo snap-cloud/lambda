@@ -1,5 +1,5 @@
 class ProblemsController < ApplicationController
-  # before_filter :authenticate_via_lti
+  before_filter :authenticate_via_lti
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
   # GET /problems
@@ -65,6 +65,12 @@ class ProblemsController < ApplicationController
     end
   end
 
+  # LIT Submit grade
+  # Should probably be done as a POST
+  def submit_grade
+    # TODO -- this is a temp..
+    
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_problem
