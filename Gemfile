@@ -55,7 +55,7 @@ gem 'pg'
 # gem 'capistrano-rails', group: :development
 
 # LTI
-gem 'dce_lti'
+gem 'ims-lti'
 gem 'activerecord-session_store', '~> 0.1.1'
 
 group :development do
