@@ -1,4 +1,5 @@
 class ProblemsController < ApplicationController
+  include DceLti
   before_filter :authenticate_via_lti
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
@@ -68,9 +69,13 @@ class ProblemsController < ApplicationController
   # LIT Submit grade
   # Should probably be done as a POST
   def submit_grade
-    # TODO -- this is a temp..
-    
+    puts 'NEW SUBMIT GRADE'
+    puts 'Params: ', params
+    puts 'SESSION:  ', session
+    redirect_to '/', flash[:success] => 'Posted a grade...sorta'
+    debugger
   end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_problem

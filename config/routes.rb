@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   mount DceLti::Engine => "/lti"
   
-  post 'submission', to: 'submissions#submit_grade'
+  post 'submission', to: 'problems#submit_grade'
   
   # Public Redirects
   get 'snap', to: 'welcome#snap'
