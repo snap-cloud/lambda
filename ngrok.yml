@@ -1,0 +1,12 @@
+# ngrok configuration file
+# feel free to modify, but don't commit changes.
+consolue_ui: false
+tunnels:
+  rails-web:
+    addr: 3000
+    proto: http
+    subdomain: michael
+    log_level: info
+    log_format: logfmt
+    log: log/ngrok.log
+
