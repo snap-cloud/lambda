@@ -32,6 +32,7 @@ module DceLti
     end
 
     def tool_provider
+      puts 'CALLED tool_provider'
       @tool_provider ||= IMS::LTI::ToolProvider.new(
         consumer_key, consumer_secret, launch_params
       )

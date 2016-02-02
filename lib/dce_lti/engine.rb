@@ -4,6 +4,8 @@ require 'p3p'
 
 module DceLti
   class Engine < ::Rails::Engine
+
+    puts 'CREATINGING ENGINE'
     def self.setup
       config.copy_launch_attributes_to_session = %i|
 context_id
@@ -45,11 +47,11 @@ launch_presentation_return_url
 
     isolate_namespace DceLti
 
-    config.generators do |g|
-      g.test_framework :rspec, :fixture => false
-      g.fixture_replacement :factory_girl, :dir => 'spec/factories'
-      g.assets false
-      g.helper false
-    end
+    # config.generators do |g|
+    #   g.test_framework :rspec, :fixture => false
+    #   g.fixture_replacement :factory_girl, :dir => 'spec/factories'
+    #   g.assets false
+    #   g.helper false
+    # end
   end
 end

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
+  puts 'LOADING ROUTES'
   scope '/lti' do
     resources :sessions, only: [:create] do
       collection do

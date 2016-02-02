@@ -5,4 +5,5 @@ require 'dce_lti/middleware/cookie_shim'
 require 'dce_lti/middleware/cookieless_sessions'
 
 module DceLti
+  puts 'EMPTY ENGINE FILE'
 end

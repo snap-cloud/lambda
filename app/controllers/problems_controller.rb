@@ -1,6 +1,6 @@
 class ProblemsController < ApplicationController
   include DceLti
-  before_filter :authenticate_via_lti
+  # before_filter :authenticate_via_lti
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
   # GET /problems
