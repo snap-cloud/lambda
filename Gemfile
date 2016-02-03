@@ -56,6 +56,8 @@ gem 'pg'
 
 # LTI
 gem 'ims-lti'
+gem 'p3p'
+gem 'rack-plastic'
 gem 'activerecord-session_store', '~> 0.1.1'
 
 group :development do

@@ -31,5 +31,9 @@ module Lambda
     config.action_controller.action_on_unpermitted_parameters = :raise
     config.active_record.raise_in_transactional_callbacks = true
     config.active_job.queue_adapter = :delayed_job
+
+    # Used to autoload Dce_Lti which isn't being used as a gem.
+    config.autoload_paths += %W(#{config.root}/lib)
+
   end
 end

@@ -75,7 +75,7 @@ class ProblemsController < ApplicationController
     redirect_to '/', flash[:success] => 'Posted a grade...sorta'
     debugger
   end
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_problem

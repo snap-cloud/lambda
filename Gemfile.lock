@@ -141,6 +141,8 @@ GEM
       mini_portile2 (~> 2.0.0.rc2)
     normalize-rails (3.0.3)
     oauth (0.4.7)
+    p3p (1.2.0)
+      rack
     pg (0.18.4)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -157,6 +159,9 @@ GEM
     rack (1.6.4)
     rack-canonical-host (0.1.0)
       addressable
+      rack (~> 1.0)
+    rack-plastic (0.1.3)
+      nokogiri (~> 1.4)
       rack (~> 1.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -291,6 +296,7 @@ DEPENDENCIES
   neat (~> 1.7.0)
   newrelic_rpm (>= 3.9.8)
   normalize-rails (~> 3.0.0)
+  p3p
   pg
   pry
   pry-byebug
@@ -298,6 +304,7 @@ DEPENDENCIES
   puma
   quiet_assets
   rack-canonical-host
+  rack-plastic
   rack-timeout
   rails (= 4.2.5)
   rails_stdout_logging
