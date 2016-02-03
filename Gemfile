@@ -48,7 +48,8 @@ gem "rack-canonical-host"
 gem "simple_form"
 gem "title"
 
-# Always use PG as the db
+# Always use postgres as the db
+# Currently LTI tools depend on it
 gem 'pg'
 
 # Use Capistrano for deployment
