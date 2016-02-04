@@ -6,15 +6,16 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   puts 'LOADING ROUTES'
-  scope '/lti' do
-    resources :sessions, only: [:create] do
-      collection do
-        get :invalid
-      end
-    end
-
-    resources :configs, only: [:index]
-  end
+  mount DceLti::Engine => '/lti'
+  # scope '/lti' do
+  #   resources :sessions, only: [:create] do
+  #     collection do
+  #       get :invalid
+  #     end
+  #   end
+  #
+  #   resources :configs, only: [:index]
+  # end
 
 
   post 'submission', to: 'problems#submit_grade'
