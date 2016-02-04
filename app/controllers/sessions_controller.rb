@@ -3,7 +3,7 @@ require 'oauth/request_proxy/rack_request'
 module DceLti
   class SessionsController < ApplicationController
     include SessionHelpers
-
+    puts 'SESSIONS MODULE'
     skip_before_filter :verify_authenticity_token, :authenticate_via_lti
 
     def create
