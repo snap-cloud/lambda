@@ -1,6 +1,7 @@
 class ProblemsController < ApplicationController
   include DceLti
-  before_filter :authenticate_via_lti
+  include DceLti::SessionHelpers
+  # before_filter :authenticate_via_lti
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
   # GET /problems
@@ -14,7 +15,12 @@ class ProblemsController < ApplicationController
   # GET /problems/1.json
   def show
     puts 'PARAMS', params
-    #debugger
+    begin
+      puts tool_provider
+      debugger
+    rescue
+      puts 'TP not defined'
+    end
   end
 
   # GET /problems/new
@@ -75,7 +81,7 @@ class ProblemsController < ApplicationController
     redirect_to '/', flash[:success] => 'Posted a grade...sorta'
     debugger
   end
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_problem

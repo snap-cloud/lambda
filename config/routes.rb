@@ -5,10 +5,20 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
-  mount DceLti::Engine => "/lti"
-  
+  puts 'LOADING ROUTES'
+  mount DceLti::Engine => '/lti'
+  # scope '/lti' do
+  #   resources :sessions, only: [:create] do
+  #     collection do
+  #       get :invalid
+  #     end
+  #   end
+  #
+  #   resources :configs, only: [:index]
+  # end
+
   post 'submission', to: 'problems#submit_grade'
-  
+
   # Public Redirects
   get 'snap', to: 'welcome#snap'
 end

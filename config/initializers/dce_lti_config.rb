@@ -1,4 +1,5 @@
 DceLti::Engine.setup do |lti|
+  puts 'LOADED ENGINE SETUP'
   # "provider_*" attributes are used to describe this tool to the consumer,
   # where "consumer" is an LMS like Canvas. The defaults are below, uncomment
   # and modify as necessary or (ideally) configure via environment variables.

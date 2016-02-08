@@ -48,14 +48,15 @@ gem "rack-canonical-host"
 gem "simple_form"
 gem "title"
 
-# Always use PG as the db
+# Always use postgres as the db
+# Currently LTI tools depend on it
 gem 'pg'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 # LTI
-gem 'dce_lti'
+gem 'dce_lti', path: './dce-lti/'
 gem 'activerecord-session_store', '~> 0.1.1'
 
 group :development do
