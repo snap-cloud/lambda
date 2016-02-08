@@ -1,6 +1,6 @@
 class ProblemsController < ApplicationController
   include DceLti
-  include SessionHelpers
+  include DceLti::SessionHelpers
   # before_filter :authenticate_via_lti
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
@@ -17,10 +17,10 @@ class ProblemsController < ApplicationController
     puts 'PARAMS', params
     begin
       puts tool_provider
+      debugger
     rescue
       puts 'TP not defined'
     end
-    #debugger
   end
 
   # GET /problems/new

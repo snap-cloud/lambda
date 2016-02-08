@@ -1,3 +1,3 @@
-bin/ngrok start -config=$HOME/.ngrok2/ngrok.yml -config=ngrok.yml rails-web > /dev/null & 
+bin/ngrok start -config=$HOME/.ngrok2/ngrok.yml -config=ngrok.yml rails-web > /dev/null &
 open https://bcourses.berkeley.edu/courses/1268501/assignments/7182763
 bin/rails s
