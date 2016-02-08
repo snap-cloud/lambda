@@ -1,5 +1,6 @@
 class ProblemsController < ApplicationController
   include DceLti
+  include SessionHelpers
   # before_filter :authenticate_via_lti
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
@@ -14,6 +15,7 @@ class ProblemsController < ApplicationController
   # GET /problems/1.json
   def show
     puts 'PARAMS', params
+    puts tool_provider
     #debugger
   end
 

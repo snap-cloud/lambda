@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   #   resources :configs, only: [:index]
   # end
 
-
   post 'submission', to: 'problems#submit_grade'
 
   # Public Redirects

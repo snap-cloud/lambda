@@ -6,6 +6,10 @@ module DceLti
       end
     end
 
+    # def tool_provider
+    #
+    # end
+
     def current_user
       @current_user ||=
         if ENV['FAKE_USER_ID']
