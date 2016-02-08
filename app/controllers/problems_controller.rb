@@ -15,7 +15,11 @@ class ProblemsController < ApplicationController
   # GET /problems/1.json
   def show
     puts 'PARAMS', params
-    puts tool_provider
+    begin
+      puts tool_provider
+    rescue
+      puts 'TP not defined'
+    end
     #debugger
   end
 
