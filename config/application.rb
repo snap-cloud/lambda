@@ -15,6 +15,7 @@ Dotenv::Railtie.load
 module Lambda
   class Application < Rails::Application
     config.i18n.enforce_available_locales = true
+    config.quiet_assets = true
     config.generators do |generate|
       generate.helper false
       generate.javascript_engine false
@@ -28,8 +29,8 @@ module Lambda
     config.active_record.raise_in_transactional_callbacks = true
     config.active_job.queue_adapter = :delayed_job
 
-    # Used to autoload Dce_Lti which isn't being used as a gem.
-    config.autoload_paths += %W(#{config.root}/lib)
+    # Used this to preload and modules in lib/.
+    # config.autoload_paths += %W(#{config.root}/lib)
 
   end
 end
