@@ -74,8 +74,8 @@ programming in style.
 	launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 	```
 	* `ngrok` 2 Mac binary is in `bin/`
-		* Launch with `bin/ngrok http 3000`
-		* Then put that URL in Canvas / wherever.
+		* Currently things use `ngrok.yml` with a custom domain.
+		* If you don't want to pay, just edit this file.
 * Configuration
 * Database creation
 	* Postgres

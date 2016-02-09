@@ -31,9 +31,25 @@ DceLti::Engine.setup do |lti|
 
   # Simple function to pass all keys to the next page
   # TODO: This is only for testing, oauth data should be filtered.
-  # lti.copy_launch_attributes_to_session =  -> (params) {
-#     params.keys
-#   }
+  lti.copy_launch_attributes_to_session = %w|
+  resource_link_title
+  resource_link_description
+  context_id
+  context_type
+  context_title
+  launch_presentation_css_url
+  launch_presentation_document_target
+  launch_presentation_return_url
+  tool_consumer_info_version
+  tool_consumer_instance_guid
+  tool_consumer_instance_name
+  tool_consumer_instance_url
+  tool_consumer_instance_contact_email
+  lis_outcome_service_url
+  |
+  #   ext_outcome_data_values_accepted
+
+
   # `lti.copy_launch_attributes_to_session` is an array of attributes to copy
   # to the default rails session from the IMS::LTI::ToolProvider instance after
   # a successful launch. The default attributes are defined in

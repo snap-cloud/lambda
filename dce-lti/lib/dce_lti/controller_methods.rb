@@ -6,9 +6,9 @@ module DceLti
       end
     end
 
-    # def tool_provider
-    #
-    # end
+    def get_tool_provider
+      puts 'Controller TP method'
+    end
 
     def current_user
       @current_user ||=

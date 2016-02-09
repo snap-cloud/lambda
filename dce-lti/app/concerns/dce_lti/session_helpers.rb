@@ -36,6 +36,7 @@ module DceLti
       @tool_provider ||= IMS::LTI::ToolProvider.new(
         consumer_key, consumer_secret, launch_params
       )
+      Rails.application.config.global_tp = @tool_provider
     end
 
     def captured_attributes_from(tool_provider)

@@ -8,6 +8,7 @@ class ProblemsController < ApplicationController
   # GET /problems.json
   def index
     puts 'PARAMS', params
+    puts 'CONFIG TP ', Rails.application.config.global_tp
     @problems = Problem.all
   end
 
@@ -15,12 +16,7 @@ class ProblemsController < ApplicationController
   # GET /problems/1.json
   def show
     puts 'PARAMS', params
-    begin
-      puts tool_provider
-      debugger
-    rescue
-      puts 'TP not defined'
-    end
+    puts 'SESSION', ap(session)
   end
 
   # GET /problems/new
@@ -75,11 +71,32 @@ class ProblemsController < ApplicationController
   # LIT Submit grade
   # Should probably be done as a POST
   def submit_grade
-    puts 'NEW SUBMIT GRADE'
-    puts 'Params: ', params
-    puts 'SESSION:  ', session
+    puts "\n\n\===SUBMIT GRADE"
+    provider = Rails.application.config.global_tp
+    score =  || 0.8
+    if provider.outcome_service?
+      puts 'READY TO SUBMIT GRADE'
+      score = normalize_score(params[:score], @problem.points)
+      response = provider.post_replace_result!(score)
+      if response.success?
+        puts 'Score: ', score
+        puts 'PARTYYYYYYYYYY'
+        # grade write worked
+      elsif response.processing?
+        puts 'Processing....'
+      elsif response.unsupported?
+        puts 'Unsupported'
+      else
+        puts 'sadface.'
+        debugger
+        # failed
+      end
+    else
+      puts 'NO SUBMIT GRADE'
+      # normal tool launch without grade write-back
+    end
     redirect_to '/', flash[:success] => 'Posted a grade...sorta'
-    debugger
+
   end
 
   private
@@ -88,8 +105,17 @@ class ProblemsController < ApplicationController
       @problem = Problem.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # white list allowed parameters.
     def problem_params
       params.require(:problem).permit(:title, :points, :content, :tests, :initial_file, :metadata, :tags)
+    end
+
+    # LTI requires scores to be returned as a float, that's a percentage.
+    def normalize_score(score, max_points)
+      if score >= 0.0 and score <= 1.0
+        score
+      else
+        score / max_points
+      end
     end
 end
