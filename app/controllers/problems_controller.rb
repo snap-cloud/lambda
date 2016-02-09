@@ -1,22 +1,18 @@
 class ProblemsController < ApplicationController
   include DceLti
-  include DceLti::SessionHelpers
   # before_filter :authenticate_via_lti
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
   # GET /problems
   # GET /problems.json
   def index
-    puts 'PARAMS', params
-    puts 'CONFIG TP ', Rails.application.config.global_tp
     @problems = Problem.all
   end
 
   # GET /problems/1
   # GET /problems/1.json
   def show
-    puts 'PARAMS', params
-    puts 'SESSION', ap(session)
+    @problem = Problem.find_by_id(params[:id])
   end
 
   # GET /problems/new
@@ -71,9 +67,13 @@ class ProblemsController < ApplicationController
   # LIT Submit grade
   # Should probably be done as a POST
   def submit_grade
-    puts "\n\n\===SUBMIT GRADE"
-    provider = Rails.application.config.global_tp
-    score =  || 0.8
+    provider = get_tool_provider
+    
+    if provider.nil?
+       redirect_to '/', flash[:error] => 'Can\'t post grades if no LTI'
+       return
+     end
+     
     if provider.outcome_service?
       puts 'READY TO SUBMIT GRADE'
       score = normalize_score(params[:score], @problem.points)

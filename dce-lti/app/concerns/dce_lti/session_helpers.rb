@@ -1,7 +1,6 @@
 module DceLti
   module SessionHelpers
     def valid_lti_request?(request)
-      puts 'modules folder valid request??'
       tool_provider.valid_request?(request) &&
         Nonce.valid?(tool_provider.oauth_nonce) &&
         TimestampValidator.valid?(tool_provider.oauth_timestamp)
@@ -36,7 +35,6 @@ module DceLti
       @tool_provider ||= IMS::LTI::ToolProvider.new(
         consumer_key, consumer_secret, launch_params
       )
-      Rails.application.config.global_tp = @tool_provider
     end
 
     def captured_attributes_from(tool_provider)
