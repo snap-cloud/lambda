@@ -67,6 +67,7 @@ class ProblemsController < ApplicationController
   # LIT Submit grade
   # Should probably be done as a POST
   def submit_grade
+    @problem = Problem.find(params[:problem_id])
     provider = get_tool_provider
     
     if provider.nil?
@@ -76,6 +77,7 @@ class ProblemsController < ApplicationController
      
     if provider.outcome_service?
       puts 'READY TO SUBMIT GRADE'
+      debugger
       score = normalize_score(params[:score], @problem.points)
       response = provider.post_replace_result!(score)
       if response.success?
@@ -111,11 +113,15 @@ class ProblemsController < ApplicationController
     end
 
     # LTI requires scores to be returned as a float, that's a percentage.
+    # We will "normalize" values >1 to be a % of the problem's score
+    # Note that a 1/x would be treated as a 100%
     def normalize_score(score, max_points)
+      score = score.to_f
+      max_points = max_points.to_f
       if score >= 0.0 and score <= 1.0
-        score
+        score.to_s
       else
-        score / max_points
+        (score / max_points).to_s
       end
     end
 end

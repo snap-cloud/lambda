@@ -1,23 +1,13 @@
 Rails.application.routes.draw do
   root :to => "problems#index"
-  resources :problems
-  #get 'problem/new'
+  resources :problems do
+    # TODO: Figure out if a submissions controller might be better...
+    post 'submission', to: 'problems#submit_grade'
+  end
 
   get 'welcome/index'
 
-  puts 'LOADING ROUTES'
   mount DceLti::Engine => '/lti'
-  # scope '/lti' do
-  #   resources :sessions, only: [:create] do
-  #     collection do
-  #       get :invalid
-  #     end
-  #   end
-  #
-  #   resources :configs, only: [:index]
-  # end
-
-  post 'submission', to: 'problems#submit_grade'
 
   # Public Redirects
   get 'snap', to: 'welcome#snap'

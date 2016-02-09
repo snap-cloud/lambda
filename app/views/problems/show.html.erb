@@ -2,7 +2,7 @@
 
 <p>
   <strong>SUBMIT GRADE TEST:</strong>
-	<%= form_tag(submission_path, method: "post") do %>
+	<%= form_tag(problem_submission_path(params[:id]), method: "post") do %>
 	  <%= label_tag(:score, "Enter a score:") %>
 	  <%= text_field_tag(:score) %>
 	  <%= submit_tag("Submit") %>

@@ -12,13 +12,9 @@ Bundler.require(*Rails.groups)
 
 Dotenv::Railtie.load
 
-## TODO Test LTI HERE
-## require File.expand_path('../boot', __FILE__)
-
 module Lambda
   class Application < Rails::Application
     config.i18n.enforce_available_locales = true
-    config.quiet_assets = true
     config.generators do |generate|
       generate.helper false
       generate.javascript_engine false
