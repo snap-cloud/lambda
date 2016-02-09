@@ -1,5 +1,4 @@
 DceLti::Engine.setup do |lti|
-  puts 'LOADED ENGINE SETUP'
   # "provider_*" attributes are used to describe this tool to the consumer,
   # where "consumer" is an LMS like Canvas. The defaults are below, uncomment
   # and modify as necessary or (ideally) configure via environment variables.
@@ -18,12 +17,17 @@ DceLti::Engine.setup do |lti|
   # that we can instantiate a successful cookieless session if needed.
   #
   lti.redirect_after_successful_auth = ->(controller) {
-    # if controller.params[:problem_id]
-    #   Rails.application.routes.url_helpers.problem_path(:id => controller.params[:problem_id], :params => controller.params)
-    # else
-      session_key_name = Rails.application.config.session_options[:key]
-      Rails.application.routes.url_helpers.root_path(session_key_name => controller.session.id)
-    # end
+    session_key_name = Rails.application.config.session_options[:key]
+    if controller.params[:problem_id]
+      Rails.application.routes.url_helpers.problem_path(
+        id: controller.params[:problem_id],
+        params: controller.params
+      )
+    else
+      Rails.application.routes.url_helpers.root_path(
+        session_key_name => controller.session.id
+      )
+    end
   }
 
   lti.consumer_secret = (ENV['LTI_CONSUMER_SECRET'] || 'consumer_secret')

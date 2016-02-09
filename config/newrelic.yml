@@ -1,5 +1,5 @@
 common: &default_settings
-  app_name: "lambda"
+  app_name: "lambda-grader"
   audit_log:
     enabled: false
   browser_monitoring:
