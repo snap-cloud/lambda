@@ -12,7 +12,6 @@ class ProblemsController < ApplicationController
   # GET /problems/1
   # GET /problems/1.json
   def show
-    @problem = Problem.find_by_id(params[:id])
   end
 
   # GET /problems/new
@@ -76,12 +75,9 @@ class ProblemsController < ApplicationController
      end
      
     if provider.outcome_service?
-      puts 'READY TO SUBMIT GRADE'
-      debugger
       score = normalize_score(params[:score], @problem.points)
       response = provider.post_replace_result!(score)
       if response.success?
-        puts 'Score: ', score
         puts 'PARTYYYYYYYYYY'
         # grade write worked
       elsif response.processing?
@@ -90,7 +86,7 @@ class ProblemsController < ApplicationController
         puts 'Unsupported'
       else
         puts 'sadface.'
-        debugger
+        # debugger
         # failed
       end
     else
