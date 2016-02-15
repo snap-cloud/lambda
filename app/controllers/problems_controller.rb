@@ -68,12 +68,21 @@ class ProblemsController < ApplicationController
   def submit_grade
     @problem = Problem.find(params[:problem_id])
     provider = get_tool_provider
-    
     if provider.nil?
        redirect_to '/', flash[:error] => 'Can\'t post grades if no LTI'
        return
      end
-     
+
+    if provider.nil?
+       redirect_to '/', flash[:error] => 'Can\'t post grades if no LTI'
+       return
+     end
+
+    if provider.nil?
+       redirect_to '/', flash[:error] => 'Can\'t post grades if no LTI'
+       return
+     end
+
     if provider.outcome_service?
       score = normalize_score(params[:score], @problem.points)
       response = provider.post_replace_result!(score)

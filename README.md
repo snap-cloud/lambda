@@ -5,6 +5,8 @@ Lambda is an LTI app for autograding [Snap<em>!</em>][1] programs.
 
 It is currently in active development.
 
+[1]: http://snap.berkeley.edu
+
 ## Overview
 
 We have:
@@ -15,7 +17,7 @@ We have:
 
 ## API
 
-## Integrations -- TODO
+## Configurations
 ### edX
 ### Canvas (bCourses)
 
@@ -30,7 +32,9 @@ If you've already cloned without `--recursive` do:
 * `git submodule init`
 * `git submodule update`
 
-## Getting Started
+
+
+## Development Getting Started
 
 After you have cloned this repo, run this setup script to set up your machine
 with the necessary dependencies to run and test this app:
@@ -48,6 +52,7 @@ After setting up, you can run the application using [Heroku Local]:
 
 [Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
 
+
 ## Guidelines
 
 Use the following guides for getting things done, programming well, and
@@ -59,7 +64,8 @@ programming in style.
 
 ---
 
-#### Rails Doc Suggestions ( TODO )
+
+## Requirements and Setup
 * Ruby version
 	* 2.3.0
 * System dependencies

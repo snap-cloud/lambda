@@ -11,11 +11,15 @@
   <title><%= title %></title>
   <%= stylesheet_link_tag :application, media: "all" %>
   <%= csrf_meta_tags %>
+  <%= render partial: "partials/google_analytics" %>
 </head>
+
 <body class="<%= body_class %>">
   
   <%= render "flashes" -%>
   <%= yield %>
   <%= render "javascript" %>
+  
+  <%= render partial: "partials/google_analytics_pageview" %>
 </body>
 </html>
