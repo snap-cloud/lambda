@@ -7,10 +7,8 @@ gem 'rails', '4.2.5'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-# Thoughtbot Layout Tools
-gem "bourbon", "~> 4.2.0"
-gem "neat", "~> 1.7.0"
-gem "bitters"
+# TODO: CSS stuff?
+
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -33,8 +31,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Puma as the app server
 gem 'puma'
 
-gem "autoprefixer-rails"
 gem "delayed_job_active_record"
+# TODO: need this?
 gem "flutie"
 gem "high_voltage"
 gem "newrelic_rpm", ">= 3.9.8"
@@ -45,6 +43,7 @@ gem "rack-canonical-host"
 # Emailing
 # gem "recipient_interceptor"
 
+# TODO: Remove these?
 gem "simple_form"
 gem "title"
 
@@ -98,4 +97,5 @@ end
 group :staging, :production do
   gem "rails_stdout_logging"
   gem "rack-timeout"
+  gem "rails_12factor"
 end

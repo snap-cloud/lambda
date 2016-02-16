@@ -1,28 +1,15 @@
 <p id="notice"><%= notice %></p>
 
+<div class="hidden">
+  <%= link_to 'Back', problems_path %>
+</div>
 <p>
-  <strong>SUBMIT GRADE TEST:</strong>
-	<%= form_tag(problem_submission_path(params[:id]), method: "post") do %>
-	  <%= label_tag(:score, "Enter a score:") %>
-	  <%= text_field_tag(:score) %>
-	  <%= submit_tag("Submit") %>
-	<% end %>
+    <%= form_tag(problem_submission_path(params[:id]), method: "post") do %>
+      <%= label_tag(:score, "Enter a score:") %>
+      <%= text_field_tag(:score) %>
+      <%= submit_tag("Submit") %>
+    <% end %>
 </p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @problem.title %>
-</p>
-
-<p>
-  <strong>Points:</strong>
-  <%= @problem.points %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @problem.content %>
-</p>
-
-<%= link_to 'Edit', edit_problem_path(@problem) %> |
-<%= link_to 'Back', problems_path %>
+<%= render 'snap_base' %>
+<%= render 'snap_autograder' %>
