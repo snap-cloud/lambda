@@ -1,0 +1,11 @@
+p#notice
+  = notice
+.hidden
+  = link_to 'Back', problems_path
+p
+  = form_tag(problem_submission_path(params[:id]), method: "post") do
+    = label_tag(:score, "Enter a score:")
+    = text_field_tag(:score)
+    = submit_tag("Submit")
+= render 'snap_base'
+= render 'snap_autograder'

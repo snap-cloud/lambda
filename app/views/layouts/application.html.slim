@@ -1,0 +1,18 @@
+doctype html
+html[lang="en"]
+  head
+    meta charset="utf-8"
+    meta name="viewport" content="initial-scale=1"
+    title
+      = title
+    = stylesheet_link_tag :application, media: "all"
+    = csrf_meta_tags
+    = render partial: "partials/google_analytics"
+    = yield :head
+  |  <body class="
+  = body_class
+  | "> 
+  = render "flashes"
+  = yield
+  = render "javascript"
+  = render partial: "partials/google_analytics_pageview"

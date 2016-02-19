@@ -1,0 +1,12 @@
+= simple_form_for(@problem) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :title
+    = f.input :points
+    = f.input :content
+    = f.input :tests
+    = f.input :initial_file
+    = f.input :metadata
+    = f.input :tags
+  .form-actions
+    = f.button :submit
