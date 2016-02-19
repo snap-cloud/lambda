@@ -14,6 +14,10 @@ en:
         "%b %-d, %Y"
       short:
         "%B %d"
-
   titles:
-    application: Lambda
+      application: AppName
+      problems:
+        show: Problems
+      users:
+        show: '%{user}'
+        new: Registration
