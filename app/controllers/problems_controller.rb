@@ -12,6 +12,9 @@ class ProblemsController < ApplicationController
   # GET /problems/1
   # GET /problems/1.json
   def show
+    # TODO: This will need to be more generic.
+    # Pass other attributes?
+    gon.starter_file_path = problem_starter_file_path(problem_id: @problem.id)
   end
 
   # GET /problems/new
@@ -103,9 +106,14 @@ class ProblemsController < ApplicationController
       # normal tool launch without grade write-back
     end
     redirect_to '/', flash[:success] => 'Posted a grade...sorta'
-
   end
 
+  # Return the starter file as XML.{}
+  def starter_file
+    @problem = Problem.find(params[:problem_id])
+    render xml: @problem.initial_file
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_problem

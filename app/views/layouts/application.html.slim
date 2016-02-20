@@ -9,9 +9,8 @@ html[lang="en"]
     = csrf_meta_tags
     = render partial: "partials/google_analytics"
     = yield :head
-  |  <body class="
-  = body_class
-  | "> 
+body [class= body_class]
+  = Gon::Base.render_data
   = render "flashes"
   = yield
   = render "javascript"
