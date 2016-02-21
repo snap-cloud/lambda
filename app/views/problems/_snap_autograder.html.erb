@@ -40,7 +40,7 @@
       grade_button.addEventListener('click', button_listener);
       world_canvas.addEventListener("mouseup", update_listener);
       // This is a link relative to /problems/N/
-      starter_path = 'starter-file';
+      starter_path = gon.starter_file_path;
       initializeSnapAdditions(world, ide);
   };
 

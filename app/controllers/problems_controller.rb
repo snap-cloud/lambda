@@ -1,7 +1,9 @@
 class ProblemsController < ApplicationController
   include DceLti
   # before_filter :authenticate_via_lti
-  before_action :set_problem, only: [:show, :edit, :update, :destroy]
+  before_action :set_problem, only: [
+    :show, :edit, :update, :destroy, :starter_file, :submit_grade
+  ]
 
   # GET /problems
   # GET /problems.json
@@ -14,7 +16,7 @@ class ProblemsController < ApplicationController
   def show
     # TODO: This will need to be more generic.
     # Pass other attributes?
-    gon.starter_file_path = problem_starter_file_path(problem_id: @problem.id)
+    gon.starter_file_path = starter_file_problem_path #(problem_id: @problem.id)
   end
 
   # GET /problems/new
@@ -69,7 +71,7 @@ class ProblemsController < ApplicationController
   # LIT Submit grade
   # Should probably be done as a POST
   def submit_grade
-    @problem = Problem.find(params[:problem_id])
+    #@problem = Problem.find(params[:problem_id])
     provider = get_tool_provider
     if provider.nil?
        redirect_to '/', flash[:error] => 'Can\'t post grades if no LTI'
@@ -110,7 +112,7 @@ class ProblemsController < ApplicationController
 
   # Return the starter file as XML.{}
   def starter_file
-    @problem = Problem.find(params[:problem_id])
+    #@problem = Problem.find(params[:problem_id])
     render xml: @problem.initial_file
   end
   

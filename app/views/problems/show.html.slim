@@ -2,15 +2,11 @@ p#notice
   = notice
 .hidden(style='display: none')
   = link_to 'Back', problems_path
-p(style='display: none')
-  = form_tag(problem_submission_path(params[:id]), method: "post") do
-    = label_tag(:score, "Enter a score:")
+  = form_tag(submission_problem_path(params[:id]), method: "post") do
     = text_field_tag(:score)
     = submit_tag("Submit")
 = render 'snap_base'
 = render 'snap_autograder'
 script
    == @problem.tests
-script
-   | starter_path = gon.starter_file_path;
    
