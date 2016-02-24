@@ -1,0 +1,45 @@
+p#notice
+  = notice
+h1
+  | All Questions
+table
+  thead
+    tr
+      th
+        | View
+      th
+        | Title
+      th
+        | Points
+      th
+        | Content
+      th
+        | Test File
+      th
+        | Starter file
+      th
+        | Metadata
+      th[colspan="2"]
+  tbody
+    - @questions.each do |question|
+      tr
+        td
+          = link_to 'Show', question
+        td
+          = question.title
+        td
+          = question.points
+        td
+          = truncate question.content
+        td
+          = truncate question.test_file
+        td
+          = truncate question.starter_file
+        td
+          = truncate question.metadata
+        td
+          = link_to 'Edit', edit_question_path(question)
+        td
+          = link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New question', new_question_path

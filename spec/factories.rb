@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :problem do
+  factory :question do
     title "MyString"
     points 1.5
     content "MyText"

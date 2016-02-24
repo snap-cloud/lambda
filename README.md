@@ -10,7 +10,7 @@ It is currently in active development.
 ## Overview
 
 We have:
-* Problems
+* questions
 * Submissions
 * Users
 * AG-Interfaces

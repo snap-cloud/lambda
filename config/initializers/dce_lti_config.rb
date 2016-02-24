@@ -18,9 +18,9 @@ DceLti::Engine.setup do |lti|
   #
   lti.redirect_after_successful_auth = ->(controller) {
     session_key_name = Rails.application.config.session_options[:key]
-    if controller.params[:problem_id]
-      Rails.application.routes.url_helpers.problem_path(
-        id: controller.params[:problem_id],
+    if controller.params[:question_id]
+      Rails.application.routes.url_helpers.question_path(
+        id: controller.params[:question_id],
         params: controller.params
       )
     else

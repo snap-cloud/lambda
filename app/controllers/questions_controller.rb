@@ -1,75 +1,85 @@
-class ProblemsController < ApplicationController
+class QuestionsController < ApplicationController
   include DceLti
-  # before_filter :authenticate_via_lti
-  before_action :set_problem, only: [
+
+  before_action :set_question, only: [
     :show, :edit, :update, :destroy,
     :starter_file, :submit_grade, :test_file
   ]
 
-  # GET /problems
-  # GET /problems.json
+  # GET /questions
+  # GET /questions.json
   def index
-    @problems = Problem.all
+    @questions = Question.all
   end
 
-  # GET /problems/1
-  # GET /problems/1.json
+  # GET /questions/1
+  # GET /questions/1.json
   def show
     # TODO: This will need to be more generic.
     # TODO: Refactor if/else's to be functions.
-    if @problem.initial_file
-      gon.starter_file_path = starter_file_problem_path
+    if @question.starter_file
+      gon.starter_file_path = starter_file_question_path
     else
       gon.starter_file_path = nil # TODO -- does this work?
     end
-    gon.submissions_path = submission_problem_path
+    gon.submissions_path = submission_question_path
   end
 
-  # GET /problems/new
+  # GET /questions/new
   def new
-    @problem = Problem.new
+    @question = Question.new
   end
 
-  # GET /problems/1/edit
+  # GET /questions/1/edit
   def edit
   end
 
-  # POST /problems
-  # POST /problems.json
+  # POST /questions
+  # POST /questions.json
   def create
-    @problem = Problem.new(problem_params)
+    @question = Question.new(question_params)
 
     respond_to do |format|
-      if @problem.save
-        format.html { redirect_to @problem, notice: 'Problem was successfully created.' }
-        format.json { render :show, status: :created, location: @problem }
+      if @question.save
+        format.html {
+          redirect_to @question,
+          notice: 'question was successfully created.'
+        }
+        format.json {
+          render :show, status: :created, location: @question
+        }
       else
         format.html { render :new }
-        format.json { render json: @problem.errors, status: :unprocessable_entity }
+        format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /problems/1
-  # PATCH/PUT /problems/1.json
+  # PATCH/PUT /questions/1
+  # PATCH/PUT /questions/1.json
   def update
     respond_to do |format|
-      if @problem.update(problem_params)
-        format.html { redirect_to @problem, notice: 'Problem was successfully updated.' }
-        format.json { render :show, status: :ok, location: @problem }
+      if @question.update(question_params)
+        format.html {
+          redirect_to @question,
+          notice: 'question was successfully updated.'
+        }
+        format.json {
+          render :show, status: :ok, location: @question
+        }
       else
         format.html { render :edit }
-        format.json { render json: @problem.errors, status: :unprocessable_entity }
+        format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /problems/1
-  # DELETE /problems/1.json
+  # DELETE /questions/1
+  # DELETE /questions/1.json
   def destroy
-    @problem.destroy
+    @question.destroy
     respond_to do |format|
-      format.html { redirect_to problems_url, notice: 'Problem was successfully destroyed.' }
+      format.html { redirect_to questions_url, notice: 'question was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -77,7 +87,7 @@ class ProblemsController < ApplicationController
   # LIT Submit grade
   # Should probably be done as a POST
   def submit_grade
-    #@problem = Problem.find(params[:problem_id])
+    #@question = question.find(params[:question_id])
     @provider ||= get_tool_provider
     if @provider.nil?
        redirect_to '/', flash[:error] => 'Can\'t post grades if no LTI'
@@ -85,7 +95,7 @@ class ProblemsController < ApplicationController
      end
 
     if @provider.outcome_service?
-      score = normalize_score(params[:score], @problem.points)
+      score = normalize_score(params[:score], @question.points)
       response = @provider.post_replace_result!(score)
       if response.success?
         puts 'PARTYYYYYYYYYY'
@@ -107,30 +117,30 @@ class ProblemsController < ApplicationController
   end
 
   # Return the starter file as XML.
-  # GET /problems/1/starter-file
+  # GET /questions/1/starter-file
   def starter_file
-    render xml: @problem.initial_file
+    render xml: @question.starter_file
   end
 
   # Return the tests JS file as text.
-  # GET /problems/1/test-file
+  # GET /questions/1/test-file
   def test_file
-    render text: @problem.tests
+    render text: @question.test_file
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_problem
-      @problem = Problem.find(params[:id])
+    def set_question
+      @question = question.find(params[:id])
     end
 
     # white list allowed parameters.
-    def problem_params
-      params.require(:problem).permit(:title, :points, :content, :tests, :initial_file, :metadata, :tags)
+    def question_params
+      params.require(:question).permit(:title, :points, :content, :starter_file, :test_file, :metadata)
     end
 
     # LTI requires scores to be returned as a float, that's a percentage.
-    # We will "normalize" values >1 to be a % of the problem's score
+    # We will "normalize" values >1 to be a % of the question's score
     # Note that a 1/x would be treated as a 100%
     def normalize_score(score, max_points)
       score = score.to_f

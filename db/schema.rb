@@ -37,14 +37,13 @@ ActiveRecord::Schema.define(version: 20160112012252) do
     t.datetime "updated_at"
   end
 
-  create_table "problems", force: :cascade do |t|
+  create_table "questions", force: :cascade do |t|
     t.string   "title"
     t.float    "points"
     t.text     "content"
-    t.text     "tests"
-    t.text     "initial_file"
-    t.text     "metadata"
-    t.text     "tags"
+    t.text     "test_file"
+    t.text     "starter_file"
+    t.jsonb    "metadata"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  
-  root :to => "problems#index"
-  
-  resources :problems do
+
+  root :to => "questions#index"
+
+  resources :questions do
     member do
       # TODO: Figure out if a submissions controller might be better...
-      post 'submission', to: 'problems#submit_grade'
-      get 'starter-file', to: 'problems#starter_file'
-      get 'test-file', to: 'problems#test_file'
+      post 'submission', to: 'questions#submit_grade'
+      get 'starter-file', to: 'questions#starter_file'
+      get 'test-file', to: 'questions#test_file'
     end
   end
 
