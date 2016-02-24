@@ -5,3 +5,21 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+questions = [
+  'MOOC 3 GPS',
+  'MOOC 3 Spam Ham',
+  'MOOC 3 Subsets'
+]
+
+
+questions.each do |title|
+  Question.create(
+    title: title,
+    content: 'mooc imported question',
+    points: 2,
+    starter_file: File.read("db/seed-data/#{title}.xml"),
+    test_file: File.read("db/seed-data/#{title}.js"),
+    metadata: {}
+  )
+end
