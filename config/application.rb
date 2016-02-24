@@ -10,7 +10,10 @@ require "sprockets/railtie"
 
 Bundler.require(*Rails.groups)
 
-Dotenv::Railtie.load
+# FIXME -- why is this necessary.
+if Rails.env == 'development'
+  Dotenv::Railtie.load
+end
 
 module Lambda
   class Application < Rails::Application
