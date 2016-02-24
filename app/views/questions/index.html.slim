@@ -1,5 +1,3 @@
-p#notice
-  = notice
 h1
   | All Questions
 table
@@ -32,11 +30,15 @@ table
         td
           = truncate question.content
         td
-          = truncate question.test_file
+          pre
+            code
+              = truncate question.test_file
         td
-          = truncate question.starter_file
+          pre
+            code
+              = truncate question.starter_file
         td
-          = truncate question.metadata
+          = truncate question.metadata.to_s
         td
           = link_to 'Edit', edit_question_path(question)
         td

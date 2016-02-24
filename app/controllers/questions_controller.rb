@@ -131,7 +131,7 @@ class QuestionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_question
-      @question = question.find(params[:id])
+      @question = Question.find(params[:id])
     end
 
     # white list allowed parameters.
