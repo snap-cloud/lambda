@@ -2,7 +2,8 @@ class ProblemsController < ApplicationController
   include DceLti
   # before_filter :authenticate_via_lti
   before_action :set_problem, only: [
-    :show, :edit, :update, :destroy, :starter_file, :submit_grade
+    :show, :edit, :update, :destroy,
+    :starter_file, :submit_grade, :test_file
   ]
 
   # GET /problems
@@ -15,8 +16,13 @@ class ProblemsController < ApplicationController
   # GET /problems/1.json
   def show
     # TODO: This will need to be more generic.
-    # Pass other attributes?
-    gon.starter_file_path = starter_file_problem_path #(problem_id: @problem.id)
+    # TODO: Refactor if/else's to be functions.
+    if @problem.initial_file
+      gon.starter_file_path = starter_file_problem_path
+    else
+      gon.starter_file_path = nil # TODO -- does this work?
+    end
+    gon.submissions_path = submission_problem_path
   end
 
   # GET /problems/new
@@ -72,25 +78,15 @@ class ProblemsController < ApplicationController
   # Should probably be done as a POST
   def submit_grade
     #@problem = Problem.find(params[:problem_id])
-    provider = get_tool_provider
-    if provider.nil?
+    @provider ||= get_tool_provider
+    if @provider.nil?
        redirect_to '/', flash[:error] => 'Can\'t post grades if no LTI'
        return
      end
 
-    if provider.nil?
-       redirect_to '/', flash[:error] => 'Can\'t post grades if no LTI'
-       return
-     end
-
-    if provider.nil?
-       redirect_to '/', flash[:error] => 'Can\'t post grades if no LTI'
-       return
-     end
-
-    if provider.outcome_service?
+    if @provider.outcome_service?
       score = normalize_score(params[:score], @problem.points)
-      response = provider.post_replace_result!(score)
+      response = @provider.post_replace_result!(score)
       if response.success?
         puts 'PARTYYYYYYYYYY'
         # grade write worked
@@ -110,12 +106,18 @@ class ProblemsController < ApplicationController
     redirect_to '/', flash[:success] => 'Posted a grade...sorta'
   end
 
-  # Return the starter file as XML.{}
+  # Return the starter file as XML.
+  # GET /problems/1/starter-file
   def starter_file
-    #@problem = Problem.find(params[:problem_id])
     render xml: @problem.initial_file
   end
-  
+
+  # Return the tests JS file as text.
+  # GET /problems/1/test-file
+  def test_file
+    render text: @problem.tests
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_problem
