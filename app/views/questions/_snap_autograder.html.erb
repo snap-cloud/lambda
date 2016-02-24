@@ -2,16 +2,15 @@
   <!-- AG Snap Modifications -->
   <script src="/snap-path.js"></script>
   <script src="/snap/ag-files/snap-ui-overrides.js"></script>
-  <script src="/snap/ag-files/snap-local-cloud.js"></script>
+
   <!-- Autograder custom display -->
   <link rel="stylesheet" type="text/css" href="/snap/ag-files/AG_status_bar.css" />
   <link rel="stylesheet" type="text/css" href="/snap/ag-files/hintstyle.css" />
   <!-- Autograder + edX Utilties -->
   <!-- TODO: Remove jschannel -->
-  <script src="/snap/lib/jschannel.js"></script>
   <script src="/snap/lib/jquery-1.11.3.min.js"></script>
   <script src="/snap/lib/underscore-min.js"></script>
-  
+
   <!-- Main autograder components -->
   <script src='/snap/ag-files/ag-util.js'></script>
   <script src='/snap/ag-files/spriteEventLog.js'></script>
@@ -19,6 +18,11 @@
   <script src="/snap/ag-files/AGAgent.js"></script>
   <script src='/snap/ag-files/feedbackLog.js'></script>
   <script src="/snap/ag-files/AGFormatting.js"></script>
+
+  <% if Rails.env == 'development' %>
+  <!-- Custom cloud access on localhost only. -->
+  <script src="/snap/ag-files/snap-local-cloud.js"></script>
+  <% end %>
 
   <!-- Load snap + AG additions, similar to snap.html -->
   <script>
@@ -34,7 +38,7 @@
       ide.openIn(world);
       // Start Snap Environment Loop
       loop();
-      
+
       // AUTOGRADER ADDITIONS:
       // Set Snap! to small stage mode
       ide.toggleStageSize(true);
