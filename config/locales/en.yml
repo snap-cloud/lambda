@@ -16,8 +16,6 @@ en:
         "%B %d"
   titles:
       application: λ
-      questions:
-        show: Questions
       users:
         show: '%{user}'
         new: Registration

@@ -15,8 +15,6 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
-    # TODO: This will need to be more generic.
-    # TODO: Refactor if/else's to be functions.
     if @question.starter_file
       gon.starter_file_path = starter_file_question_path
     else
@@ -85,18 +83,30 @@ class QuestionsController < ApplicationController
   end
 
   # LIT Submit grade
-  # Should probably be done as a POST
+  # POST /questions/1/submission
   def submit_grade
+    puts 'CALLED SUBMIT GRADE'
     #@question = question.find(params[:question_id])
     @provider ||= get_tool_provider
     if @provider.nil?
        redirect_to '/', flash[:error] => 'Can\'t post grades if no LTI'
        return
      end
+     
+     puts '='*72
+     puts 'Logging Provider'
+     puts @provider
+     puts '='*72
+     puts 'Logging Params'
+     puts params
+     puts '='*72
+     puts 'Loggin Session'
+     puts session
 
     if @provider.outcome_service?
       score = normalize_score(params[:score], @question.points)
       response = @provider.post_replace_result!(score)
+      # TODO: CHECK FOR HIGHEST SCORE
       if response.success?
         puts 'PARTYYYYYYYYYY'
         # grade write worked
