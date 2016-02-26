@@ -1,27 +1,27 @@
 <% content_for :head do %>
   <!-- AG Snap Modifications -->
   <script src="/snap-path.js"></script>
-  <script src="/snap/ag-files/snap-ui-overrides.js"></script>
+  <script src="/autograder/ag-files/snap-ui-overrides.js"></script>
 
   <!-- Autograder custom display -->
-  <link rel="stylesheet" type="text/css" href="/snap/ag-files/AG_status_bar.css" />
-  <link rel="stylesheet" type="text/css" href="/snap/ag-files/hintstyle.css" />
+  <link rel="stylesheet" type="text/css" href="/autograder/ag-files/AG_status_bar.css" />
+  <link rel="stylesheet" type="text/css" href="/autograder/ag-files/hintstyle.css" />
   <!-- Autograder + edX Utilties -->
   <!-- TODO: Remove jschannel -->
-  <script src="/snap/lib/jquery-1.11.3.min.js"></script>
-  <script src="/snap/lib/underscore-min.js"></script>
+  <script src="/autograder/lib/jquery-1.11.3.min.js"></script>
+  <script src="/autograder/lib/underscore-min.js"></script>
 
   <!-- Main autograder components -->
-  <script src='/snap/ag-files/ag-util.js'></script>
-  <script src='/snap/ag-files/spriteEventLog.js'></script>
-  <script src='/snap/ag-files/scriptAnalysis.js'></script>
-  <script src="/snap/ag-files/AGAgent.js"></script>
-  <script src='/snap/ag-files/feedbackLog.js'></script>
-  <script src="/snap/ag-files/AGFormatting.js"></script>
+  <script src='/autograder/ag-files/ag-util.js'></script>
+  <script src='/autograder/ag-files/spriteEventLog.js'></script>
+  <script src='/autograder/ag-files/scriptAnalysis.js'></script>
+  <script src="/autograder/ag-files/AGAgent.js"></script>
+  <script src='/autograder/ag-files/feedbackLog.js'></script>
+  <script src="/autograder/ag-files/AGFormatting.js"></script>
 
-  <% if Rails.env == 'development' %>
   <!-- Custom cloud access on localhost only. -->
-  <script src="/snap/ag-files/snap-local-cloud.js"></script>
+  <% if Rails.env == 'development' %>
+  <script src="/autograder/ag-files/snap-local-cloud.js"></script>
   <% end %>
 
   <!-- Load snap + AG additions, similar to snap.html -->
