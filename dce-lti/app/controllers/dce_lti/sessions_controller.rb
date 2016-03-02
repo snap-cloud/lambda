@@ -14,7 +14,9 @@ module DceLti
         session.merge!(captured_attributes_from(tool_provider))
         redirect_to redirect_after_successful_auth
       else
-        render :invalid
+        puts 'SESSION ERROR'
+        redirect_to redirect_after_successful_auth
+        # render :invalid
       end
     end
   end
