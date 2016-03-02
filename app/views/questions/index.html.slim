@@ -17,7 +17,6 @@ table
         | Starter file
       th
         | Metadata
-      th[colspan="2"]
   tbody
     - @questions.each do |question|
       tr
@@ -39,9 +38,3 @@ table
               = truncate question.starter_file
         td
           = truncate question.metadata.to_s
-        td
-          = link_to 'Edit', edit_question_path(question)
-        td
-          = link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' }
-br
-= link_to 'New question', new_question_path
