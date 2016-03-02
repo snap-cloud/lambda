@@ -139,10 +139,8 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.3)
     multi_json (1.11.2)
-    newrelic_rpm (3.14.1.311)
     nokogiri (1.6.7.1)
       mini_portile2 (~> 2.0.0.rc2)
-    normalize-rails (3.0.3)
     oauth (0.4.7)
     p3p (1.2.0)
       rack
@@ -303,8 +301,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
-  newrelic_rpm (>= 3.9.8)
-  normalize-rails (~> 3.0.0)
   pg
   pry
   pry-byebug
