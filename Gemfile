@@ -60,6 +60,9 @@ gem 'pg'
 gem 'dce_lti', path: './dce-lti/'
 gem 'activerecord-session_store', '~> 0.1.1'
 
+# SPECIFIC APIS BECAUSE EDUC APIS ARE HELL
+gem 'canvas-api'
+
 group :development do
   gem "quiet_assets"
   gem "refills"

@@ -1,6 +1,9 @@
 class QuestionsController < ApplicationController
   include DceLti
 
+  # TODO: extract this.
+  require 'canvas-api'
+
   before_action :set_question, only: [
     :show, :edit, :update, :destroy,
     :starter_file, :submit_grade, :test_file
@@ -92,32 +95,31 @@ class QuestionsController < ApplicationController
        redirect_to '/', flash[:error] => 'Can\'t post grades if no LTI'
        return
      end
-     
-     puts '='*72
-     puts 'Logging Provider'
-     puts @provider
-     puts '='*72
-     puts 'Logging Params'
-     puts params
-     puts '='*72
-     puts 'Loggin Session'
-     puts session
 
-    if @provider.outcome_service?
-      score = normalize_score(params[:score], @question.points)
-      response = @provider.post_replace_result!(score)
-      # TODO: CHECK FOR HIGHEST SCORE
-      if response.success?
-        puts 'PARTYYYYYYYYYY'
-        # grade write worked
-      elsif response.processing?
-        puts 'Processing....'
-      elsif response.unsupported?
-        puts 'Unsupported'
-      else
-        puts 'sadface.'
-        # debugger
-        # failed
+     puts '='*72
+     puts 'Submission'
+     debugger
+     if @provider.outcome_service?
+       begin
+         puts 'Trying to submit grade'
+         score = normalize_score(params[:score], @question.points)
+         response = @provider.post_replace_result!(score)
+         # TODO: CHECK FOR HIGHEST SCORE
+        if response.success?
+          puts 'PARTYYYYYYYYYY'
+          # grade write worked
+        elsif response.processing?
+          puts 'Processing....'
+        elsif response.unsupported?
+          puts 'Unsupported'
+        else
+          puts 'sadface.'
+          do_submit_api_grade(score)
+          # debugger
+          # failed
+        end
+      rescue
+        do_submit_api_grade(score)
       end
     else
       puts 'NO SUBMIT GRADE'
@@ -136,6 +138,20 @@ class QuestionsController < ApplicationController
   # GET /questions/1/test-file
   def test_file
     render text: @question.test_file
+  end
+
+  def do_submit_api_grade(score)
+    puts 'BAD LTI ERROR'
+    puts 'TRYING CANVAS API'
+    cParams = @provider.custom_params
+    canvas = Canvas::API.new(
+      :host => "https://#{cParams['canvas_api_domain']}",
+      :token => ENV['CANVAS_API_TOKEN']
+    )
+    url = "/api/v1/courses/"
+    url = url + "#{cParams['canvas_course_id']}/assignments/#{cParams['canvas_assignment_id']}/submissions/#{cParams['canvas_user_id']}"
+    canvas.put(url, {'submission[posted_grade]' => score} )
+    puts 'posted score via canvas API.'
   end
 
   private
