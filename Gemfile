@@ -38,8 +38,7 @@ gem "delayed_job_active_record"
 # TODO: need this?
 gem "flutie"
 gem "high_voltage"
-# gem "newrelic_rpm", ">= 3.9.8"
-# gem "normalize-rails", "~> 3.0.0"
+gem "newrelic_rpm", ">= 3.9.8"
 
 gem "rack-canonical-host"
 
