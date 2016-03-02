@@ -89,8 +89,31 @@ class QuestionsController < ApplicationController
   # POST /questions/1/submission
   def submit_grade
     puts 'CALLED SUBMIT GRADE'
-    #@question = question.find(params[:question_id])
+
     @provider ||= get_tool_provider
+    score = normalize_score(params[:score], @question.points)
+
+    if @provider.nil?
+       user_json = {}
+     else
+       cParams = @provider.custom_params
+       user_json = {
+         canvas_id: cParams["canvas_user_id"],
+         full_name: @provider.lis_person_name_full,
+         canvas_login_id: cParams["canvas_user_login_id"]
+       }
+     end
+    puts 'LOGGING SUBMISSION'
+    Submission.create(
+      question_id: @question.id,
+      score: score,
+      code_submission: params[:code_submission],
+      test_results: params[:test_results],
+      user_info: user_json,
+      session_id: session.id
+    )
+    puts 'Saved to Session Log'
+
     if @provider.nil?
        redirect_to '/', flash[:error] => 'Can\'t post grades if no LTI'
        return
@@ -98,11 +121,10 @@ class QuestionsController < ApplicationController
 
      puts '='*72
      puts 'Submission'
-     debugger
+
      if @provider.outcome_service?
        begin
          puts 'Trying to submit grade'
-         score = normalize_score(params[:score], @question.points)
          response = @provider.post_replace_result!(score)
          # TODO: CHECK FOR HIGHEST SCORE
         if response.success?
