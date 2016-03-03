@@ -167,7 +167,7 @@ class QuestionsController < ApplicationController
     puts 'TRYING CANVAS API'
     cParams = @provider.custom_params
     canvas = Canvas::API.new(
-      :host => "https://bcourses.berkeley.edu}",
+      :host => "https://bcourses.berkeley.edu",
       :token => ENV['CANVAS_API_TOKEN']
     )
     url = "/api/v1/courses/"
