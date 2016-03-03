@@ -122,36 +122,40 @@ class QuestionsController < ApplicationController
      puts '='*72
      puts 'Submission'
 
+     debugger
+
      if @provider.outcome_service?
        begin
          puts 'Trying to submit grade'
          response = @provider.post_replace_result!(score)
-         # TODO: CHECK FOR HIGHEST SCORE
-        if response.success?
-          puts 'PARTYYYYYYYYYY'
-          # grade write worked
-        elsif response.processing?
-          puts 'Processing....'
-        elsif response.unsupported?
-          puts 'Unsupported'
-        else
-          puts 'sadface.'
-          do_submit_api_grade(score)
-          # debugger
-          # failed
-        end
-      rescue
-        do_submit_api_grade(score)
-      end
-    else
-      puts 'NO SUBMIT GRADE'
-      # normal tool launch without grade write-back
-    end
-    redirect_to '/', flash[:success] => 'Posted a grade...sorta'
-  end
+         puts response
+         if response.success?
+           puts 'PARTYYYYYYYYYY'
+           # grade write worked
+         elsif response.processing?
+           puts 'Processing....'
+         elsif response.unsupported?
+           puts 'Unsupported'
+         else
+           puts 'ERROR: LTI Response'
+           do_submit_api_grade(score)
+           # debugger
+           # failed
+         end
+       rescue Exception => e
+         puts e.message
+         puts e.backtrace.inspect
+         do_submit_api_grade(score)
+       end
+     else
+       puts 'NO SUBMIT GRADE'
+       # normal tool launch without grade write-back
+     end
+     redirect_to '/', flash[:success] => 'Posted a grade...sorta'
+   end
 
-  # Return the starter file as XML.
-  # GET /questions/1/starter-file
+   # Return the starter file as XML.
+   # GET /questions/1/starter-file
   def starter_file
     render xml: @question.starter_file
   end
@@ -164,6 +168,10 @@ class QuestionsController < ApplicationController
 
   def do_submit_api_grade(score)
     puts 'BAD LTI ERROR'
+    if @provider.tool_consumer_info_product_family_code != "canvas"
+      puts 'Non Canvas Request Found'
+      return
+    end
     puts 'TRYING CANVAS API'
     cParams = @provider.custom_params
     canvas = Canvas::API.new(
@@ -172,8 +180,9 @@ class QuestionsController < ApplicationController
     )
     url = "/api/v1/courses/"
     url = url + "#{cParams['canvas_course_id']}/assignments/#{cParams['canvas_assignment_id']}/submissions/#{cParams['canvas_user_id']}"
-    canvas.put(url, {'submission[posted_grade]' => score} )
+    resp = canvas.put(url, {'submission[posted_grade]' => score} )
     puts 'posted score via canvas API.'
+    puts resp
   end
 
   private
