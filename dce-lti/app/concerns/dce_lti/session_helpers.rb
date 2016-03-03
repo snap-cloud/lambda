@@ -3,13 +3,13 @@ module DceLti
     def valid_lti_request?(request)
       puts('-'*50)
       puts("TOOL PROVIDER VALID: ")
-      puts(tool_provider.valid_request!(request))
+      puts(tool_provider.valid_request?(request))
       puts('-'*50)
 
       tool_provider.valid_request?(request) &&
         Nonce.valid?(tool_provider.oauth_nonce) &&
         TimestampValidator.valid?(tool_provider.oauth_timestamp)
-      
+
       return true
     end
 
