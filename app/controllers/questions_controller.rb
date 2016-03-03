@@ -179,8 +179,12 @@ class QuestionsController < ApplicationController
       :token => ENV['CANVAS_API_TOKEN']
     )
     url = "/api/v1/courses/"
-    url = url + "#{cParams['canvas_course_id']}/assignments/#{cParams['canvas_assignment_id']}/submissions/#{cParams['canvas_user_id']}"
-    resp = canvas.put(url, {'submission[posted_grade]' => score} )
+    url = url + "#{cParams['canvas_course_id']}/assignments/#{cParams['canvas_assignment_id']}/submissions/#{cParams['canvas_user_id']}/"
+    resp = canvas.post(url, {
+      'submission[posted_grade]' => score,
+      'submission[submission_type]' => 'online_text_entry',
+      'submission[body]' => 'Submitted Score via Snap! autograder'
+      } )
     puts 'posted score via canvas API.'
     puts resp
   end

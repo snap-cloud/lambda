@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com:rails/activerecord-session_store.git
+  remote: https://github.com/rails/activerecord-session_store.git
   revision: 1f1999c549701f92007e6946cb476baf3ed3a4c2
   specs:
     activerecord-session_store (0.1.2)
