@@ -103,7 +103,6 @@ class QuestionsController < ApplicationController
          canvas_login_id: cParams["canvas_user_login_id"]
        }
      end
-    puts 'LOGGING SUBMISSION'
     Submission.create(
       question_id: @question.id,
       score: score,
@@ -112,25 +111,19 @@ class QuestionsController < ApplicationController
       user_info: user_json,
       session_id: session.id
     )
-    puts 'Saved to Session Log'
 
     if @provider.nil?
-       redirect_to '/', flash[:error] => 'Can\'t post grades if no LTI'
-       return
+      puts 'Saved submission log for non-lti context'
+      return
      end
-
-     puts '='*72
-     puts 'Submission'
-
-     # debugger
+     puts '='*50
 
      if @provider.outcome_service?
        begin
          puts 'Trying to submit grade'
          response = @provider.post_replace_result!(score)
-         puts response
          if response.success?
-           puts 'PARTYYYYYYYYYY'
+           puts 'PARTY'
            # grade write worked
          elsif response.processing?
            puts 'Processing....'
@@ -139,8 +132,6 @@ class QuestionsController < ApplicationController
          else
            puts 'ERROR: LTI Response'
            do_submit_api_grade(score)
-           # debugger
-           # failed
          end
        rescue Exception => e
          puts e.message

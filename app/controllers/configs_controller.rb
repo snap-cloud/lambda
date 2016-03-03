@@ -1,7 +1,6 @@
 module DceLti
   class ConfigsController < ApplicationController
     skip_before_filter :authenticate_via_lti
-    puts 'CONFIGS CONTROLLER'
     def index
       tool_config = ::IMS::LTI::ToolConfig.new(
         launch_url: sessions_url,
@@ -19,7 +18,6 @@ module DceLti
     private
 
     def engine_config
-      puts 'config fn'
       DceLti::Engine.config
     end
   end

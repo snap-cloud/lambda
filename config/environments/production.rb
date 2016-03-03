@@ -13,7 +13,7 @@ Rails.application.configure do
   config.assets.js_compressor = :uglifier
   config.assets.compile = false
   config.assets.digest = true
-  config.log_level = :debug
+  config.log_level = :info
   config.action_controller.asset_host = ENV.fetch("ASSET_HOST", ENV.fetch("APPLICATION_HOST"))
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = SMTP_SETTINGS
