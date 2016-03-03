@@ -122,7 +122,7 @@ class QuestionsController < ApplicationController
      puts '='*72
      puts 'Submission'
 
-     debugger
+     # debugger
 
      if @provider.outcome_service?
        begin
