@@ -58,7 +58,8 @@ gem 'pg'
 
 # LTI
 gem 'dce_lti', path: './dce-lti/'
-gem 'activerecord-session_store', '~> 0.1.1'
+# The master branch fixes deprecation warnings on rails 2.3
+gem 'activerecord-session_store', :git => 'git@github.com:rails/activerecord-session_store.git'
 
 # SPECIFIC APIS BECAUSE EDUC APIS ARE HELL
 gem 'canvas-api'
