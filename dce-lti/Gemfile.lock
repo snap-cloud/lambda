@@ -72,7 +72,7 @@ GEM
     i18n (0.6.11)
     ims-lti (1.1.8)
       builder
-      oauth (~> 0.4.5)
+      oauth (~> 0.5.1)
     json (1.8.1)
     launchy (2.4.2)
       addressable (~> 2.3)
@@ -84,7 +84,7 @@ GEM
     minitest (5.4.2)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
-    oauth (0.4.7)
+    oauth (0.5.1)
     p3p (1.2.0)
       rack
     pg (0.18.2)
