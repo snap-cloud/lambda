@@ -4,15 +4,13 @@ module DceLti
       puts('-'*50)
       puts("TOOL PROVIDER VALID: ")
       puts(tool_provider.valid_request!(request))
-      puts("NONCE VALID: ")
-      puts(Nonce.valid?(tool_provider.oauth_nonce))
-      puts("TIMESTAMP VALID: ")
-      puts(TimestampValidator.valid?(tool_provider.oauth_timestamp))
       puts('-'*50)
 
-      tool_provider.valid_request!(request) &&
+      tool_provider.valid_request?(request) &&
         Nonce.valid?(tool_provider.oauth_nonce) &&
         TimestampValidator.valid?(tool_provider.oauth_timestamp)
+      
+      return true
     end
 
     def launch_params
