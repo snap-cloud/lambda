@@ -119,6 +119,13 @@ class QuestionsController < ApplicationController
      puts '='*50
 
      if @provider.outcome_service?
+       previos = get_previous_score(@provider)
+       if previous == nil || score > previous
+         # do submit
+       else
+         puts 'Found previous score, no need to resubmit.'
+         redirect_to '/', flash[:success] => 'Posted a grade...sorta'
+       end
        begin
          puts 'Trying to submit grade'
          response = @provider.post_replace_result!(score)
