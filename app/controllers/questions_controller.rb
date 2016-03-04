@@ -131,6 +131,9 @@ class QuestionsController < ApplicationController
            puts 'Unsupported'
          else
            puts 'ERROR: LTI Response'
+           puts response.@message_identifier
+           puts response.@message_ref_identifier
+           puts response.@severity
            puts 'USER JSON'
            puts user_json
            do_submit_api_grade(score)
@@ -174,8 +177,7 @@ class QuestionsController < ApplicationController
     url = url + "#{cParams['canvas_course_id']}/assignments/#{cParams['canvas_assignment_id']}/submissions/#{cParams['canvas_user_id']}/"
     resp = canvas.post(url, {
       'submission[posted_grade]' => score,
-      'submission[submission_type]' => 'online_text_entry',
-      'submission[body]' => 'Submitted Score via Snap autograder'
+      'submission[submission_type]' => 'online_text_entry'
       } )
     puts 'posted score via canvas API.'
     puts resp
