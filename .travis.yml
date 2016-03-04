@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+- 2.3.0
+# before_script:
+# - npm install
+script:
+- RAILS_ENV=test bundle exec rake db:migrate
+cache: bundler
+addons:
+  postgresql: '9.4'
+notifications:
+  email:
+    on_success: never
+    on_failure: change
