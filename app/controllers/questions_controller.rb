@@ -131,6 +131,8 @@ class QuestionsController < ApplicationController
            puts 'Unsupported'
          else
            puts 'ERROR: LTI Response'
+           puts 'USER JSON'
+           puts user_json
            do_submit_api_grade(score)
          end
        rescue Exception => e
@@ -158,7 +160,6 @@ class QuestionsController < ApplicationController
   end
 
   def do_submit_api_grade(score)
-    puts 'BAD LTI ERROR'
     if @provider.tool_consumer_info_product_family_code != "canvas"
       puts 'Non Canvas Request Found'
       return
@@ -174,7 +175,7 @@ class QuestionsController < ApplicationController
     resp = canvas.post(url, {
       'submission[posted_grade]' => score,
       'submission[submission_type]' => 'online_text_entry',
-      'submission[body]' => 'Submitted Score via Snap! autograder'
+      'submission[body]' => 'Submitted Score via Snap autograder'
       } )
     puts 'posted score via canvas API.'
     puts resp
