@@ -32,6 +32,10 @@ module Lambda
     config.active_record.raise_in_transactional_callbacks = true
     config.active_job.queue_adapter = :delayed_job
 
+    # Not for security, just make things easier to read!
+    config.filter_parameters += [
+      :code_submission, :test_results
+    ]
     # Used this to preload and modules in lib/.
     # config.autoload_paths += %W(#{config.root}/lib)
 

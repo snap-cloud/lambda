@@ -114,7 +114,7 @@ class QuestionsController < ApplicationController
 
     if @provider.nil?
       puts 'Saved submission log for non-lti context'
-      return
+      redirect_to '/', flash[:success] => 'Posted data'
      end
      puts '='*50
 
@@ -131,9 +131,9 @@ class QuestionsController < ApplicationController
            puts 'Unsupported'
          else
            puts 'ERROR: LTI Response'
-           puts response.@message_identifier
-           puts response.@message_ref_identifier
-           puts response.@severity
+           puts response.message_identifier
+           puts response.message_ref_identifier
+           puts response.severity
            puts 'USER JSON'
            puts user_json
            do_submit_api_grade(score)
