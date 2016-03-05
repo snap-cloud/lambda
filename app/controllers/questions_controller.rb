@@ -93,16 +93,17 @@ class QuestionsController < ApplicationController
     @provider ||= get_tool_provider
     score = normalize_score(params[:score], @question.points)
 
+    # TODO: Extra to user logging function.
     if @provider.nil?
-       user_json = {}
-     else
-       cParams = @provider.custom_params
-       user_json = {
-         canvas_id: cParams["canvas_user_id"],
-         full_name: @provider.lis_person_name_full,
-         canvas_login_id: cParams["canvas_user_login_id"]
-       }
-     end
+      user_json = {}
+    else
+      cParams = @provider.custom_params
+      user_json = {
+        canvas_id: cParams["canvas_user_id"],
+        full_name: @provider.lis_person_name_full,
+        canvas_login_id: cParams["canvas_user_login_id"]
+      }
+    end
     Submission.create(
       question_id: @question.id,
       score: score,
@@ -114,8 +115,9 @@ class QuestionsController < ApplicationController
 
     if @provider.nil?
       puts 'Saved submission log for non-lti context'
-      redirect_to '/', flash[:success] => 'Posted data'
-     end
+      render nothing: true
+      return
+    end
      puts '='*50
 
      if @provider.outcome_service?
@@ -154,7 +156,7 @@ class QuestionsController < ApplicationController
        puts 'NO SUBMIT GRADE'
        # normal tool launch without grade write-back
      end
-     redirect_to '/', flash[:success] => 'Posted a grade...sorta'
+     render nothing: true
    end
 
    # Return the starter file as XML.
