@@ -121,12 +121,13 @@ class QuestionsController < ApplicationController
      puts '='*50
 
      if @provider.outcome_service?
-       previos = get_previous_score(@provider)
+       previous = get_previous_score(@provider)
        if previous == nil || score > previous
          # do submit
        else
          puts 'Found previous score, no need to resubmit.'
-         redirect_to '/', flash[:success] => 'Posted a grade...sorta'
+         render nothing: true
+         return
        end
        begin
          puts 'Trying to submit grade'
@@ -141,8 +142,8 @@ class QuestionsController < ApplicationController
          else
            puts 'ERROR: LTI Response'
            puts response.message_identifier
-           puts response.message_ref_identifier
-           puts response.severity
+           puts response.description
+           puts response.code_major
            puts 'USER JSON'
            puts user_json
            do_submit_api_grade(score)
@@ -183,13 +184,29 @@ class QuestionsController < ApplicationController
       :token => ENV['CANVAS_API_TOKEN']
     )
     url = "/api/v1/courses/"
-    url = url + "#{cParams['canvas_course_id']}/assignments/#{cParams['canvas_assignment_id']}/submissions/#{cParams['canvas_user_id']}/"
-    resp = canvas.post(url, {
-      'submission[posted_grade]' => score,
-      'submission[submission_type]' => 'online_text_entry'
-      } )
+    url = "#{url}#{cParams['canvas_course_id']}/assignments/#{cParams['canvas_assignment_id']}/submissions/#{cParams['canvas_user_id']}"
+    resp = canvas.put(url,  "submission[posted_grade]=#{score * 100}%"  )
     puts 'posted score via canvas API.'
     puts resp
+  end
+
+  # Make an LTI call that tries to return the previous score.
+  def get_previous_score(provider)
+    score = nil
+    begin
+      response = provider.post_read_result!
+      if response.success?
+        puts "Got previous score #{response.score}"
+        score = response.score
+      else
+        puts 'Unable to get Previous score'
+      end
+    rescue Exception => e
+      puts 'EXCEPTION IN GETTING PREVIOUS SCORE'
+      puts e.message
+      puts e.backtrace.inspect
+    end
+    score
   end
 
   private

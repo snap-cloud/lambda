@@ -33,7 +33,8 @@ module Lambda
     config.active_job.queue_adapter = :delayed_job
 
     # Used this to preload and modules in lib/.
-    # config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W(#{config.root}/lib)
+
 
   end
 end
