@@ -11,13 +11,14 @@ function submitAutograderResults(ag_log) {
     
     if (ag_log.savedXML) {
         xml = ag_log.savedXML;
+        ag_log.savedXML = null;
     } else if (ide) {
         xml = ide.serializer.serialize(ide.stage);
     } else {
         xml = 'ERROR: XML COULD NOT BE SERIALIZED';
     }
     
-    score = ag_log.points || 0;
+    score = ag_log.points / ag_log.totalPoints || 0;
     // Allow JSON stringification
     ag_log.snapWorld = null;
     try {
@@ -50,7 +51,10 @@ function submitAutograderResults(ag_log) {
         },
         success: function () {
             console.log('SUCCESS');
+        },
+        error: function (data, xhr, stuff) {
+            console.log('Error Submitting Assignment');
+            // TODO: Log Data somewhere?
         }
     });
-    console.log('Submitted.');
 }
