@@ -18,7 +18,7 @@ function submitAutograderResults(ag_log) {
         xml = 'ERROR: XML COULD NOT BE SERIALIZED';
     }
     
-    score = ag_log.points / ag_log.totalPoints || 0;
+    score = (ag_log.points / ag_log.totalPoints) || 0;
     // Allow JSON stringification
     ag_log.snapWorld = null;
     try {
