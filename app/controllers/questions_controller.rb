@@ -185,7 +185,7 @@ class QuestionsController < ApplicationController
     )
     url = "/api/v1/courses/"
     url = "#{url}#{cParams['canvas_course_id']}/assignments/#{cParams['canvas_assignment_id']}/submissions/#{cParams['canvas_user_id']}"
-    resp = canvas.put(url,  "submission[posted_grade]=#{score * 100}%"  )
+    resp = canvas.put(url,  "submission[posted_grade]=#{score.to_i * 100}%"  )
     puts 'posted score via canvas API.'
     puts resp
   end
