@@ -6,6 +6,7 @@
 class ActiveRecord::ConnectionAdapters::AbstractAdapter
    protected
 
+   # TODO: This doesn't seem to be redacting UPDATES
    def log_with_binary_truncate(sql, name="SQL", binds=[], stmt_key='', &block)
      binds = binds.map do |col, data|
        if col.name == 'code_submission' || col.name == 'test_results'

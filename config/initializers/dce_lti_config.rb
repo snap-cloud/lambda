@@ -2,20 +2,18 @@ DceLti::Engine.setup do |lti|
   # "provider_*" attributes are used to describe this tool to the consumer,
   # where "consumer" is an LMS like Canvas. The defaults are below, uncomment
   # and modify as necessary or (ideally) configure via environment variables.
-  #
   lti.provider_title = (ENV['LTI_PROVIDER_TITLE'] || 'Lambda')
   lti.provider_description = (ENV['LTI_PROVIDER_DESCRIPTION'] || 'An autograder')
-  #
+
   # Set this to `true` to enable the form and URL-rewriting behavior that
   # allows for the creation of cookieless sessions. The default is `false`,
   # meaning we don't attempt to use cookieless sessions when a cookie cannot be
   # set - the session just fails.
-  #
   lti.enable_cookieless_sessions = true
-  #
+  
+  
   # The default post-auth redirect includes the session key and session id so
   # that we can instantiate a successful cookieless session if needed.
-  #
   lti.redirect_after_successful_auth = ->(controller) {
     session_key_name = Rails.application.config.session_options[:key]
     if controller.params[:question_id]
