@@ -40,9 +40,6 @@ gem "newrelic_rpm", ">= 3.9.8"
 
 gem "rack-canonical-host"
 
-# TODO: Remove these?
-gem "simple_form"
-
 # Always use postgres as the db
 # Currently LTI tools depend on it
 gem 'pg'
