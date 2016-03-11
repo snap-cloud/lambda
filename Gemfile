@@ -5,6 +5,9 @@ ruby "2.3.0"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.2'
 
+# Use Puma as the app server
+gem 'puma'
+
 # VIEW LEVEL STUFF
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -31,10 +34,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Puma as the app server
-gem 'puma'
-
-gem "delayed_job_active_record"
 # TODO: need this?
 gem "flutie"
 gem "high_voltage"
@@ -42,12 +41,8 @@ gem "newrelic_rpm", ">= 3.9.8"
 
 gem "rack-canonical-host"
 
-# Emailing
-# gem "recipient_interceptor"
-
 # TODO: Remove these?
 gem "simple_form"
-gem "title"
 
 # Always use postgres as the db
 # Currently LTI tools depend on it
@@ -65,11 +60,31 @@ gem 'activerecord-session_store', :git => 'https://github.com/rails/activerecord
 gem 'canvas-api'
 
 group :development do
-  gem "quiet_assets"
+
   gem "refills"
   gem "spring"
   gem "spring-commands-rspec"
-  gem "web-console"
+
+  # Custtom Error Pages in Dev Only
+  gem "better_errors"
+  gem "binding_of_caller"
+
+  # Disable logging Assets in the Server log
+  gem 'quiet_assets'
+
+  # Code Linting
+  gem 'rubocop', require: false
+
+  # Better Debugging From Rails Console (See Readme)
+  gem 'awesome_print'
+
+  # Code Quality Locally
+  gem 'metric_fu'
+
+  # Security Analysis
+  gem 'brakeman'
+  # DB Query Analysis / Optimizations
+  gem "bullet"
 end
 
 group :development, :test do
@@ -78,8 +93,6 @@ group :development, :test do
 
   gem 'pry'
 
-  gem "awesome_print"
-  gem "bullet"
   gem "bundler-audit", require: false
   gem "dotenv-rails"
   gem "factory_girl_rails"
@@ -103,5 +116,6 @@ end
 group :staging, :production do
   gem "rails_stdout_logging"
   gem "rack-timeout"
+  # For Heroku:
   gem "rails_12factor"
 end
