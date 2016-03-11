@@ -1,0 +1,32 @@
+{
+  "name": "snap-cloud",
+  "version": "1.0.0",
+  "description": "This controls the bower dependencies and build for the main rails app",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/snap-cloud/snap-cloud.git"
+  },
+  "author": "Michael Ball",
+  "license": "AGPL",
+  "bugs": {
+    "url": "https://github.com/snap-cloud/snap-cloud/issues"
+  },
+  "homepage": "https://github.com/snap-cloud/snap-cloud",
+  "dependencies": {
+    "bower": "^1.4.1"
+  },
+  "engine": {
+    "node": "0.12.x"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install"
+  }
+}
