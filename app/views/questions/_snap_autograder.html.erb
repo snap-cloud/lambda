@@ -24,41 +24,53 @@
 
   <!-- Load snap + AG additions, similar to snap.html -->
   <script>
+  function RESET_WORLD_SIZE() {
+    // The canvas size needs to manually be set so that morphic
+    // knows the exact pixel dimensions to handle.
+    $('#world').attr('height', $(window).height() - $('.ag-header').height());
+    $('#world').attr('width', $('.snap').width());
+    if (world) {
+      world.drawNew();
+    }
+  }
   // THIS SEEMS LIKE A HACK.
   // but this site is not edX....
   isEDX = false;
   var world, world_canvas;
   window.onload = function () {
-      var ide, grade_button;
-      world_canvas = document.getElementById('world')
-      world = new WorldMorph(world_canvas);
-      ide = new IDE_Morph();
-      ide.openIn(world);
-      // Start Snap Environment Loop
-      loop();
+    RESET_WORLD_SIZE();
+    $(window).resize(RESET_WORLD_SIZE);
+    var ide, grade_button;
+    world_canvas = document.getElementById('world')
+    world = new WorldMorph(world_canvas, false); // do not autosize
+    ide = new IDE_Morph();
+    ide.openIn(world);
+    // Start Snap Environment Loop
+    loop();
 
-      // AUTOGRADER ADDITIONS:
-      // Set Snap! to small stage mode
-      ide.toggleStageSize(true);
-      // Initialize AGSB button.
-      grade_button = document.getElementById("autograding_button");
-      grade_button.addEventListener('click', button_listener);
-      world_canvas.addEventListener("mouseup", update_listener);
-      // This is a link relative to /problems/N/
-      starter_path = gon.starter_file_path;
-      initializeSnapAdditions(world, ide);
+    // AUTOGRADER ADDITIONS:
+    // Set Snap! to small stage mode
+    ide.toggleStageSize(true);
+    // Initialize AGSB button.
+    grade_button = document.getElementById("autograding_button");
+    grade_button.addEventListener('click', button_listener);
+    world_canvas.addEventListener("mouseup", update_listener);
+    // This is a link relative to /problems/N/
+    starter_path = gon.starter_file_path;
+    initializeSnapAdditions(world, ide);
   };
 
   function loop() {
-      requestAnimationFrame(loop);
-      world.doOneCycle();
+    requestAnimationFrame(loop);
+    world.doOneCycle();
   }
 
   </script>
 <% end %>
 
 <!-- Snap Autograding Button -->
-<div id="autograding_bar">
+
+<!--<div id="autograding_bar">
   <div tabindex="0" class="onclick-menu" id='onclick-menu' style="display:inline-block">
     <span title="Menu">&#9776;</span>
     <div class='hover_darken'></div>
@@ -85,11 +97,11 @@
     <div class='hover_darken'></div>
   </div>
   <div id="numtips" style="display:inline-block"></div>
-</div>
+</div> -->
 
 <!-- Snap Autograding Menu -->
 <!-- Autograding Menu Help Button -->
-<div class="overlay is-hidden" id="overlay">
+<!-- <div class="overlay is-hidden" id="overlay">
   <p class="help-text" id="full-screen-arrow">&#8600;</p>
   <p class="help-text" id="full-screen-help">This full-screen button will pop out the Snap! window.</p>
   <p class="help-text" id="menu-item-arrow">&#8599;</p>
@@ -108,7 +120,7 @@
     <div id="toggle-correct-tests"></div>
     <p id="comment"></p>
   </div>
-</div>
+</div> -->
 
 <!-- TODO: Move THIS -->
 <!-- GETFEEDBACK FORM -->

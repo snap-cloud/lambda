@@ -1,4 +1,3 @@
-require Rails.root.join("config/smtp")
 Rails.application.configure do
   if ENV.fetch("HEROKU_APP_NAME", "").include?("staging-pr-")
     ENV["APPLICATION_HOST"] = ENV["HEROKU_APP_NAME"] + ".herokuapp.com"
@@ -8,6 +7,7 @@ Rails.application.configure do
   config.eager_load = true
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+  config.static_cache_control = 'public, max-age=3600'
   config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
   config.middleware.use Rack::Deflater
   config.assets.js_compressor = :uglifier

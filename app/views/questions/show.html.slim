@@ -11,7 +11,11 @@ p#notice
     = text_field_tag(:code_submission)
     = text_field_tag(:test_results)
     = submit_tag("Submit")
-= render 'snap_base'
+
+.ag-header(style="height:50px; background-color:#CCC")
+    | header-row
+.snap(style="width:100%;")
+    = render 'snap_base'
 = render 'snap_autograder'
 
 script

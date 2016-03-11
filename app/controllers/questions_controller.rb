@@ -24,6 +24,7 @@ class QuestionsController < ApplicationController
       gon.starter_file_path = nil # TODO -- does this work?
     end
     gon.submissions_path = submission_question_path
+    render layout: 'base'
   end
 
   # GET /questions/new
