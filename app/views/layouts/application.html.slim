@@ -12,7 +12,8 @@ html[lang="en"]
 body [class= body_class]
   = Gon::Base.render_data
   = render "flashes"
-  = yield
+  .container
+      = yield
   = javascript_include_tag "application"
   = render "javascript"
   = render partial: "partials/google_analytics_pageview"

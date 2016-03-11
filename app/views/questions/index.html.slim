@@ -1,40 +1,29 @@
 h1
-  | All Questions
-table
-  thead
-    tr
-      th
-        | View
-      th
-        | Title
-      th
-        | Points
-      th
-        | Content
-      th
-        | Test File
-      th
-        | Starter file
-      th
-        | Metadata
-  tbody
-    - @questions.each do |question|
-      tr
-        td
-          = link_to 'Show', question
-        td
-          = question.title
-        td
-          = question.points
-        td
-          = truncate question.content
-        td
-          pre
-            code
-              = truncate question.test_file
-        td
-          pre
-            code
-              = truncate question.starter_file
-        td
-          = truncate question.metadata.to_s
+  | Pick a Question to Practice!
+.table
+    table.table.table-striped
+      thead
+        tr
+          th
+            | Title
+          th
+            | Points
+          th
+            | Content
+          th
+            | Test File
+          th
+            | Starter file
+      tbody
+        - @questions.each do |question|
+          tr
+            td
+              = link_to question.title, question
+            td
+              = question.points
+            td
+              = truncate question.content
+            td
+              = link_to 'View Tests File', test_file_question_path(question.id)
+            td
+              = link_to 'View Starter File', starter_file_question_path(question.id)
