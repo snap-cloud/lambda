@@ -47,9 +47,6 @@ gem "simple_form"
 # Currently LTI tools depend on it
 gem 'pg'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 # LTI
 gem 'dce_lti', path: './dce-lti/'
 # The master branch fixes deprecation warnings on rails 2.3
@@ -88,7 +85,7 @@ group :development do
 end
 
 group :development, :test do
-  # Call 'debugger' anywhere in the code to stop execution and get a debugger console
+  # Call 'debugger' anywhere in code to get a debugger console
   gem 'byebug'
 
   gem 'pry'
