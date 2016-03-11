@@ -18,3 +18,8 @@
 
 .env
 .byebug_history
+
+# Assets
+vendor/bower/
+# Exclude anything that's pre-compiled
+public/assets/
