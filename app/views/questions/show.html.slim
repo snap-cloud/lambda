@@ -1,9 +1,7 @@
 - content_for :head do
     title
-        '#{@question.title} | λ'
+        | #{@question.title} | λ
 
-p#notice
-  = notice
 .hidden(style='display: none')
   = link_to 'Back', questions_path
   = form_tag(submission_question_path(params[:id]), id: 'submission-form', method: "post") do
@@ -17,7 +15,7 @@ p#notice
 = render 'autograder_header'
 
 // Snap is in it's own div to better allow us to set its size.
-.snap(style="width:100%;")
+#snap(style="width:100%;")
     = render 'snap_base'
 
 = render 'snap_autograder'

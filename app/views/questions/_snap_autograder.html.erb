@@ -27,8 +27,17 @@
   function RESET_WORLD_SIZE() {
     // The canvas size needs to manually be set so that morphic
     // knows the exact pixel dimensions to handle.
-    $('#world').attr('height', $(window).height() - $('#ag-header').height());
-    $('#world').attr('width', $('#snap').width());
+    var jQworld, agHeight, snap;
+    jQworld = $('#world');
+    snap = $('#snap');
+    agHeight = $('#ag-header').height();
+    // $(document.body).style('height', $(window).height());
+    // $(document.body).style('overflow-y', 'hidden');
+    jQworld.attr('height', $(window).height() - agHeight);
+    jQworld.attr('width', snap.width());
+    jQworld.css('top', agHeight);
+    jQworld.css('width', '100%');
+    snap.css('top', agHeight);
     if (world) {
       world.drawNew();
     }

@@ -1,28 +1,124 @@
-<!-- Bootstrap set bar fixed pos -->
-<div class="pos-f-t" id="ag-header">
-    <div class="navbar navbar-light bg-faded navbar-static-top" id="autograding_bar">
-        <!-- These are the buttons. -->
-        <div class="btn-group btn-group-sm" role="group" aria-label="Autograder control buttons and menu">
-          <!-- Control Menu -->
-          <div class="btn-group site-navigation" role="group" id="navigation">
-            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span title="Menu">&#9776;</span>
-              <div class='hover_darken'></div>
+<style type="text/css">
+/** PAGE NAV (TOP AND BOTTOM) ************************************************/
+.llab-nav {
+  line-height: 1.38; /* Keep slightly smaller than normal to control centering the nav buttons */
+  background: #FFF;
+  margin: 0;
+  width: 100%;
+  padding: .5em 1em;
+  vertical-align: middle;
+}
+
+.navbar-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  font-variant: small-caps;
+  color: #003A70;
+  text-align: left;
+}
+
+/* Contains the page title text, truncates text with '…' */
+/* First line is stupid bootstrap stuff....*/
+.navbar-default .navbar-title:hover, .navbar-default .navbar-title:focus,
+.navbar-default .navbar-title,
+.navbar-title, a.navbar-title {
+  vertical-align: middle;
+  max-width: 70%;
+  min-width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.nav-btns {
+  float: left;
+  z-index: 9999;
+  max-width: 18em;
+  min-width: 15em;
+  margin-bottom: 0; /* Bootstrap override for ul, defaults 10 otherwise */
+  line-height: 1em;
+  font-weight: 900;
+  position: relative;
+  vertical-align: middle;
+}
+
+/* BUTTON CLASSES */
+/* Overrides default bootstrap which conflicts with right float dropdown. */
+.btn-group > .btn {
+  float: none;
+}
+
+/* END NAV SECTION ***********************************************************/
+
+/* PAGE DROPDOWN SECTION ******************************************************/
+/* Give space to caret in dropdown menus */
+/* FIXME -- standardize class names! */
+.dropdown-menu {
+  margin-top: 6px; /* should be equal to padding on list_header */
+  overflow-y: scroll; /* scroll menu on small screens */
+  width: auto;
+  white-space: nowrap;
+  overflow-x: hidden;  /* Text truncation */
+  text-overflow: ellipsis;
+  /* max- height + width set using JS on page load. */
+}
+.list_item {
+  font-size: 10pt;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+/* Button to toggle the menu */
+.list_header, .arrow {
+  height: 2em;
+  margin: 0;
+  text-align: center;
+  font-size: 12pt;
+  font-weight: 900;
+  border-color: #888;
+  border-radius: 0; /* No round coners on dropdowns between buttons */
+}
+
+.arrow {/* For Buttons with arrows instead of words. */
+  border-radius: 8px;
+  font-variant: small-caps;
+  width: 3em;
+  padding: 3px; /* center text in buttons */
+}
+
+/* END PAGE DROPDWON SECTION *************************************************/
+
+
+
+</style> 
+<!-- TODO: Remove LLAB Stuff -->
+<nav class="llab-nav navbar navbar-default navbar-static-top" role="navigation" id="ag-header">
+    <div class="nav navbar-nav navbar-left" id="autograding_bar">
+        <ul class="nav-btns btn-group">
+            <button class="navbar-toggle btn btn-default dropdown-toggle site-navigation" type="button" data-toggle="dropdown" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span title="Menu">&#9776;</span>
+                <div class='hover_darken'></div>
             </button>
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-              <!-- .dropdwon-closed .bubble -->
-              <a class="dropdown-item enabled-button" id="undo-button">Revert To Last Attempt</a>
-              <a class="dropdown-item enabled-button" id="revert-button">Revert To Best Attempt</a>
-              <a class="dropdown-item enabled-button" id="reset-button">Reset</a>
-              <span class="menu-divider-sub-menu" id='menu-divider'></span>
-              <a class="dropdown-item enabled-button"  onclick="openPopup();" id="help-button">Help</a>
+            <div class="dropdown inline">
+                <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labeledby="Autograder Controls Menu">
+                    <li class="list_item dropdown-item enabled-button" role="presentation" id="undo-button">Revert to Last Attempt</li>
+                    <li class="list_item dropdown-item enabled-button" role="presentation" id="revert-button">Rest to Best Attempt</li>
+                    <li class="list_item dropdown-item enabled-button" role="presentation" id="reset-button">Reset</li>
+                    <li class="divider list_item" role="presentation"></li>
+                    <li class="list_item dropdown-item enabled-button" onclick="openPopup();" id="help-button" role="presentation">Help</li>
+                </ul>
             </div>
-            <!-- Get Feedback Button -->
-            <button id="autograding_button" type="button" class="btn btn-secondary">Get Feedback</button>
+            <a class="btn btn-default" id="autograding_button" href="#">Get Feedback</a>
             <div class='hover_darken'></div>
             <!-- Add a 'Show Feedback' thing that doesn't run tests. -->
             <div id="numtips" class="btn button" style="display:inline-block"></div>
-          </div>
-        </div>
+        </ul>
     </div>
-</div>
+    
+    <div class="nav navbar-nav navbar-title navbar-right">Autograder ?</div>
+</nav>
+
+
