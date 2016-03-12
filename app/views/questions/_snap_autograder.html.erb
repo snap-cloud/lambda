@@ -27,8 +27,8 @@
   function RESET_WORLD_SIZE() {
     // The canvas size needs to manually be set so that morphic
     // knows the exact pixel dimensions to handle.
-    $('#world').attr('height', $(window).height() - $('.ag-header').height());
-    $('#world').attr('width', $('.snap').width());
+    $('#world').attr('height', $(window).height() - $('#ag-header').height());
+    $('#world').attr('width', $('#snap').width());
     if (world) {
       world.drawNew();
     }
@@ -68,31 +68,6 @@
   </script>
 <% end %>
 
-<!-- Snap Autograding Controls Bar -->
-<div id="autograding_bar">
-  <div class="btn-group btn-group-sm" role="group" aria-label="Button group with nested dropdown">
-    <!-- Control Menu -->
-    <div class="btn-group site-navigation" role="group" id="navigation">
-      <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span title="Menu">&#9776;</span>
-        <div class='hover_darken'></div>
-      </button>
-      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <!-- .dropdwon-closed .bubble -->
-        <a class="dropdown-item enabled-button" id="undo-button">Revert To Last Attempt</a>
-        <a class="dropdown-item enabled-button" id="revert-button">Revert To Best Attempt</a>
-        <a class="dropdown-item enabled-button" id="reset-button">Reset</a>
-        <span class="menu-divider-sub-menu" id='menu-divider'></span>
-        <a class="dropdown-item enabled-button"  onclick="openPopup();" id="help-button">Help</a>
-      </div>
-      <!-- Get Feedback -->
-      <button id="autograding_button" type="button" class="btn btn-secondary">Get Feedback</button>
-      <div class='hover_darken'></div>
-      <div id="numtips" class="btn button" style="display:inline-block"></div>
-    </div>
-  </div>
-</div>
-
 
 <!-- Autograding Menu Help Button -->
 <!-- <div class="overlay is-hidden" id="overlay">
@@ -116,11 +91,3 @@
   </div>
 </div> -->
 
-<!-- TODO: Move THIS -->
-<!-- GETFEEDBACK FORM -->
-<script>
-  (function(w,d,s,u,g,a,b){w['GetFeedbackObject']=g;w[g]=w[g]||function(){
-  (w[g].q=w[g].q||[]).push(arguments)};a=d.createElement(s),
-  b=d.getElementsByTagName(s)[0];a.async=1;a.src=u;b.parentNode.insertBefore(a,b)
-  })(window,document,'script','//websites-beta.cdn.getfeedback.com/embed/5eojzRMI01/gf.js','gf')
-</script>

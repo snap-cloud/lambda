@@ -1,13 +1,28 @@
-<div class="ag-header pos-f-t">
-      <div class="collapse" id="navbar-header" aria-expanded="false" style="height: 0px;">
-        <div class="container-fluid bg-inverse p-a-1">
-          <h3>Collapsed content</h3>
-          <p>Toggleable via the navbar brand.</p>
+<!-- Bootstrap set bar fixed pos -->
+<div class="pos-f-t" id="ag-header">
+    <div class="navbar navbar-light bg-faded navbar-static-top" id="autograding_bar">
+        <!-- These are the buttons. -->
+        <div class="btn-group btn-group-sm" role="group" aria-label="Autograder control buttons and menu">
+          <!-- Control Menu -->
+          <div class="btn-group site-navigation" role="group" id="navigation">
+            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span title="Menu">&#9776;</span>
+              <div class='hover_darken'></div>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <!-- .dropdwon-closed .bubble -->
+              <a class="dropdown-item enabled-button" id="undo-button">Revert To Last Attempt</a>
+              <a class="dropdown-item enabled-button" id="revert-button">Revert To Best Attempt</a>
+              <a class="dropdown-item enabled-button" id="reset-button">Reset</a>
+              <span class="menu-divider-sub-menu" id='menu-divider'></span>
+              <a class="dropdown-item enabled-button"  onclick="openPopup();" id="help-button">Help</a>
+            </div>
+            <!-- Get Feedback Button -->
+            <button id="autograding_button" type="button" class="btn btn-secondary">Get Feedback</button>
+            <div class='hover_darken'></div>
+            <!-- Add a 'Show Feedback' thing that doesn't run tests. -->
+            <div id="numtips" class="btn button" style="display:inline-block"></div>
+          </div>
         </div>
-      </div>
-      <div class="navbar navbar-light bg-faded navbar-static-top">
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-header" aria-expanded="false">
-          ☰
-        </button>
-      </div>
     </div>
+</div>

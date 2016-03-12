@@ -11,7 +11,7 @@
   "dependencies": {
     "jquery": "~2.2.x",
     "jquery-ujs": "~1.0.3",
-    "bootstrap": "v4.0.0-alpha.2",
+    "bootstrap": "~3.x.x",
     "font-awesome": "~4.3.0",
     "underscore": "^1.8.3",
     "tether": "^1.2.0"
