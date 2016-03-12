@@ -12,11 +12,17 @@ p#notice
     = text_field_tag(:test_results)
     = submit_tag("Submit")
 
-.ag-header(style="height:50px; background-color:#CCC")
-    | header-row
+
+// Controls for getting feedback and state and such.
+= render 'autograder_header'
+
+// Snap is in it's own div to better allow us to set its size.
 .snap(style="width:100%;")
     = render 'snap_base'
+
 = render 'snap_autograder'
 
 script
    == @question.test_file
+   
+= render partial: 'partials/getfeedback'
