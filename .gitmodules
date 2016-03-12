@@ -1,3 +1,6 @@
 [submodule "public/autograder"]
 	path = public/autograder
 	url = git://github.com/cycomachead/lambda-evaluator.git
+[submodule "public/snap"]
+	path = public/snap
+	url = git://github.com:jmoenig/Snap--Build-Your-Own-Blocks.git

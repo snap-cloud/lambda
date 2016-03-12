@@ -40,15 +40,9 @@ gem "newrelic_rpm", ">= 3.9.8"
 
 gem "rack-canonical-host"
 
-# TODO: Remove these?
-gem "simple_form"
-
 # Always use postgres as the db
 # Currently LTI tools depend on it
 gem 'pg'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
 # LTI
 gem 'dce_lti', path: './dce-lti/'
@@ -88,7 +82,7 @@ group :development do
 end
 
 group :development, :test do
-  # Call 'debugger' anywhere in the code to stop execution and get a debugger console
+  # Call 'debugger' anywhere in code to get a debugger console
   gem 'byebug'
 
   gem 'pry'

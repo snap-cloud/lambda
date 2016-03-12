@@ -15,11 +15,25 @@ We have:
 * Users
 * AG-Interfaces
 
-## API
+## LTI Overview
 
 ## Configurations
+LTI Config TODO.
+
+* Launch URL: `https://lambda.cs10.org/lti/sessions`
+* Key and Secret: Currently stored on the server :O
+* Use `?question_id=X` after the launch URL to load a specific question.
+
+### Custom Parameters
+None Yet...
 ### edX
+
+* Follow edX guide. TODO: get link.
+
 ### Canvas (bCourses)
+**Note about submitting grades:** Canvas requires you to be in "Student View" for the LTI tool to be able to passback a grade. Get to this through your course's settings.
+
+* Pass the tool 'public' information
 
 
 ---
@@ -35,6 +49,7 @@ If you've already cloned without `--recursive` do:
 
 
 ## Development Getting Started
+Once things are setup, use `./run` to launch Rails and start ngrok.
 
 After you have cloned this repo, run this setup script to set up your machine
 with the necessary dependencies to run and test this app:
@@ -42,15 +57,7 @@ with the necessary dependencies to run and test this app:
     % ./bin/setup
 
 It assumes you have a machine equipped with Ruby, Postgres, etc. If not, set up
-your machine with [this script].
-
-[this script]: https://github.com/thoughtbot/laptop
-
-After setting up, you can run the application using [Heroku Local]:
-
-    % heroku local
-
-[Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
+your machine with `brew` (on a Mac).
 
 
 ## Guidelines
@@ -80,13 +87,13 @@ programming in style.
 	launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 	```
 	* `ngrok` 2 Mac binary is in `bin/`
-		* Currently things use `ngrok.yml` with a custom domain.
+		* Currently the run script uses `ngrok.yml` with a custom domain.
 		* If you don't want to pay, just edit this file.
 * Configuration
 * Database creation
-	* Postgres
-	* rake db:create 
-	* rake db:migrate
+	* Postgres needs to be running!
+	* `rake db:create`
+	* `rake db:migrate`
 * Database initialization
 	* TODO create seeds file
 * How to run the test suite
