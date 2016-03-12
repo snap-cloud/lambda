@@ -57,34 +57,29 @@
   </script>
 <% end %>
 
-<!-- Snap Autograding Button -->
+<!-- Snap Autograding Controls Bar -->
 <div id="autograding_bar">
-  <div tabindex="0" class="onclick-menu" id='onclick-menu' style="display:inline-block">
-    <span title="Menu">&#9776;</span>
-    <div class='hover_darken'></div>
-    <nav id="navigation" class="site-navigation" role="navigation">
-      <ul id="dropdown-closed" class="bubble">
-        <li class="menu-item-sub-menu" id="enabled-button">
-            <a id="undo-button">Revert To Last Attempt</a>
-        </li>
-        <li class="menu-item-sub-menu" id="enabled-button">
-            <a id="revert-button">Revert To Best Attempt</a>
-        </li>
-        <li class="menu-item-sub-menu" id="enabled-button">
-            <a id="reset-button">Reset</a>
-        </li>
-        <li class="menu-divider-sub-menu" id='menu-divider'></li>
-        <li class="menu-item-sub-menu" id='enabled-button' onclick="openPopup();">
-            <a id="help-button">Help</a>
-        </li>
-      </ul>
-    </nav>
+  <div class="btn-group btn-group-sm" role="group" aria-label="Button group with nested dropdown">
+    <!-- Control Menu -->
+    <div class="btn-group site-navigation" role="group" id="navigation">
+      <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span title="Menu">&#9776;</span>
+        <div class='hover_darken'></div>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <!-- .dropdwon-closed .bubble -->
+        <a class="dropdown-item enabled-button" id="undo-button">Revert To Last Attempt</a>
+        <a class="dropdown-item enabled-button" id="revert-button">Revert To Best Attempt</a>
+        <a class="dropdown-item enabled-button" id="reset-button">Reset</a>
+        <span class="menu-divider-sub-menu" id='menu-divider'></span>
+        <a class="dropdown-item enabled-button"  onclick="openPopup();" id="help-button">Help</a>
+      </div>
+      <!-- Get Feedback -->
+      <button id="autograding_button" type="button" class="btn btn-secondary">Get Feedback</button>
+      <div class='hover_darken'></div>
+      <div id="numtips" class="btn button" style="display:inline-block"></div>
+    </div>
   </div>
-  <div id="autograding_button" style="display:inline-block;">
-    <span></span>
-    <div class='hover_darken'></div>
-  </div>
-  <div id="numtips" style="display:inline-block"></div>
 </div>
 
 <!-- Snap Autograding Menu -->

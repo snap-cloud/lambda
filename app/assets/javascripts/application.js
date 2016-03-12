@@ -13,5 +13,7 @@
 //= require jquery/dist/jquery.min.js
 //= require jquery-ujs
 //= require underscore/underscore-min.js
-// FUTURE: require bootstrap/dist/js/bootstrap.min.js
+// Tether is a plugin for BS4.
+//= require tether/dist/js/tether.min.js
+//= require bootstrap/dist/js/bootstrap.min.js
 //= require_tree .
