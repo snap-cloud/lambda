@@ -1,7 +1,12 @@
 <style type="text/css">
+
+#numtips {
+    border: 1px solid #666666;
+    border-radius: 4px;
+}
+
 /** PAGE NAV (TOP AND BOTTOM) ************************************************/
 .llab-nav {
-  line-height: 1.38; /* Keep slightly smaller than normal to control centering the nav buttons */
   background: #FFF;
   margin: 0;
   width: 100%;
@@ -9,32 +14,25 @@
   vertical-align: middle;
 }
 
-.navbar-title {
-  font-size: 1.5em;
-  font-weight: bold;
-  font-variant: small-caps;
-  color: #003A70;
-  text-align: left;
-}
-
-/* Contains the page title text, truncates text with '…' */
-/* First line is stupid bootstrap stuff....*/
-.navbar-default .navbar-title:hover, .navbar-default .navbar-title:focus,
-.navbar-default .navbar-title,
-.navbar-title, a.navbar-title {
-  vertical-align: middle;
-  max-width: 70%;
-  min-width: 50%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+#question-title {
+    padding: 4px;
+    line-height: 1.2;
+    float: left;
+    font-size: 1.2em;
+    min-width: 50%;
+    max-width: 80%;
+    font-variant: small-caps;
+    color: #003A70;
+    vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
 .nav-btns {
   float: left;
   z-index: 9999;
-  max-width: 18em;
   min-width: 15em;
   margin-bottom: 0; /* Bootstrap override for ul, defaults 10 otherwise */
   line-height: 1em;
@@ -90,35 +88,36 @@
 
 /* END PAGE DROPDWON SECTION *************************************************/
 
-
-
 </style> 
+
+
 <!-- TODO: Remove LLAB Stuff -->
 <nav class="llab-nav navbar navbar-default navbar-static-top" role="navigation" id="ag-header">
     <div class="nav navbar-nav navbar-left" id="autograding_bar">
         <ul class="nav-btns btn-group">
-            <button class="navbar-toggle btn btn-default dropdown-toggle site-navigation" type="button" data-toggle="dropdown" aria-expanded="false">
+            <a class="btn btn-default dropdown-toggle site-navigation" type="button" data-toggle="dropdown" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span title="Menu">&#9776;</span>
                 <div class='hover_darken'></div>
-            </button>
-            <div class="dropdown inline">
-                <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labeledby="Autograder Controls Menu">
-                    <li class="list_item dropdown-item enabled-button" role="presentation" id="undo-button">Revert to Last Attempt</li>
-                    <li class="list_item dropdown-item enabled-button" role="presentation" id="revert-button">Rest to Best Attempt</li>
-                    <li class="list_item dropdown-item enabled-button" role="presentation" id="reset-button">Reset</li>
-                    <li class="divider list_item" role="presentation"></li>
-                    <li class="list_item dropdown-item enabled-button" onclick="openPopup();" id="help-button" role="presentation">Help</li>
-                </ul>
-            </div>
+                <div class="dropdown inline">
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labeledby="Autograder Controls Menu">
+                        <li class="list_item dropdown-item enabled-button" role="presentation" id="undo-button">Revert to Last Attempt</li>
+                        <li class="list_item dropdown-item enabled-button" role="presentation" id="revert-button">Rest to Best Attempt</li>
+                        <li class="list_item dropdown-item enabled-button" role="presentation" id="reset-button">Reset</li>
+                        <li class="divider list_item" role="presentation"></li>
+                        <li class="list_item dropdown-item enabled-button" onclick="openPopup();" id="help-button" role="presentation">Help</li>
+                    </ul>
+                </div>
+            </a>
             <a class="btn btn-default" id="autograding_button" href="#">Get Feedback</a>
-            <div class='hover_darken'></div>
             <!-- Add a 'Show Feedback' thing that doesn't run tests. -->
-            <div id="numtips" class="btn button" style="display:inline-block"></div>
+            <span class="btn hidden" id="numtips"></span>
         </ul>
     </div>
     
-    <div class="nav navbar-nav navbar-title navbar-right">Autograder ?</div>
+    <div class="nav navbar-nav navbar-right" id="question-title">
+      <%= @question.title %>
+    </div>
 </nav>
 
 
