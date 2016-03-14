@@ -33,7 +33,7 @@
     agHeight = $('#ag-header').height();
     // $(document.body).style('height', $(window).height());
     // $(document.body).style('overflow-y', 'hidden');
-    jQworld.attr('height', $(window).height() - agHeight);
+    jQworld.attr('height', $(window).height() - agHeight - 10);
     jQworld.attr('width', snap.width());
     jQworld.css('top', agHeight);
     jQworld.css('width', '100%');
@@ -52,51 +52,22 @@
     var ide, grade_button;
     world_canvas = document.getElementById('world')
     world = new WorldMorph(world_canvas, false); // do not autosize
-    ide = new IDE_Morph();
-    ide.openIn(world);
+    (new IDE_Morph()).openIn(world);
     // Start Snap Environment Loop
     loop();
 
     // AUTOGRADER ADDITIONS:
-    // Set Snap! to small stage mode
-    ide.toggleStageSize(true);
     // Initialize AGSB button.
-    grade_button = document.getElementById("autograding_button");
-    grade_button.addEventListener('click', button_listener);
+    $("#autograding_button").click(doExecAndDisplayTests);
     world_canvas.addEventListener("mouseup", update_listener);
     // This is a link relative to /problems/N/
     starter_path = gon.starter_file_path;
-    initializeSnapAdditions(world, ide);
+    initializeSnapAdditions(world, id);
   };
 
   function loop() {
     requestAnimationFrame(loop);
     world.doOneCycle();
   }
-
   </script>
 <% end %>
-
-
-<!-- Autograding Menu Help Button -->
-<!-- <div class="overlay is-hidden" id="overlay">
-  <p class="help-text" id="full-screen-arrow">&#8600;</p>
-  <p class="help-text" id="full-screen-help">This full-screen button will pop out the Snap! window.</p>
-  <p class="help-text" id="menu-item-arrow">&#8599;</p>
-  <p class="help-text" id="menu-item-help">The first two menu items will revert your current Snap! state to one of your previous attempts, depending on whether you wish to revert to your last graded attempt or to your best attempt.</br></br>The 'Reset' button will revert to a blank Snap! project, or to a provided starter file if one is given for this problem.</p>
-  <p class="help-text" id="ag-button-arrow">&#8593;</p>
-  <p class="help-text" id="ag-button-help">Clicking this button will grade your current attempt and send the results to edX.</p>
-</div>
-
-<div style="display:inline-block" class="view-results"
-  id="circle" onclick="openResults();">Results
-</div>
-
-<div class="overlay is-hidden" id="ag-output">
-  <div class="popup-content" id="ag-results">
-    <span class="button-close" onclick="closeResults();" id="popup">X</span>
-    <div id="toggle-correct-tests"></div>
-    <p id="comment"></p>
-  </div>
-</div> -->
-

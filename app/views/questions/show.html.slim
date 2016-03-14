@@ -1,6 +1,6 @@
 - content_for :head do
     title
-        | #{@question.title} | λ
+        | @question.title}
 
 .hidden(style='display: none')
   = link_to 'Back', questions_path
@@ -10,6 +10,8 @@
     = text_field_tag(:test_results)
     = submit_tag("Submit")
 
+script
+   == @question.test_file
 
 // Controls for getting feedback and state and such.
 = render 'autograder_header'
@@ -19,8 +21,6 @@
     = render 'snap_base'
 
 = render 'snap_autograder'
-
-script
-   == @question.test_file
+= render 'autograder_help_results'
    
 = render partial: 'partials/getfeedback'

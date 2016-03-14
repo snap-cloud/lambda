@@ -1,11 +1,16 @@
 <style type="text/css">
 
+body, .snap {
+    overflow-y: hidden;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
 #numtips {
     border: 1px solid #666666;
     border-radius: 4px;
 }
 
-/** PAGE NAV (TOP AND BOTTOM) ************************************************/
 .llab-nav {
   background: #FFF;
   margin: 0;
@@ -35,87 +40,54 @@
   z-index: 9999;
   min-width: 15em;
   margin-bottom: 0; /* Bootstrap override for ul, defaults 10 otherwise */
-  line-height: 1em;
   font-weight: 900;
   position: relative;
   vertical-align: middle;
 }
 
-/* BUTTON CLASSES */
-/* Overrides default bootstrap which conflicts with right float dropdown. */
-.btn-group > .btn {
-  float: none;
-}
-
-/* END NAV SECTION ***********************************************************/
-
-/* PAGE DROPDOWN SECTION ******************************************************/
-/* Give space to caret in dropdown menus */
-/* FIXME -- standardize class names! */
 .dropdown-menu {
-  margin-top: 6px; /* should be equal to padding on list_header */
-  overflow-y: scroll; /* scroll menu on small screens */
-  width: auto;
+  width: 15em;
   white-space: nowrap;
   overflow-x: hidden;  /* Text truncation */
   text-overflow: ellipsis;
-  /* max- height + width set using JS on page load. */
-}
-.list_item {
-  font-size: 10pt;
-  padding: 0;
-  margin: 0;
-  text-align: left;
 }
 
-/* Button to toggle the menu */
-.list_header, .arrow {
-  height: 2em;
-  margin: 0;
-  text-align: center;
-  font-size: 12pt;
-  font-weight: 900;
-  border-color: #888;
-  border-radius: 0; /* No round coners on dropdowns between buttons */
+.dropdown-item {
+    padding: 4px 8px;
+    font-weight: normal;
+    font-size: 10pt;
+    text-align: left;
 }
-
-.arrow {/* For Buttons with arrows instead of words. */
-  border-radius: 8px;
-  font-variant: small-caps;
-  width: 3em;
-  padding: 3px; /* center text in buttons */
-}
-
-/* END PAGE DROPDWON SECTION *************************************************/
-
-</style> 
+</style>
 
 
 <!-- TODO: Remove LLAB Stuff -->
 <nav class="llab-nav navbar navbar-default navbar-static-top" role="navigation" id="ag-header">
     <div class="nav navbar-nav navbar-left" id="autograding_bar">
-        <ul class="nav-btns btn-group">
-            <a class="btn btn-default dropdown-toggle site-navigation" type="button" data-toggle="dropdown" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span title="Menu">&#9776;</span>
-                <div class='hover_darken'></div>
-                <div class="dropdown inline">
-                    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labeledby="Autograder Controls Menu">
-                        <li class="list_item dropdown-item enabled-button" role="presentation" id="undo-button">Revert to Last Attempt</li>
-                        <li class="list_item dropdown-item enabled-button" role="presentation" id="revert-button">Rest to Best Attempt</li>
-                        <li class="list_item dropdown-item enabled-button" role="presentation" id="reset-button">Reset</li>
-                        <li class="divider list_item" role="presentation"></li>
-                        <li class="list_item dropdown-item enabled-button" onclick="openPopup();" id="help-button" role="presentation">Help</li>
-                    </ul>
-                </div>
-            </a>
-            <a class="btn btn-default" id="autograding_button" href="#">Get Feedback</a>
+        <div class="nav-btns btn-group">
+            <div class="btn-group dropdown" id="onclick-menu">
+                <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle AG Menu</span>
+                    <span title="Menu">&#9776;</span>
+                    <div class='hover_darken'></div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labeledby="Autograder Controls Menu">
+                    <li class="dropdown-item enabled-button" role="presentation" id="undo-button">Revert to Last Attempt</li>
+                    <li class="dropdown-item enabled-button" role="presentation" id="revert-button">Rest to Best Attempt</li>
+                    <li class="divider" role="separator"></li>
+                    <li class="dropdown-item enabled-button" role="presentation" id="reset-button">Reset</li>
+                    <li class="divider" role="separator"></li>
+                    <li class="dropdown-item enabled-button" onclick="openPopup();" id="help-button" role="presentation">Help</li>
+                </ul>
+            </div>
+            <button class="btn btn-default" id="autograding_button">Get Feedback</button>
             <!-- Add a 'Show Feedback' thing that doesn't run tests. -->
-            <span class="btn hidden" id="numtips"></span>
-        </ul>
+            <span class="btn" id="numtips">No Tips Yet</span>
+        </div>
     </div>
     
-    <div class="nav navbar-nav navbar-right" id="question-title">
+    <div class="container navbar-right" id="question-title">
+    <!-- <div class="nav navbar-nav navbar-right" id="question-title"> -->
       <%= @question.title %>
     </div>
 </nav>
