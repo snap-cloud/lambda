@@ -72,12 +72,14 @@ body, .snap {
                     <div class='hover_darken'></div>
                 </a>
                 <ul class="dropdown-menu" role="menu" aria-labeledby="Autograder Controls Menu">
-                    <li class="dropdown-item enabled-button" role="presentation" id="undo-button">Revert to Last Attempt</li>
-                    <li class="dropdown-item enabled-button" role="presentation" id="revert-button">Rest to Best Attempt</li>
+                    <li class="dropdown-item" role="presentation" id="show-results-button" onclick="openResults();">Show Test Results</li>
                     <li class="divider" role="separator"></li>
-                    <li class="dropdown-item enabled-button" role="presentation" id="reset-button">Reset</li>
+                    <li class="dropdown-item" role="presentation" id="undo-button">Revert to Last Attempt</li>
+                    <li class="dropdown-item" role="presentation" id="revert-button">Rest to Best Attempt</li>
                     <li class="divider" role="separator"></li>
-                    <li class="dropdown-item enabled-button" onclick="openPopup();" id="help-button" role="presentation">Help</li>
+                    <li class="dropdown-item" role="presentation" id="reset-button">Reset</li>
+                    <li class="divider" role="separator"></li>
+                    <li class="dropdown-item" onclick="openPopup();" id="help-button" role="presentation">Help</li>
                 </ul>
             </div>
             <button class="btn btn-default" id="autograding_button">Get Feedback</button>

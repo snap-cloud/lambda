@@ -39,6 +39,7 @@
     jQworld.css('width', '100%');
     snap.css('top', agHeight);
     if (world) {
+        world.changed();
       world.drawNew();
     }
   }
@@ -48,7 +49,7 @@
   var world, world_canvas;
   window.onload = function () {
     RESET_WORLD_SIZE();
-    $(window).resize(RESET_WORLD_SIZE);
+    $(window).on('resize', RESET_WORLD_SIZE);
     var ide, grade_button;
     world_canvas = document.getElementById('world')
     world = new WorldMorph(world_canvas, false); // do not autosize

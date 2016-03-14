@@ -50,11 +50,21 @@ function submitAutograderResults(ag_log) {
             'authenticity_token': $(inputs[1]).attr('value')
         },
         success: function () {
-            console.log('SUCCESS');
+            ga('send', {
+              hitType: 'event',
+              eventCategory: 'Submission',
+              eventAction: 'submit',
+              eventLabel: 'success'
+            });
         },
         error: function (data, xhr, stuff) {
             console.log('Error Submitting Assignment');
-            // TODO: Log Data somewhere?
+            ga('send', {
+              hitType: 'event',
+              eventCategory: 'Submission',
+              eventAction: 'submit',
+              eventLabel: 'failure'
+            });
         }
     });
 }
