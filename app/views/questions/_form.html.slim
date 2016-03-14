@@ -1,10 +1,18 @@
-= simple_form_for(@question) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :title
-    = f.input :points
-    = f.input :content
-    = f.input :test_file
-    = f.input :starter_file
-  .form-actions
-    = f.button :submit
+= form_for @question, html: { class: 'form-horizontal' } do |f|
+  .form-group
+      = f.label :title
+      = f.text_field :title, class: 'form-control'
+  .form-group
+      = f.label :points
+      = f.number_field :points, class: 'form-control'
+  .form-group
+      = f.label :content
+      = f.text_area :content, class: 'form-control', rows: 10
+  .form-group
+      = f.label :test_file
+      = f.text_area :test_file, class: 'form-control', rows: 10
+  .form-group
+      = f.label :starter_file
+      = f.text_area :starter_file, class: 'form-control'
+  .form-group
+    = f.button :submit, class: "btn btn-default"
