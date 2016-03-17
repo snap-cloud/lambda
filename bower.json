@@ -10,10 +10,9 @@
   "private": true,
   "dependencies": {
     "jquery": "~2.2.x",
-    "jquery-ujs": "~1.0.3",
+    "jquery-ujs": "~1.x.x",
     "bootstrap": "~3.x.x",
-    "font-awesome": "~4.3.0",
-    "underscore": "^1.8.3",
-    "tether": "^1.2.0"
+    "font-awesome": "~4.x.x",
+    "underscore": "^1.8.3"
   }
 }

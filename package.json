@@ -1,18 +1,13 @@
 {
-  "name": "snap-cloud",
+  "name": "lambda-grader",
   "version": "1.0.0",
   "description": "This controls the bower dependencies and build for the main rails app",
-  "main": "index.js",
-  "directories": {
-    "doc": "doc",
-    "test": "test"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/snap-cloud/snap-cloud.git"
+    "url": "https://github.com/cycomachead/lambda.git"
   },
   "author": "Michael Ball",
   "license": "AGPL",
@@ -24,7 +19,7 @@
     "bower": "^1.4.1"
   },
   "engine": {
-    "node": "0.12.x"
+    "node": "^4.2.x"
   },
   "scripts": {
     "postinstall": "./node_modules/bower/bin/bower install"
