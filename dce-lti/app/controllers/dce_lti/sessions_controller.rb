@@ -15,8 +15,7 @@ module DceLti
         redirect_to redirect_after_successful_auth
       else
         puts 'SESSION ERROR'
-        redirect_to redirect_after_successful_auth
-        # render :invalid
+        render :invalid
       end
     end
   end
