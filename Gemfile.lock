@@ -1,13 +1,3 @@
-GIT
-  remote: https://github.com/rails/activerecord-session_store.git
-  revision: 2bd2e6c18ba2e0714e8a1b5d4e6f7b2a2c1819f3
-  specs:
-    activerecord-session_store (0.1.2)
-      actionpack (>= 4.0, < 5.1)
-      activerecord (>= 4.0, < 5.1)
-      rack (>= 1.5.2, < 3)
-      railties (>= 4.0, < 5.1)
-
 PATH
   remote: ./dce-lti/
   specs:
@@ -52,6 +42,10 @@ GEM
       activemodel (= 4.2.6)
       activesupport (= 4.2.6)
       arel (~> 6.0)
+    activerecord-session_store (0.1.2)
+      actionpack (>= 4.0.0, < 5)
+      activerecord (>= 4.0.0, < 5)
+      railties (>= 4.0.0, < 5)
     activesupport (4.2.6)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
@@ -301,6 +295,10 @@ GEM
     rdoc (4.2.2)
       json (~> 1.4)
     redcard (1.1.0)
+    redis (3.2.2)
+    redis-session-store (0.8.1)
+      actionpack (>= 3, < 5.1)
+      redis
     reek (2.2.1)
       parser (~> 2.2)
       rainbow (~> 2.0)
@@ -415,7 +413,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-session_store!
   awesome_print
   better_errors
   binding_of_caller
@@ -448,6 +445,7 @@ DEPENDENCIES
   rails (= 4.2.6)
   rails_12factor
   rails_stdout_logging
+  redis-session-store
   refills
   rspec-rails (~> 3.4.0)
   rubocop
