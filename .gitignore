@@ -23,3 +23,6 @@
 vendor/bower/
 # Exclude anything that's pre-compiled
 public/assets/
+
+# Don't commit the redis db
+dump.rdb
