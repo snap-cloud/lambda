@@ -1,5 +1,5 @@
 # Start Postgres
-# TODO
+postgres -D /usr/local/var/postgres/ &
 # Start Redis
 redis-server &
 # Start a tunnel
