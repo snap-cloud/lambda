@@ -53,7 +53,7 @@
     var ide, grade_button;
     world_canvas = document.getElementById('world')
     world = new WorldMorph(world_canvas, false); // do not autosize
-    (new IDE_Morph()).openIn(world);
+    new IDE_Morph().openIn(world);
     // Start Snap Environment Loop
     loop();
 
@@ -63,12 +63,30 @@
     world_canvas.addEventListener("mouseup", update_listener);
     // This is a link relative to /problems/N/
     starter_path = gon.starter_file_path;
+    <% if Rails.env == 'development' %>
+    loadTestJS();
+    <% else %>
     initializeSnapAdditions(world, id);
+    <% end %>
   };
 
   function loop() {
     requestAnimationFrame(loop);
     world.doOneCycle();
+  }
+  
+  function loadTestJS() {
+    var query = queryString.parse(location.hash.slice(1)),
+        problem_js = query.test_file,
+        tag = document.createElement('script');
+    if (problem_js) {
+      tag.src = problem_js;
+      tag.onload = function () {
+          starter_path = gon.starter_file_path;
+          initializeSnapAdditions(world, id);
+      };
+      document.head.appendChild(tag);
+    }
   }
   </script>
 <% end %>
