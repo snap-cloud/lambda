@@ -46,8 +46,10 @@
       grade_button = document.getElementById("autograding_button");
       grade_button.addEventListener('click', button_listener);
       world_canvas.addEventListener("mouseup", update_listener);
-      // This is a link relative to /problems/N/
+      // This is a link relative to /questions/N/
       starter_path = gon.starter_file_path;
+      // Use an id based on the Rails DB id.
+      id = starter_path;
       initializeSnapAdditions(world, ide);
   };
 

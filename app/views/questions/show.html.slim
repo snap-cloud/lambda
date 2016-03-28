@@ -11,8 +11,13 @@ p#notice
     = text_field_tag(:code_submission)
     = text_field_tag(:test_results)
     = submit_tag("Submit")
-= render 'snap_base'
-= render 'snap_autograder'
 
 script
    == @question.test_file
+script
+  | // Use an id based on the Rails DB id.
+  | id = starter_path || gon ? gon.starter_file_path : 'id';
+  
+= render 'snap_base'
+= render 'snap_autograder'
+
