@@ -49,6 +49,10 @@ gem 'dce_lti', path: './dce-lti/'
 # Not using postgres due to Heroku's row limit.
 gem 'redis-session-store'
 
+# User Accounts
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google'
 
 # SPECIFIC APIS BECAUSE EDUC APIS ARE HELL
 gem 'canvas-api'
