@@ -1,10 +1,11 @@
 language: ruby
 rvm:
 - 2.3.0
-# before_script:
-# - npm install
+before_script:
+  - npm install
+  - RAILS_ENV=test bundle exec rake db:migrate
 script:
-- RAILS_ENV=test bundle exec rake db:migrate
+  - bundle exec rake test
 cache: bundler
 addons:
   postgresql: '9.4'
