@@ -13,31 +13,35 @@ bundle check || bundle install
 # Set up database and add any development seed data
 bin/rake dev:prime
 
-# Add binstubs to PATH via export PATH=".git/safe/../../bin:$PATH" in ~/.zshenv
-mkdir -p .git/safe
+# Install bower dependencies
+bower install
 
 # Only if this isn't CI
 # if [ -z "$CI" ]; then
 # fi
-          
-if heroku join --app lambda-staging &> /dev/null; then
-  git remote add staging git@heroku.com:lambda-staging.git || true
-  printf 'You are a collaborator on the "lambda-staging" Heroku app
-'
+
+
+if heroku join --app lambda-grader &> /dev/null; then
+  git remote add heroku git@heroku.com:lambda-grader.git || true
+  printf 'You are a collaborator on the "lambda-grader" Heroku app'
 else
-  printf 'Ask for access to the "lambda-staging" Heroku app
-'
+  printf 'Ask for access to the "lambda-grader" Heroku app'
 fi
 
-          
-if heroku join --app lambda-production &> /dev/null; then
-  git remote add production git@heroku.com:lambda-production.git || true
-  printf 'You are a collaborator on the "lambda-production" Heroku app
-'
-else
-  printf 'Ask for access to the "lambda-production" Heroku app
-'
-fi
+# if heroku join --app lambda-staging &> /dev/null; then
+#   git remote add staging git@heroku.com:lambda-staging.git || true
+#   printf 'You are a collaborator on the "lambda-staging" Heroku app'
+# else
+#   printf 'Ask for access to the "lambda-staging" Heroku app'
+# fi
 
 
-          git config heroku.remote staging
+# if heroku join --app lambda-production &> /dev/null; then
+#   git remote add production git@heroku.com:lambda-production.git || true
+#   printf 'You are a collaborator on the "lambda-production" Heroku app'
+# else
+#   printf 'Ask for access to the "lambda-production" Heroku app'
+# fi
+
+
+git config heroku.remote heroku
