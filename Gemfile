@@ -50,9 +50,8 @@ gem 'dce_lti', path: './dce-lti/'
 gem 'redis-session-store'
 
 # User Accounts
-gem 'devise'
 gem 'omniauth'
-gem 'omniauth-google'
+gem 'omniauth-google-oauth2'
 
 # SPECIFIC APIS BECAUSE EDUC APIS ARE HELL
 gem 'canvas-api'
