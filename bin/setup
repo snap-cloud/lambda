@@ -10,6 +10,13 @@ set -e
 gem install bundler --conservative
 bundle check || bundle install
 
+# Note duplicated from run script.
+# Start Postgres
+postgres -D /usr/local/var/postgres/ &
+# Start Redis
+redis-server &
+
+
 # Set up database and add any development seed data
 bin/rake dev:prime
 
@@ -27,6 +34,10 @@ if heroku join --app lambda-grader &> /dev/null; then
 else
   printf 'Ask for access to the "lambda-grader" Heroku app'
 fi
+
+# After heroku app is added grab a .env file.
+# Disabled because this is too different of a config for now...
+# heroku config -s > .env
 
 # if heroku join --app lambda-staging &> /dev/null; then
 #   git remote add staging git@heroku.com:lambda-staging.git || true

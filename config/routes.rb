@@ -15,6 +15,9 @@ Rails.application.routes.draw do
 
   mount DceLti::Engine => '/lti'
 
+  # Oauth Account URLs
+  get 'auth/:provider/callback', to: 'sessions#create'
+  
   # Public Redirects
   get 'snap', to: 'welcome#snap'
 end
