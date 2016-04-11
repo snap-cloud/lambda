@@ -1,39 +1,28 @@
 {
-  "name":"lambda",
-  "scripts":{},
-  "env":{
-    "AIRBRAKE_API_KEY":{
-      "required":true
+  "name": "lambda",
+  "scripts": {},
+  "env": {
+    "RACK_ENV": {
+      "required": true
     },
-    "EMAIL_RECIPIENTS":{
-      "required":true
+    "RAILS_ENV": {
+      "required": true
     },
-    "RACK_ENV":{
-      "required":true
+    "SECRET_KEY_BASE": {
+      "generator": "secret"
     },
-    "RAILS_ENV":{
-      "required":true
+    "WEB_CONCURRENCY": {
+      "required": false
     },
-    "SECRET_KEY_BASE":{
-      "generator":"secret"
+    "LTI_CONSUMER_KEY": {
+        "required": true
     },
-    "SMTP_ADDRESS":{
-      "required":true
-    },
-    "SMTP_DOMAIN":{
-      "required":true
-    },
-    "SMTP_PASSWORD":{
-      "required":true
-    },
-    "SMTP_USERNAME":{
-      "required":true
-    },
-    "WEB_CONCURRENCY":{
-      "required":true
+    "LTI_CONSUMER_SECRET": {
+        "required": true
     }
   },
-  "addons":[
-    "heroku-postgresql"
+  "addons": [
+    "heroku-postgresql",
+    "heroku-redis"
   ]
 }
