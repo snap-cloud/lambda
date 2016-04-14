@@ -9,6 +9,10 @@ class QuestionsController < ApplicationController
     :starter_file, :submit_grade, :test_file
   ]
 
+  before_action :require_admin, only: [
+    :edit, :update, :destroy, :new
+  ]
+
   # GET /questions
   # GET /questions.json
   def index
@@ -219,6 +223,14 @@ class QuestionsController < ApplicationController
     # white list allowed parameters.
     def question_params
       params.require(:question).permit(:title, :points, :content, :starter_file, :test_file, :metadata)
+    end
+
+    def require_admin
+      puts 'called require'
+      if !current_user || (current_user && !current_user.admin)
+        flash[:error] = 'This action requires an administrator account'
+        redirect_to '/' and return
+      end
     end
 
     # LTI requires scores to be returned as a float, that's a percentage.
