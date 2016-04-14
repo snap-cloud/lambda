@@ -1,19 +1,24 @@
 h1
   | Pick a Question to Practice!
 .table
-    table.table.table-striped
-      thead
-        tr
+  table.table.table-striped
+    thead
+      tr
+        th
+          | Title
+        th
+          | Points
+        th
+          | Content
+        th
+          | Test File
+        th
+          | Starter file
+        - if current_user && current_user.admin
           th
-            | Title
+            | Edit
           th
-            | Points
-          th
-            | Content
-          th
-            | Test File
-          th
-            | Starter file
+            | Delete
       tbody
         - @questions.each do |question|
           tr
@@ -27,6 +32,11 @@ h1
               = link_to 'View Tests File', test_file_question_path(question.id)
             td
               = link_to 'View Starter File', starter_file_question_path(question.id)
+            - if current_user && current_user.admin
+              td
+                = link_to 'Edit', edit_question_path(question)
+              td
+                = link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' }
 
 .container
     - if current_user
