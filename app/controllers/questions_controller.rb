@@ -226,7 +226,6 @@ class QuestionsController < ApplicationController
     end
 
     def require_admin
-      puts 'called require'
       if !current_user || (current_user && !current_user.admin)
         flash[:error] = 'This action requires an administrator account'
         redirect_to '/' and return
