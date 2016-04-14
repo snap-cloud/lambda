@@ -29,4 +29,7 @@ h1
               = link_to 'View Starter File', starter_file_question_path(question.id)
 
 .container
-    = link_to 'Admin Login', '/auth/google'
+    - if current_user
+        = link_to 'Logout', '/logout', method: :delete
+    - else
+        = link_to 'Admin Login', '/auth/google'

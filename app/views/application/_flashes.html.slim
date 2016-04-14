@@ -1,7 +1,9 @@
+p
+  = 'Flashes go here'
 - if flash.any?
   .flashes
     - user_facing_flashes.each do |key, value|
-      |  <div class="flash-
+      |  <div class="alert alert-dismissible flash flash-
       = key
-      | ">
+      | " role="alert">
       = value
