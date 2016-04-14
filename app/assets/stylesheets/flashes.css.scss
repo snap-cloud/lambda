@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+@import 'bootstrap-sass/assets/stylesheets/bootstrap';
+
+.flash {
+    @extend .alert;
+}
+
+.flash-success {
+    @extend .alert-success;
+}
+
+.flash-info {
+    @extend .alert-info;
+}
+
+.flash-warning {
+    @extend .alert-warning;
+}
+
+.flash-error {
+    @extend .alert-danger;
+}
