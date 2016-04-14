@@ -456,7 +456,6 @@ DEPENDENCIES
   launchy
   metric_fu
   newrelic_rpm (>= 3.9.8)
-  omniauth
   omniauth-google-oauth2
   pg
   pry

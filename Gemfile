@@ -50,15 +50,12 @@ gem 'dce_lti', path: './dce-lti/'
 gem 'redis-session-store'
 
 # User Accounts
-gem 'omniauth'
 gem 'omniauth-google-oauth2'
 
 # SPECIFIC APIS BECAUSE EDUC APIS ARE HELL
 gem 'canvas-api'
 
-
 group :development do
-
   gem "refills"
   gem "spring"
   gem "spring-commands-rspec"
