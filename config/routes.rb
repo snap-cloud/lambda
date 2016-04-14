@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   # Oauth Account URLs
   get 'auth/:provider/callback', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
   
   # Public Redirects
   get 'snap', to: 'welcome#snap'
