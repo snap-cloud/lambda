@@ -49,7 +49,7 @@ class QuestionsController < ApplicationController
       if @question.save
         format.html {
           redirect_to @question,
-          notice: 'question was successfully created.'
+          notice: "Question #{@Question.name} was successfully created."
         }
         format.json {
           render :show, status: :created, location: @question
