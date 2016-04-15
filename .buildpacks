@@ -1,2 +1,6 @@
+# Assets
 https://github.com/heroku/heroku-buildpack-nodejs.git
+# Main App
 https://github.com/heroku/heroku-buildpack-ruby.git
+# Convenience Method
+https://github.com/gunpowderlabs/buildpack-ruby-db-migrate.git
