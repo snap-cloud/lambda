@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414095919) do
+ActiveRecord::Schema.define(version: 20160415232353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.string "url"
+    t.string "consumer_key"
+    t.string "consumer_secret"
+    t.hstore "configuration"
+  end
+
+  add_index "courses", ["name"], name: "index_courses_on_name", unique: true, using: :btree
 
   create_table "dce_lti_nonces", force: :cascade do |t|
     t.string   "nonce"

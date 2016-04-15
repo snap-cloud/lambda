@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @course.name
+p
+  strong Url:
+  = @course.url
+p
+  strong Consumer key:
+  = @course.consumer_key
+p
+  strong Consumer secret:
+  = @course.consumer_secret
+p
+  strong Config:
+  = @course.config
+
+= link_to 'Edit', edit_course_path(@course)
+'|
+= link_to 'Back', courses_path

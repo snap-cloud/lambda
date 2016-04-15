@@ -11,10 +11,8 @@ gem 'puma'
 # Frontend Utilities
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-# TODO: CSS stuff?
-gem 'slim'
-# JS Data Transfer
-gem 'gon'
+gem 'slim-rails' # Templates
+gem 'gon' # JS Data Transfer
 # https://github.com/rails/turbolinks
 gem 'turbolinks'
 
