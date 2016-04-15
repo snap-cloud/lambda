@@ -23,7 +23,16 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
+  
+  def require_admin
+    if !current_user || (current_user && !current_user.admin)
+      flash[:error] = 'This action requires an administrator account'
+      redirect_to '/' and return
+    end
+  end
+  
+  helper_method :require_admin
+  
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end

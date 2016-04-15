@@ -225,13 +225,6 @@ class QuestionsController < ApplicationController
       params.require(:question).permit(:title, :points, :content, :starter_file, :test_file, :metadata)
     end
 
-    def require_admin
-      if !current_user || (current_user && !current_user.admin)
-        flash[:error] = 'This action requires an administrator account'
-        redirect_to '/' and return
-      end
-    end
-
     # LTI requires scores to be returned as a float, that's a percentage.
     # We will "normalize" values >1 to be a % of the question's score
     # Note that a 1/x would be treated as a 100%
