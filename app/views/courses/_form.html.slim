@@ -1,4 +1,4 @@
-= form_for @course do |f|
+= form_for @course, html: { class: 'form-horizontal' } do |f|
   - if @course.errors.any?
     #error_explanation
       h2 = "#{pluralize(@course.errors.count, "error")} prohibited this course from being saved:"
@@ -6,19 +6,37 @@
         - @course.errors.full_messages.each do |message|
           li = message
 
-  .field
+  .form-group
     = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :url
-    = f.text_field :url
-  .field
-    = f.label :consumer_key
-    = f.text_field :consumer_key
-  .field(content-editable=false)
-    = f.label :consumer_secret
-    = f.text_field :consumer_secret
-  .field
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :url, 'URL'
+    = f.text_field :url, class: 'form-control'
+  .form-group
+    = f.label :consumer_key, 'Consumer Key'
+    = f.text_field :consumer_key, class: 'form-control'
+  .form-group
+    = f.label :consumer_secret, 'Consumer Secret'
+    = f.text_field :consumer_secret, class: 'form-control', 'readonly':true
+  .form-group
     = f.label :configuration
-    = f.text_field :configuration
-  .actions = f.submit
+    .table-responsive
+      table.table
+        tbody(class='key-value-body')
+          tr(class='key-value-row')
+            td
+              input(class='form-control')
+                | Key
+            td
+              input(class='form-control')
+                | Value (This form doesn't work yet!!)
+        tfoot
+          tr
+            td(colspan=2)
+              button(class='btn btn-info' id='add-row-btn' action='false' role='button')
+                span(class='glyphicon glyphicon-plus')
+    br
+    = f.text_field :configuration, class: 'form-control'
+  .form-group
+    = f.button :submit, class: "btn btn-default"
+      | Submit

@@ -1,21 +1,28 @@
 p#notice = notice
 
-p
-  strong Name:
-  = @course.name
-p
-  strong Url:
-  = @course.url
-p
-  strong Consumer key:
-  = @course.consumer_key
-p
-  strong Consumer secret:
-  = @course.consumer_secret
-p
-  strong Config:
-  = @course.config
+.container
+  .col-md-9
+    p
+      strong Name:
+    p
+      = @course.name
+    p
+      strong URL:
+    p
+      = @course.url
+    p
+      strong Consumer Key:
+    p
+      = @course.consumer_key
+    p
+      strong Consumer Secret:
+    p
+      = @course.consumer_secret
+    p
+      strong Configuration:
+    p
+      = @course.configuration
 
 = link_to 'Edit', edit_course_path(@course)
-'|
+' | 
 = link_to 'Back', courses_path

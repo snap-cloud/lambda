@@ -1,28 +1,26 @@
-h1 Listing courses
+h1
+  | LTI Course Configurations
 
-table
-  thead
-    tr
-      th Name
-      th URL
-      th Consumer key
-      th Consumer secret
-      th Config
-      th View
-      th Edit
-      th Delete
-
-  tbody
-    - @courses.each do |course|
+.table
+  table.table.table-striped
+    thead
       tr
-        td = course.name
-        td = course.url
-        td = course.consumer_key
-        td = course.consumer_secret
-        td = course.configuration
-        td = link_to 'Show', course
-        td = link_to 'Edit', edit_course_path(course)
-        td = link_to 'Destroy', course, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th Name
+        th URL
+        th Consumer Key
+        th View
+        th Edit
+        th Delete
+
+    tbody
+      - @courses.each do |course|
+        tr
+          td = course.name
+          td = course.url
+          td = course.consumer_key
+          td = link_to 'Show', course
+          td = link_to 'Edit', edit_course_path(course)
+          td = link_to 'Destroy', course, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 

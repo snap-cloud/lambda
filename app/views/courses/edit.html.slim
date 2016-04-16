@@ -1,8 +1,10 @@
-h1 Editing course
+h1
+ | Edit Course "#{@course.name}"
 
-== render 'form'
+.col-md-9
+  = render 'form'
 
-= link_to 'Show', @course
-'|
-= link_to 'Back', courses_path
+  = link_to 'Show', @course
+  '|
+  = link_to 'Back', courses_path
 
