@@ -40,3 +40,8 @@
   .form-group
     = f.button :submit, class: "btn btn-default"
       | Submit
+
+script
+  | $('#add-row-btn').click(function (e) { 
+  |   e.preventDefault();
+  | })
