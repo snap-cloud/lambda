@@ -33,7 +33,7 @@
         tfoot
           tr
             td(colspan=2)
-              button(class='btn btn-info' id='add-row-btn' action='false' role='button')
+              button(class='btn btn-info' id='add-row-btn' onclick='addRow' role='button')
                 span(class='glyphicon glyphicon-plus')
     br
     = f.text_field :configuration, class: 'form-control'
@@ -42,6 +42,9 @@
       | Submit
 
 script
-  | $('#add-row-btn').click(function (e) { 
-  |   e.preventDefault();
-  | })
+  | function addRow(evt) {
+  |   evt.preventDefault();
+  |   var row = $('tr.key-value-row')[0].clone();
+  |   row('input').forEach(function (item) { item.html('') });
+  |   $('tbody.key-value-body').append(row);
+  | }
