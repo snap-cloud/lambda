@@ -14,3 +14,7 @@
  *= require bootstrap/dist/css/bootstrap-theme.min.css
  *= require_self
  */
+
+body {
+  padding-top: 70px;
+}

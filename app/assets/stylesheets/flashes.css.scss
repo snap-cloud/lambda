@@ -6,7 +6,7 @@
     @extend .alert;
 }
 
-.flash-success {
+.flash-success, .flash-notice {
     @extend .alert-success;
 }
 

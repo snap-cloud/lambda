@@ -11,6 +11,7 @@ html[lang="en"]
     = yield :head
 body [class= body_class]
   = Gon::Base.render_data
+  = render "navbar"
   = render "flashes"
   = yield
   = render "javascript"

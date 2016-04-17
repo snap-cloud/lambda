@@ -20,21 +20,15 @@
     = f.text_field :consumer_secret, class: 'form-control', 'readonly':true
   .form-group
     = f.label :configuration
-    .table-responsive
-      table.table
-        tbody(class='key-value-body')
-          tr(class='key-value-row')
-            td
-              input(class='form-control')
-                | Key
-            td
-              input(class='form-control')
-                | Value (This form doesn't work yet!!)
-        tfoot
-          tr
-            td(colspan=2)
-              button(class='btn btn-info' id='add-row-btn' onclick='addRow' role='button')
-                span(class='glyphicon glyphicon-plus')
+    .key-value-body
+      .key-value-group
+        .col-xs-4
+          inputs(type="text" class="form-control" placeholder="key")
+        .col-xs-4
+          inputs(type="text" class="form-control" placeholder="key")
+        .col-xs-8
+            button(class='btn btn-info' id='add-row-btn' onclick='addRow' role='button')
+              span(class='glyphicon glyphicon-plus')
     br
     = f.text_field :configuration, class: 'form-control'
   .form-group
