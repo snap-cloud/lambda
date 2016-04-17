@@ -1,7 +1,11 @@
 - if flash.any?
   .flashes
-    - user_facing_flashes.each do |key, value|
-      |  <div class="alert alert-dismissible flash flash-
-      = key
-      | " role="alert">
-      = value
+    .container
+      .row
+        - user_facing_flashes.each do |key, value|
+          | <div class="alert alert-dismissible flash flash-#{key}" role="alert">
+          | <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          = value
+          | </div>
+  | </div>
+.container

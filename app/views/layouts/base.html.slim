@@ -7,12 +7,12 @@ html[lang="en"]
       = "λ | Snap! Autograder"
     = stylesheet_link_tag :application, media: "all"
     = csrf_meta_tags
-    = render partial: "partials/google_analytics"
-    = yield :head
+    == render partial: "partials/google_analytics"
+    == yield :head
 body [class= body_class]
   = Gon::Base.render_data
-  = render "navbar"
-  = render "flashes"
-  = yield
-  = render "javascript"
-  = render partial: "partials/google_analytics_pageview"
+  == render "navbar"
+  == render "flashes"
+  == yield
+  == render "javascript"
+  == render partial: "partials/google_analytics_pageview"
