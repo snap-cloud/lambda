@@ -7,7 +7,13 @@ nav.navbar.navbar-inverse.navbar-fixed-top
       ul.nav.navbar-nav
         li
           a(href="#{questions_path}" class="disabled")Questions
-        li
-          a(href="#{courses_path}" class="disabled")Courses
-        li
-          a(href="#" class="disabled")Users
+        - if current_user && current_user.admin
+          li
+            a(href="#{courses_path}" class="disabled")Courses
+          li
+            a(href="#" class="disabled")Users
+    p.navbar-text.navbar-right
+      - if current_user
+        = link_to 'Logout', '/logout', method: :delete, class: 'navbar-link'
+      - else
+        = link_to 'Admin Login', '/auth/google', class: 'navbar-link'

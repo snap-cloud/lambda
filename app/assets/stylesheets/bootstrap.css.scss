@@ -21,3 +21,7 @@
 .flash-error {
     @extend .alert-danger;
 }
+
+.navbar-right {
+    margin-right: 0;
+}

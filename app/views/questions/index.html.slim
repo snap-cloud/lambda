@@ -40,10 +40,7 @@ h1
 
 .container
     - if current_user
-        = link_to 'Logout', '/logout', method: :delete
         - if current_user.admin
           br
           a.btn.btn-success(href=new_question_path role='button')
             | New Question
-    - else
-        = link_to 'Admin Login', '/auth/google'

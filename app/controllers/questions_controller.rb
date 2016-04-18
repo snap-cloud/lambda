@@ -118,7 +118,7 @@ class QuestionsController < ApplicationController
       test_results: params[:test_results],
       user_info: user_json,
       session_id: session.id,
-      user_id: session[:user_id] || nil,
+      user_id: current_user.nil? ?  nil : current_user.id,
       dce_lti_user_id: dce_lti_id
     )
 
