@@ -49,7 +49,7 @@ class QuestionsController < ApplicationController
       if @question.save
         format.html {
           redirect_to @question,
-          notice: "Question #{@Question.name} was successfully created."
+          notice: "Question #{@question.name} was successfully created."
         }
         format.json {
           render :show, status: :created, location: @question
@@ -68,7 +68,7 @@ class QuestionsController < ApplicationController
       if @question.update(question_params)
         format.html {
           redirect_to @question,
-          notice: 'question was successfully updated.'
+          notice: "Question #{@question.name} was successfully updated."
         }
         format.json {
           render :show, status: :ok, location: @question
@@ -100,9 +100,11 @@ class QuestionsController < ApplicationController
 
     # TODO: Extra to user logging function.
     if @provider.nil?
+      dce_lti_id = nil
       user_json = {}
     else
       cParams = @provider.custom_params
+      dce_lti_id = @provider.user_id
       user_json = {
         canvas_id: cParams["canvas_user_id"],
         full_name: @provider.lis_person_name_full,
@@ -115,7 +117,9 @@ class QuestionsController < ApplicationController
       code_submission: params[:code_submission],
       test_results: params[:test_results],
       user_info: user_json,
-      session_id: session.id
+      session_id: session.id,
+      user_id: session[:user_id] || nil,
+      dce_lti_user_id: dce_lti_id
     )
 
     if @provider.nil?

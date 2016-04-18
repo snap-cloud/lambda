@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415232353) do
+ActiveRecord::Schema.define(version: 20160417203000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,7 +78,12 @@ ActiveRecord::Schema.define(version: 20160415232353) do
     t.integer  "session_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "user_id"
+    t.integer  "dce_lti_user_id"
   end
+
+  add_index "submissions", ["dce_lti_user_id"], name: "index_submissions_on_dce_lti_user_id", using: :btree
+  add_index "submissions", ["user_id"], name: "index_submissions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "provider"
@@ -92,4 +97,6 @@ ActiveRecord::Schema.define(version: 20160415232353) do
     t.boolean  "admin",      default: false
   end
 
+  add_foreign_key "submissions", "dce_lti_users"
+  add_foreign_key "submissions", "users"
 end

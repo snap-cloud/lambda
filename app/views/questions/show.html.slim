@@ -1,6 +1,6 @@
 - content_for :head do
     title
-        | @question.title}
+        = @question.title
 
 .hidden(style='display: none')
   = link_to 'Back', questions_path
@@ -13,10 +13,10 @@
 script
    == @question.test_file
 
-// Controls for getting feedback and state and such.
+/ Controls for getting feedback and state and such.
 = render 'autograder_header'
 
-// Snap is in it's own div to better allow us to set its size.
+/ Snap is in it's own div to better allow us to set its size.
 #snap(style="width:100%;")
     = render 'snap_base'
 
