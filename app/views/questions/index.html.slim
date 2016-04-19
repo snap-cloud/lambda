@@ -1,46 +1,36 @@
 h1
   | Pick a Question to Practice!
+
 .table
   table.table.table-striped
     thead
       tr
-        th
-          | Title
-        th
-          | Points
-        th
-          | Content
-        th
-          | Test File
-        th
-          | Starter file
         - if current_user && current_user.admin
           th
-            | Edit
-          th
-            | Delete
+        th Title
+        th Points
+        th Content
+        th Test File
+        th Starter file
+        - if current_user && current_user.admin
+          th Edit
+          th Delete
       tbody
         - @questions.each do |question|
           tr
-            td
-              = link_to question.title, question
-            td
-              = question.points
-            td
-              = truncate question.content
-            td
-              = link_to 'View Tests File', test_file_question_path(question.id)
-            td
-              = link_to 'View Starter File', starter_file_question_path(question.id)
             - if current_user && current_user.admin
-              td
-                = link_to 'Edit', edit_question_path(question)
-              td
-                = link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' }
+              td = question.id
+            td = link_to question.title, question
+            td = question.points
+            td = truncate question.content
+            td = link_to 'View Tests File', test_file_question_path(question.id)
+            td = link_to 'View Starter File', starter_file_question_path(question.id)
+            - if current_user && current_user.admin
+              td = link_to 'Edit', edit_question_path(question)
+              td = link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' }
 
 .container
-    - if current_user
-        - if current_user.admin
+    - if current_user && current_user.admin
           br
           a.btn.btn-success(href=new_question_path role='button')
             | New Question
