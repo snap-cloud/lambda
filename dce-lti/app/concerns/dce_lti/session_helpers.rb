@@ -23,8 +23,11 @@ module DceLti
     def find_from_config(attribute)
       value = Engine.config.send(attribute)
       if value.respond_to?(:call)
+        puts 'Lambda thing working'
+        puts value.call(launch_params)
         value.call(launch_params)
       else
+        puts 'NO LAMBDA'
         value
       end
     end

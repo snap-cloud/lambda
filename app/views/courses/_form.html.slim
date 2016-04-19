@@ -17,28 +17,44 @@
     = f.text_field :consumer_key, class: 'form-control'
   .form-group
     = f.label :consumer_secret, 'Consumer Secret'
-    = f.text_field :consumer_secret, class: 'form-control', 'readonly':true
+    = f.text_field :consumer_secret, class: 'form-control'
   .form-group
     = f.label :configuration
-    .key-value-body
-      .key-value-group
-        .col-xs-4
-          inputs(type="text" class="form-control" placeholder="key")
-        .col-xs-4
-          inputs(type="text" class="form-control" placeholder="key")
-        .col-xs-8
-            button(class='btn btn-info' id='add-row-btn' onclick='addRow' role='button')
-              span(class='glyphicon glyphicon-plus')
+    .table-responsive
+      table.table.table-striped
+        thead
+          tr
+            th
+              | Key
+            th
+              | Value
+        tbody.key-value-body
+          tr.key-value-group
+            td.col-xs-6
+              input(type="text" class="form-control" id="config-key-1" placeholder="key")
+            td.col-xs-6
+              input(type="text" class="form-control" id="config-value-1" placeholder="value")
+        tfoot
+          tr
+            td(colspan=2)
+              a.btn.btn-info(href="#" id='add-row-btn' onclick='addRow' role='button')
+                span(class='glyphicon glyphicon-plus')
     br
     = f.text_field :configuration, class: 'form-control'
   .form-group
     = f.button :submit, class: "btn btn-default"
       | Submit
 
-script
-  | function addRow(evt) {
-  |   evt.preventDefault();
-  |   var row = $('tr.key-value-row')[0].clone();
-  |   row('input').forEach(function (item) { item.html('') });
-  |   $('tbody.key-value-body').append(row);
-  | }
+- content_for :scripts do |c|
+  script
+    | $('#add-row-btn').on('click', addRow);
+    | function addRow(evt) {
+    |   if (evt) { evt.preventDefault(); }
+    |   var rows = $('.key-value-group');
+    |   var row = rows.first().clone();
+    |   row.find('input').each(function (idx, item) {
+    |     $(item).attr('id', (idx == 0 ? 'config-key-' : 'config-value-') + rows.length );
+    |     $(item).val(null);
+    |   });
+    |   $('.key-value-body').append(row);
+    | }

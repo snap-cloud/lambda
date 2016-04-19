@@ -11,9 +11,10 @@ html[lang="en"]
     == yield :head
 body [class= body_class]
   = Gon::Base.render_data
-  - if action_name != 'show' && controller_name != 'question'
+  - unless (action_name == 'show' && controller_name == 'questions')
     == render "navbar"
   == render "flashes"
   == yield
   == render "javascript"
+  == yield :scripts
   == render partial: "partials/google_analytics_pageview"

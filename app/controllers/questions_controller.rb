@@ -49,7 +49,7 @@ class QuestionsController < ApplicationController
       if @question.save
         format.html {
           redirect_to @question,
-          notice: "Question #{@question.name} was successfully created."
+          notice: "Question #{@question.title} was successfully created."
         }
         format.json {
           render :show, status: :created, location: @question
@@ -68,7 +68,7 @@ class QuestionsController < ApplicationController
       if @question.update(question_params)
         format.html {
           redirect_to @question,
-          notice: "Question #{@question.name} was successfully updated."
+          notice: "Question #{@question.title} was successfully updated."
         }
         format.json {
           render :show, status: :ok, location: @question
