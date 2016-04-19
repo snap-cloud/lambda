@@ -22,7 +22,9 @@
 # Assets
 vendor/bower/
 # Exclude anything that's pre-compiled
-public/assets/
+public/assets/*
+!public/assets/google-icon.png
+
 
 # Don't commit the redis db
 dump.rdb
