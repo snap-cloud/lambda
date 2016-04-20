@@ -58,13 +58,11 @@ ActiveRecord::Schema.define(version: 20160420024938) do
   end
 
   create_table "courses", force: :cascade do |t|
-    t.string   "name"
-    t.string   "url"
-    t.string   "consumer_key"
-    t.string   "consumer_secret"
-    t.hstore   "configuration"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string "name"
+    t.string "url"
+    t.string "consumer_key"
+    t.string "consumer_secret"
+    t.hstore "configuration"
   end
 
   add_index "courses", ["name"], name: "index_courses_on_name", unique: true, using: :btree
