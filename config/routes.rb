@@ -24,8 +24,6 @@ Rails.application.routes.draw do
     mount Blazer::Engine, at: "queries"
   end
 
-  get 'welcome/index'
-
   # Public Redirects
   get 'snap', to: 'welcome#snap'
 end
