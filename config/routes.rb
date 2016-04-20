@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-
-  resources :courses
+  
+  # TODO: Better Homepage at some point.
   root :to => "questions#index"
 
   resources :questions do
@@ -15,10 +15,16 @@ Rails.application.routes.draw do
   # Oauth Account URLs
   get '/auth/:provider/callback', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-
-  get 'welcome/index'
-
   mount DceLti::Engine => '/lti'
+  
+  resources :courses
+  
+  # Admin Tools
+  scope '/admin' do
+    mount Blazer::Engine, at: "queries"
+  end
+  
+  get 'welcome/index'
 
   # Public Redirects
   get 'snap', to: 'welcome#snap'
