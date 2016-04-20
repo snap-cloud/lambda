@@ -7,12 +7,12 @@ data_sources:
     # statement timeout, in seconds
     # applies to PostgreSQL only
     # none by default
-    # timeout: 15
+    timeout: 10
 
     # time to cache results, in minutes
     # can greatly improve speed
     # none by default
-    # cache: 60
+    cache: 60
 
     # wrap queries in a transaction for safety
     # not necessary if you use a read-only user
@@ -32,16 +32,16 @@ data_sources:
 audit: true
 
 # change the time zone
-# time_zone: "Pacific Time (US & Canada)"
+time_zone: "Pacific Time (US & Canada)"
 
 # class name of the user model
-# user_class: User
+user_class: User
 
 # method name for the user model
 # user_name: name
 
 # optional auth method to use as a before_action (default: nil)
-# before_action: :authenticate!
+before_action: :require_admin
 
 # email to send checks from
 # from_email: blazer@example.org

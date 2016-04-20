@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   # TODO: Better Homepage at some point.
   root :to => "questions#index"
 
@@ -16,14 +16,14 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   mount DceLti::Engine => '/lti'
-  
+
   resources :courses
-  
+
   # Admin Tools
   scope '/admin' do
     mount Blazer::Engine, at: "queries"
   end
-  
+
   get 'welcome/index'
 
   # Public Redirects
