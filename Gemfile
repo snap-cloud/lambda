@@ -8,6 +8,10 @@ gem 'rails', '4.2.6'
 # Use Puma as the app server
 gem 'puma'
 
+# Always use postgres as the db
+gem 'pg'
+
+
 # Frontend Utilities
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -28,8 +32,6 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
 # TODO: need this?
 gem "flutie"
@@ -38,17 +40,15 @@ gem "newrelic_rpm", ">= 3.9.8"
 
 gem "rack-canonical-host"
 
-# Always use postgres as the db
-# Currently LTI tools depend on it
-gem 'pg'
-
-# LTI
+# User Accounts & LTI
 gem 'dce_lti', path: './dce-lti/'
 # Not using postgres due to Heroku's row limit.
 gem 'redis-session-store'
-
-# User Accounts
 gem 'omniauth-google-oauth2'
+
+# Temporary(?) Admin Dashboard-y Things
+gem 'blazer' # write and save queries
+gem 'pghero' # Analyze DB performance.
 
 # SPECIFIC APIS BECAUSE EDUC APIS ARE HELL
 gem 'canvas-api'
