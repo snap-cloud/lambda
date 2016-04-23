@@ -3,7 +3,6 @@ class WelcomeController < ApplicationController
   end
 
   def snap
-    puts 'GET SNAP'
     redirect_to '/snap/'
   end
 end

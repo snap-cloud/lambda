@@ -41,7 +41,7 @@ user_class: User
 # user_name: name
 
 # optional auth method to use as a before_action (default: nil)
-# before_action: :require_admin
+before_action: :require_admin
 
 # email to send checks from
-# from_email: blazer@example.org
+from_email: admin@<%= ENV["APPLICATION_HOST"] %>
