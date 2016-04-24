@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   # Admin Tools
   scope '/admin' do
-    mount Blazer::Engine, at: "queries"
+    mount Blazer::Engine, at: "analyze", as: 'dashboard_path'
   end
 
   # Public Redirects

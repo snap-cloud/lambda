@@ -9,9 +9,11 @@ nav.navbar.navbar-inverse.navbar-fixed-top
           a(href="#{questions_path}") Questions
         - if current_user && current_user.admin
           li
-            a(href="#{courses_path}" class="disabled")Courses
+            a(href="#{courses_path}")Courses
           li
-            a(href="#" class="disabled")Users
+            a(href="#")Users
+          li
+            a(href="#{dashboard_path}")Dashboards
     p.navbar-text.navbar-right
       - if current_user
         = link_to 'Logout', '/logout', method: :delete, class: 'navbar-link'
