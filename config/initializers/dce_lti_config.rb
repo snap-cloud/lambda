@@ -9,9 +9,9 @@ DceLti::Engine.setup do |lti|
   # allows for the creation of cookieless sessions. The default is `false`,
   # meaning we don't attempt to use cookieless sessions when a cookie cannot be
   # set - the session just fails.
-  lti.enable_cookieless_sessions = true
-  
-  
+  lti.enable_cookieless_sessions = false
+
+
   # The default post-auth redirect includes the session key and session id so
   # that we can instantiate a successful cookieless session if needed.
   lti.redirect_after_successful_auth = ->(controller) {
@@ -52,7 +52,7 @@ DceLti::Engine.setup do |lti|
       result.consumer_key
     end
   }
-  
+
   # lti.consumer_secret = (ENV['LTI_CONSUMER_SECRET'] || 'consumer_secret')
   # lti.consumer_key = (ENV['LTI_CONSUMER_KEY'] || 'consumer_key')
 
