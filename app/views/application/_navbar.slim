@@ -19,7 +19,7 @@ nav.navbar.navbar-inverse.navbar-fixed-top
             li
               a(href="#")Users
             li
-              a(href="/admin/analyze")Dashboards
+              a(href="#{blazer_path}")Dashboards
       p.navbar-text.navbar-right
         - if current_user
           = link_to 'Logout', '/logout', method: :delete, class: 'navbar-link'
