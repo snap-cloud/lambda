@@ -13,5 +13,5 @@
 //= require jquery/dist/jquery.min.js
 //= require jquery-ujs
 //= require underscore/underscore-min.js
-//= require bootstrap/dist/js/bootstrap.min.js
+//= require bootstrap-sprockets
 //= require_tree .

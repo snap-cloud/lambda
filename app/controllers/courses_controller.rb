@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   before_action :require_admin
-  
+
   # GET /courses
   # GET /courses.json
   def index
@@ -41,6 +41,9 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
+    puts 'UPDATED'
+    puts params
+    puts course_params
     respond_to do |format|
       if @course.update(course_params)
         format.html { redirect_to @course, notice: 'Course was successfully updated.' }
@@ -68,8 +71,12 @@ class CoursesController < ApplicationController
       @course = Course.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :url, :consumer_key, :consumer_secret, :configuration)
+      params.require(:course).permit(
+        :name, :url,
+        :consumer_key, :consumer_secret,
+        :configuration, :configuration_key, :configuration_value
+      )
     end
 end

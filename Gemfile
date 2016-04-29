@@ -14,6 +14,7 @@ gem 'pg'
 
 # Frontend Utilities
 # Use SCSS for stylesheets
+gem 'bootstrap-sass'
 gem 'sass-rails', '~> 5.0'
 gem 'slim-rails' # Templates
 gem 'gon' # JS Data Transfer

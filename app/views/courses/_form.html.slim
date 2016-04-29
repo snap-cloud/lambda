@@ -28,32 +28,43 @@
               | Key
             th
               | Value
+            th
+              | Remove
         tbody.key-value-body
           tr.key-value-group
+            td.col-xs-5
+              = select(:configuration_key, '1', Course.form_keys_list, {}, { class: 'form-control' })
             td.col-xs-6
-              input(type="text" class="form-control" id="config-key-1" placeholder="key")
-            td.col-xs-6
-              input(type="text" class="form-control" id="config-value-1" placeholder="value")
+              input(type="text" class="form-control" id="configuration_value_1" placeholder="value" name="configuration_value[1]")
+            td.col-xs-1
+              a.btn.btn-danger(onclick="" aria-label="Remove Row")
+                span.glyphicon.glyphicon-remove(aria-hidden="true")
+
         tfoot
           tr
-            td(colspan=2)
-              a.btn.btn-info(href="#" id='add-row-btn' onclick='addRow' role='button')
+            td(colspan=3)
+              a.btn.btn-info(href="#" id='add-row-btn' onclick='addConfigFormRow' role='button')
                 span(class='glyphicon glyphicon-plus')
-    br
-    = f.text_field :configuration, class: 'form-control'
   .form-group
-    = f.button :submit, class: "btn btn-default"
+    = f.button :submit, class: "btn btn-primary"
       | Submit
 
 - content_for :scripts do |c|
   script
-    | $('#add-row-btn').on('click', addRow);
-    | function addRow(evt) {
+    | $('#add-row-btn').on('click', addConfigFormRow);
+    | function addConfigFormRow(evt) {
     |   if (evt) { evt.preventDefault(); }
     |   var rows = $('.key-value-group');
     |   var row = rows.first().clone();
+    |   var num = rows.length + 1;
     |   row.find('input').each(function (idx, item) {
-    |     $(item).attr('id', (idx == 0 ? 'config-key-' : 'config-value-') + rows.length );
+    |     $(item).attr('id', 'configuration_value_' + num);
+    |     $(item).attr('name', 'configuration_value[' + num + ']');
+    |     $(item).val(null);
+    |   });
+    |   row.find('select').each(function (idx, item) {
+    |     $(item).attr('id', 'configuration_key_' + num);
+    |     $(item).attr('name', 'configuration_key[' + num + ']');
     |     $(item).val(null);
     |   });
     |   $('.key-value-body').append(row);
