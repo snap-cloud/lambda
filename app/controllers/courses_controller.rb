@@ -41,9 +41,6 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
-    puts 'UPDATED'
-    puts params
-    puts course_params
     respond_to do |format|
       if @course.update(course_params)
         format.html { redirect_to @course, notice: 'Course was successfully updated.' }
@@ -74,9 +71,9 @@ class CoursesController < ApplicationController
     # only allow the white list through.
     def course_params
       params.require(:course).permit(
-        :name, :url,
+        :id, :name, :url,
         :consumer_key, :consumer_secret,
-        :configuration, :configuration_key, :configuration_value
+        :configuration => Course.VALID_CONFIG_OPTIONS.keys
       )
     end
 end

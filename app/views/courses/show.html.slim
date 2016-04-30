@@ -1,28 +1,38 @@
-p#notice = notice
-
 .container
+  h2 View Course "#{@course.name}"
   .col-md-9
     p
-      strong Name:
+      strong Name
     p
       = @course.name
     p
-      strong URL:
+      strong URL
     p
       = link_to @course.url
     p
-      strong Consumer Key:
+      strong Consumer Key
     p
       = @course.consumer_key
     p
-      strong Consumer Secret:
+      strong Consumer Secret
     p
       = @course.consumer_secret
     p
-      strong Configuration:
-    p
-      = @course.configuration
-
-= link_to 'Edit', edit_course_path(@course)
-' | 
-= link_to 'Back', courses_path
+      strong Configuration
+    .table-responsive
+      table.table.table-striped
+        thead
+          tr
+            th
+              | Option
+            th
+              | Value
+        tbody.key-value-body
+          - @course.configuration.each do |key, value|
+            tr.key-value-group
+              td.col-xs-6.vert-align
+                = Course.VALID_CONFIG_OPTIONS[key.to_sym][:name]
+              td.col-xs-6
+                = value
+    
+    = link_to 'Edit', edit_course_path(@course), class: 'btn btn-success'

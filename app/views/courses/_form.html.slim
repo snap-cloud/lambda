@@ -1,11 +1,14 @@
+- if @course.errors.any?
+  .alert.alert-danger.alert-dismissible.flash.fash-danger#error_explanation(role="alert")
+    button.close(type="button" data-dismiss="alert" aria-label="Close")
+      span(aria-hidden="true")
+        | &times;
+    strong = "#{pluralize(@course.errors.count, "error")} prohibited this course from being saved:"
+    ul
+      - @course.errors.full_messages.each do |message|
+        li = message
+        
 = form_for @course, html: { class: 'form-horizontal' } do |f|
-  - if @course.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@course.errors.count, "error")} prohibited this course from being saved:"
-      ul
-        - @course.errors.full_messages.each do |message|
-          li = message
-
   .form-group
     = f.label :name
     = f.text_field :name, class: 'form-control'
@@ -16,56 +19,38 @@
     = f.label :consumer_key, 'Consumer Key'
     = f.text_field :consumer_key, class: 'form-control'
   .form-group
-    = f.label :consumer_secret, 'Consumer Secret'
-    = f.text_field :consumer_secret, class: 'form-control'
-  .form-group
     = f.label :configuration
     .table-responsive
       table.table.table-striped
         thead
           tr
             th
-              | Key
+              | Option
             th
               | Value
-            th
-              | Remove
+            / th
+            /   | Remove
         tbody.key-value-body
           tr.key-value-group
-            td.col-xs-5
-              = select(:configuration_key, '1', Course.form_keys_list, {}, { class: 'form-control' })
+            td.col-xs-6.vert-align
+              | Keep Highest Score
             td.col-xs-6
-              input(type="text" class="form-control" id="configuration_value_1" placeholder="value" name="configuration_value[1]")
-            td.col-xs-1
-              a.btn.btn-danger(onclick="" aria-label="Remove Row")
-                span.glyphicon.glyphicon-remove(aria-hidden="true")
+              = select('course[configuration]', 'keep_highest_score', [true, false], {}, { class: 'form-control' })
+            / td.col-xs-1
+            /   a.btn.btn-danger(onclick="" aria-label="Remove Row")
+            /     span.glyphicon.glyphicon-remove(aria-hidden="true")
 
-        tfoot
-          tr
-            td(colspan=3)
-              a.btn.btn-info(href="#" id='add-row-btn' onclick='addConfigFormRow' role='button')
-                span(class='glyphicon glyphicon-plus')
+        / tfoot
+        /   tr
+        /     td(colspan=3)
+        /       a.btn.btn-info(href="#" id='add-row-btn' onclick='addConfigFormRow' role='button')
+        /         span(class='glyphicon glyphicon-plus')
   .form-group
-    = f.button :submit, class: "btn btn-primary"
-      | Submit
+    .col-xs-1
+      = f.button :submit, class: "btn btn-success"
+        | Save
+    .col-xs-1
+      = link_to 'Cancel', @course, class: 'btn btn-warning'
+    
 
 - content_for :scripts do |c|
-  script
-    | $('#add-row-btn').on('click', addConfigFormRow);
-    | function addConfigFormRow(evt) {
-    |   if (evt) { evt.preventDefault(); }
-    |   var rows = $('.key-value-group');
-    |   var row = rows.first().clone();
-    |   var num = rows.length + 1;
-    |   row.find('input').each(function (idx, item) {
-    |     $(item).attr('id', 'configuration_value_' + num);
-    |     $(item).attr('name', 'configuration_value[' + num + ']');
-    |     $(item).val(null);
-    |   });
-    |   row.find('select').each(function (idx, item) {
-    |     $(item).attr('id', 'configuration_key_' + num);
-    |     $(item).attr('name', 'configuration_key[' + num + ']');
-    |     $(item).val(null);
-    |   });
-    |   $('.key-value-body').append(row);
-    | }
