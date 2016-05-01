@@ -9,13 +9,17 @@ class ApplicationController < ActionController::Base
 
   # We store the original request parameters in the session for use later on.
   # This allows us to re-create a tool provider instance whenever we need.
-  # The TP instance could be used from many controllers
-  # TODO: This doesn't yet support multiple app key / secret combos.
+  # The TP instance could be used from any controller
   def get_tool_provider
     launch_params = session[:launch_params]
     if launch_params
+      course = Course.find_by(consumer_key: launch_params[:oauth_consumer_key])   
+      if !course
+        # TODO: render invalid, and display error.
+        return nil
+      end
       IMS::LTI::ToolProvider.new(
-        consumer_key, consumer_secret, launch_params
+        course.consumer_key, course.consumer_secret, launch_params
       )
     else
       return nil
@@ -25,9 +29,8 @@ class ApplicationController < ActionController::Base
   private
 
   def require_admin
-    # TODO: Give a more specific error message.
     if !current_user || (current_user && !current_user.admin)
-      flash[:error] = 'This action requires an administrator account'
+      flash[:error] = "Visiting '#{request.fullpath}' requires an administrator account"
       redirect_to '/' and return
     end
   end
