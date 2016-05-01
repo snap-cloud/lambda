@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   # Admin Tools
   scope '/admin' do
     mount Blazer::Engine, at: "analyze"
+    mount PgHero::Engine, at: "pghero"
   end
 
   # Public Redirects

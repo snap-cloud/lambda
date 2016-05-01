@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501024132) do
+ActiveRecord::Schema.define(version: 20160501074533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,16 @@ ActiveRecord::Schema.define(version: 20160501024132) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "pghero_query_stats", force: :cascade do |t|
+    t.text     "database"
+    t.text     "query"
+    t.float    "total_time"
+    t.integer  "calls",       limit: 8
+    t.datetime "captured_at"
+  end
+
+  add_index "pghero_query_stats", ["database", "captured_at"], name: "index_pghero_query_stats_on_database_and_captured_at", using: :btree
 
   create_table "questions", force: :cascade do |t|
     t.string   "title"
