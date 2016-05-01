@@ -15,12 +15,12 @@ h1
     tbody
       - @courses.each do |course|
         tr
-          td = course.id
-          td = = link_to "#{course.name}", course
-          td = course.url
-          td = course.consumer_key
-          td = link_to 'Edit', edit_course_path(course)
-          td = link_to '&times;', course, class: "btn btn-danger", data: {:confirm => 'Are you sure?'}, :method => :delete
+          td.vert-align = course.id
+          td.vert-align = link_to "#{course.name}", course
+          td.vert-align = course.url
+          td.vert-align = course.consumer_key
+          td.vert-align = link_to 'Edit', edit_course_path(course)
+          td.vert-align = link_to raw('<strong>&times;</strong>'), course, class: "btn btn-danger", data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 a.btn.btn-success(href=new_course_path role='button')
