@@ -16,7 +16,7 @@ class Course < ActiveRecord::Base
     self.name = course_params[:name]
     self.url = course_params[:url]
     self.consumer_secret = create_consumer_secret(
-      self.consumer_key,
+      nil,
       course_params[:consumer_key]
     )
     self.consumer_key = course_params[:consumer_key]
@@ -38,7 +38,10 @@ class Course < ActiveRecord::Base
 
   # Generate a Consumer Secret
   def create_consumer_secret(old_key, new_key)
-    if old_key != new_key
+    puts 'Creating Consumer secret'
+    puts "OLD KEY #{old_key}"
+    puts "NEW KEY #{new_key}"
+    if old_key == nil || old_key != new_key && new_key != nil
       Digest::SHA256.base64digest(new_key + '_' + Time.new().to_s)
     else
       self.consumer_secret
