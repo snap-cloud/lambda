@@ -15,4 +15,8 @@
       = f.label :starter_file
       = f.text_area :starter_file, class: 'form-control'
   .form-group
-    = f.button :submit, class: "btn btn-default"
+    .col-xs-1
+      = f.button :submit, class: "btn btn-success"
+        | Save
+    .col-xs-1
+      = link_to 'Cancel', @question, class: 'btn btn-warning'

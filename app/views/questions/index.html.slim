@@ -19,15 +19,15 @@ h1
         - @questions.each do |question|
           tr
             - if current_user && current_user.admin
-              td = question.id
-            td = link_to question.title, question
-            td = question.points
-            td = truncate question.content
-            td = link_to 'View Tests File', test_file_question_path(question.id)
-            td = link_to 'View Starter File', starter_file_question_path(question.id)
+              td.vert-align = question.id
+            td.vert-align = link_to question.title, question
+            td.vert-align = question.points
+            td.vert-align = truncate question.content
+            td.vert-align = link_to 'View Tests File', test_file_question_path(question.id)
+            td.vert-align = link_to 'View Starter File', starter_file_question_path(question.id)
             - if current_user && current_user.admin
-              td = link_to 'Edit', edit_question_path(question)
-              td = link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' }
+              td.vert-align = link_to 'Edit', edit_question_path(question)
+              td.vert-align = link_to  raw('<strong>&times;</strong>'), question, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
 
 .container
     - if current_user && current_user.admin
