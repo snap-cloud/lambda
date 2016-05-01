@@ -1,8 +1,5 @@
 module DceLti
   module SessionHelpers
-    def valid_lti_request?(request)
-      puts("TOOL PROVIDER VALID: #{tool_provider.valid_request?(request)}")
-
       tool_provider.valid_request?(request) &&
         Nonce.valid?(tool_provider.oauth_nonce) &&
         TimestampValidator.valid?(tool_provider.oauth_timestamp)

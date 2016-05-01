@@ -25,7 +25,7 @@ class QuestionsController < ApplicationController
     if @question.starter_file
       gon.starter_file_path = starter_file_question_path
     else
-      gon.starter_file_path = nil # TODO -- does this work?
+      gon.starter_file_path = nil
     end
     gon.submissions_path = submission_question_path
     render layout: 'base'
@@ -93,8 +93,6 @@ class QuestionsController < ApplicationController
   # LIT Submit grade
   # POST /questions/1/submission
   def submit_grade
-    puts 'CALLED SUBMIT GRADE'
-
     @provider ||= get_tool_provider
     score = normalize_score(params[:score], @question.points)
 
@@ -105,6 +103,7 @@ class QuestionsController < ApplicationController
     else
       cParams = @provider.custom_params
       dce_lti_id = @provider.user_id
+      # TODO: Store the email...
       user_json = {
         canvas_id: cParams["canvas_user_id"],
         full_name: @provider.lis_person_name_full,
@@ -122,55 +121,41 @@ class QuestionsController < ApplicationController
       dce_lti_user_id: dce_lti_id
     )
 
-    if @provider.nil?
-      puts 'Saved submission log for non-lti context'
-      render nothing: true
-      return
+    # TODO: Extract this conditional info a function
+    if !@provider.nil? && @provider.outcome_service?
+      previous = get_previous_score(@provider)
+      if previous != nil || score <= previous
+        puts 'Found previous score, no need to resubmit.'
+        render nothing: true
+        return
+      end
+      begin
+        puts 'Trying to submit grade'
+        response = @provider.post_replace_result!(score)
+        if response.success?
+          puts 'PARTY' # grade write worked
+        elsif response.processing?
+          puts 'Processing....'
+        elsif response.unsupported?
+          puts 'Unsupported'
+        else
+          puts 'ERROR: LTI Response'
+          puts response.message_identifier
+          puts response.description
+          puts response.code_major
+          do_submit_api_grade(score)
+        end
+      rescue Exception => e
+        puts e.message
+        puts e.backtrace.inspect
+        do_submit_api_grade(score)
+      end
     end
-     puts '='*50
+    render nothing: true
+  end
 
-     if @provider.outcome_service?
-       previous = get_previous_score(@provider)
-       if previous == nil || score > previous
-         # do submit
-       else
-         puts 'Found previous score, no need to resubmit.'
-         render nothing: true
-         return
-       end
-       begin
-         puts 'Trying to submit grade'
-         response = @provider.post_replace_result!(score)
-         if response.success?
-           puts 'PARTY'
-           # grade write worked
-         elsif response.processing?
-           puts 'Processing....'
-         elsif response.unsupported?
-           puts 'Unsupported'
-         else
-           puts 'ERROR: LTI Response'
-           puts response.message_identifier
-           puts response.description
-           puts response.code_major
-           puts 'USER JSON'
-           puts user_json
-           do_submit_api_grade(score)
-         end
-       rescue Exception => e
-         puts e.message
-         puts e.backtrace.inspect
-         do_submit_api_grade(score)
-       end
-     else
-       puts 'NO SUBMIT GRADE'
-       # normal tool launch without grade write-back
-     end
-     render nothing: true
-   end
-
-   # Return the starter file as XML.
-   # GET /questions/1/starter-file
+  # Return the starter file as XML.
+  # GET /questions/1/starter-file
   def starter_file
     render xml: @question.starter_file
   end
@@ -181,6 +166,7 @@ class QuestionsController < ApplicationController
     render text: @question.test_file
   end
 
+  # TODO: Move this to a separate file.
   def do_submit_api_grade(score)
     if @provider.tool_consumer_info_product_family_code != "canvas"
       puts 'Non Canvas Request Found'

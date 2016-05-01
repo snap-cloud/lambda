@@ -36,9 +36,6 @@ class Course < ActiveRecord::Base
 
   # Generate a Consumer Secret
   def create_consumer_secret(old_key, new_key)
-    puts 'Creating Consumer secret'
-    puts "OLD KEY #{old_key}"
-    puts "NEW KEY #{new_key}"
     if old_key == nil || old_key != new_key && new_key != nil
       Digest::SHA256.base64digest(new_key + '_' + Time.new().to_s)
     else

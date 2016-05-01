@@ -5,26 +5,22 @@ h1
   table.table.table-striped
     thead
       tr
-        - if current_user && current_user.admin
-          th
+        th
         th Name
         th URL
         th Consumer Key
-        th View
         th Edit
         th Delete
 
     tbody
       - @courses.each do |course|
         tr
-          - if current_user && current_user.admin
-            td = course.id
-          td = course.name
+          td = course.id
+          td = = link_to "#{course.name}", course
           td = course.url
           td = course.consumer_key
-          td = link_to 'Show', course
           td = link_to 'Edit', edit_course_path(course)
-          td = link_to 'Destroy', course, data: {:confirm => 'Are you sure?'}, :method => :delete
+          td = link_to '&times;', course, class: "btn btn-danger", data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 a.btn.btn-success(href=new_course_path role='button')

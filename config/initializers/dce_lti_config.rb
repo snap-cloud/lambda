@@ -32,7 +32,6 @@ DceLti::Engine.setup do |lti|
   # The consumer_secret and consumer_key should be a lambda that will be
   # evaluated in the context of your application. You might use a service
   # object or model proper to find key and secret pairs. Example:
-  #
   lti.consumer_secret = ->(launch_params) {
     result = Course.find_by(consumer_key: launch_params[:oauth_consumer_key])
     if result.nil?
@@ -42,9 +41,6 @@ DceLti::Engine.setup do |lti|
     end
   }
   lti.consumer_key = ->(launch_params) {
-    puts 'FINDING CONSUMER KEY'
-    puts launch_params
-    puts launch_params[:oauth_consumer_key]
     result = Course.find_by(consumer_key: launch_params[:oauth_consumer_key])
     if result.nil?
       (ENV['LTI_CONSUMER_KEY'] || 'consumer_key')
@@ -52,11 +48,6 @@ DceLti::Engine.setup do |lti|
       result.consumer_key
     end
   }
-
-  # lti.consumer_secret = (ENV['LTI_CONSUMER_SECRET'] || 'consumer_secret')
-  # lti.consumer_key = (ENV['LTI_CONSUMER_KEY'] || 'consumer_key')
-
-
 
   # Simple function to pass all keys to the next page
   # TODO: This is only for testing, oauth data should be filtered.
