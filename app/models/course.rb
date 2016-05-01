@@ -2,6 +2,8 @@
 require 'digest'
 
 class Course < ActiveRecord::Base
+  after_create :after_initialize
+  
   # This determines the paramters and methods for update course attributes
   @@VALID_CONFIG_OPTIONS = {
     keep_highest_score: {
@@ -11,16 +13,12 @@ class Course < ActiveRecord::Base
     late_policy_formula: {}
   }
 
-  # Override new method to handle hstore hashes.
-  def new(course_params)
-    self.name = course_params[:name]
-    self.url = course_params[:url]
+  # After creating a course, set the secret key.
+  def after_initialize
     self.consumer_secret = create_consumer_secret(
       nil,
-      course_params[:consumer_key]
+      self.consumer_key
     )
-    self.consumer_key = course_params[:consumer_key]
-    self.configuration = configuration_hash(self.configuration, course_params)
     self.save
   end
   
