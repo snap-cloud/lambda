@@ -163,7 +163,7 @@ class QuestionsController < ApplicationController
   # Return the tests JS file as text.
   # GET /questions/1/test-file
   def test_file
-    render text: @question.test_file, {}
+    render(text: @question.test_file)
   end
 
   # TODO: Move this to a separate file.
