@@ -10,9 +10,9 @@ h1
         th Title
         th Points
         th Content
-        th Test File
         th Starter file
         - if current_user && current_user.admin
+          th Test File
           th Edit
           th Delete
       tbody
@@ -23,9 +23,9 @@ h1
             td.vert-align = link_to question.title, question
             td.vert-align = question.points
             td.vert-align = truncate question.content
-            td.vert-align = link_to 'View Tests File', test_file_question_path(question.id)
             td.vert-align = link_to 'View Starter File', starter_file_question_path(question.id)
             - if current_user && current_user.admin
+              td.vert-align = link_to 'View Test File', test_file_question_path(question.id)
               td.vert-align = link_to 'Edit', edit_question_path(question)
               td.vert-align = link_to  raw('<strong>&times;</strong>'), question, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
 
