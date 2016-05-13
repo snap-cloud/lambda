@@ -43,12 +43,12 @@ gem "rack-canonical-host"
 
 # User Accounts & LTI
 gem 'dce_lti', path: './dce-lti/'
-# Not using postgres due to Heroku's row limit.
+# Not using postgres due to Heroku's r/ow limit.
 gem 'redis-session-store'
 gem 'omniauth-google-oauth2'
 
 # Temporary(?) Admin Dashboard-y Things
-gem 'blazer' # write and save queries
+gem 'blazer', path: '../blazer/' # write and save queries
 gem 'pghero' # Analyze DB performance.
 
 # SPECIFIC APIS BECAUSE EDUC APIS ARE HELL

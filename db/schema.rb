@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20160508095514) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+  enable_extension "pg_stat_statements"
 
   create_table "blazer_audits", force: :cascade do |t|
     t.integer  "user_id"
@@ -58,13 +59,11 @@ ActiveRecord::Schema.define(version: 20160508095514) do
   end
 
   create_table "courses", force: :cascade do |t|
-    t.string   "name"
-    t.string   "url"
-    t.string   "consumer_key"
-    t.string   "consumer_secret"
-    t.hstore   "configuration"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string "name"
+    t.string "url"
+    t.string "consumer_key"
+    t.string "consumer_secret"
+    t.hstore "configuration"
   end
 
   add_index "courses", ["name"], name: "index_courses_on_name", unique: true, using: :btree
