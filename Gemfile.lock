@@ -1,11 +1,4 @@
 PATH
-  remote: ../blazer/
-  specs:
-    blazer (1.3.3)
-      chartkick
-      rails
-
-PATH
   remote: ./dce-lti/
   specs:
     dce_lti (0.5.4)
@@ -75,6 +68,10 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    blazer (1.5.1)
+      chartkick
+      rails
+      safely_block (>= 0.1.1)
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -133,6 +130,7 @@ GEM
       dotenv (= 2.1.1)
       railties (>= 4.0, < 5.1)
     equalizer (0.0.11)
+    errbase (0.0.3)
     erubis (2.7.0)
     ethon (0.9.0)
       ffi (>= 1.3.0)
@@ -365,6 +363,8 @@ GEM
     ruby_parser (3.8.2)
       sexp_processor (~> 4.1)
     safe_yaml (1.0.4)
+    safely_block (0.1.1)
+      errbase
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -442,7 +442,7 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
-  blazer!
+  blazer
   bootstrap-sass
   brakeman
   bullet

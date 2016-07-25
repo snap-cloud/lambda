@@ -48,7 +48,7 @@ gem 'redis-session-store'
 gem 'omniauth-google-oauth2'
 
 # Temporary(?) Admin Dashboard-y Things
-gem 'blazer', path: '../blazer/' # write and save queries
+gem 'blazer' #, path: '../blazer/' # write and save queries
 gem 'pghero' # Analyze DB performance.
 
 # SPECIFIC APIS BECAUSE EDUC APIS ARE HELL
