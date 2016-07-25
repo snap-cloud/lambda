@@ -2,10 +2,12 @@
     <title><%= blazer_title ? blazer_title : "Blazer" %></title>
 
     <%= stylesheet_link_tag "blazer/application" %>
-    <script>
-      var Chartkick = {smarterDates: true, smarterDiscrete: true};
-    </script>
     <%= javascript_include_tag "blazer/application" %>
+
+    <script>
+      var runQueriesPath = <%= run_queries_path.to_json.html_safe %>;
+    </script>
+
     <% if blazer_maps? %>
       <%= stylesheet_link_tag "https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css" %>
       <%= javascript_include_tag "https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js" %>
@@ -17,6 +19,5 @@
 <div style="margin-top: 60px">
   <%= yield %>
 </div>
-
 
 <% parent_layout 'application' %>

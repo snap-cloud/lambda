@@ -3,12 +3,12 @@ html[lang="en"]
   head
     meta charset="utf-8"
     meta name="viewport" content="initial-scale=1"
-    title
-      = "λ | Snap! Autograder"
     = stylesheet_link_tag :application, media: "all"
     = csrf_meta_tags
     == render partial: "partials/google_analytics"
     == yield :head
+    title
+      = "λ | Snap! Autograder"
 body [class= body_class]
   = Gon::Base.render_data
   - unless (action_name == 'show' && controller_name == 'questions')
