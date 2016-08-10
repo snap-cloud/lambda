@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby "2.3.0"
+ruby "2.3.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.7'
 
 # Use Puma as the app server
 gem 'puma'

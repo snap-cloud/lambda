@@ -158,7 +158,7 @@ GEM
       activesupport
       capybara
       i18n
-    globalid (0.3.6)
+    globalid (0.3.7)
       activesupport (>= 4.1.0)
     gon (6.1.0)
       actionpack (>= 3.0)
