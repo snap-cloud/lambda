@@ -42,17 +42,25 @@ gem "newrelic_rpm", ">= 3.9.8"
 gem "rack-canonical-host"
 
 # User Accounts & LTI
+# TODO: Eventually remove this...2
 gem 'dce_lti', path: './dce-lti/'
 # Not using postgres due to Heroku's r/ow limit.
 gem 'redis-session-store'
+# TODO: OmniAuth?
 gem 'omniauth-google-oauth2'
 
-# Temporary(?) Admin Dashboard-y Things
+# Admin Dashboard-y Things
 gem 'blazer' #, path: '../blazer/' # write and save queries
 gem 'pghero' # Analyze DB performance.
 
 # SPECIFIC APIS BECAUSE EDUC APIS ARE HELL
 gem 'canvas-api'
+
+# INVESTIGATE:
+# Clientside validation for forms
+# gem 'jquery-validation-rails'
+# gem 'histogram'
+
 
 group :development do
   gem "refills"
@@ -92,7 +100,18 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "pry-byebug"
   gem "pry-rails"
+
+
+  gem 'jazz_fingers'
+
+  # Generate fake user data.
+  gem 'faker'
+
+  # gem 'rspec'
   gem "rspec-rails", "~> 3.4.0"
+
+  # Test / Code quality utils
+
 end
 
 group :test do
