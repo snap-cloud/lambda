@@ -37,7 +37,7 @@ function submitAutograderResults(ag_log) {
     var formId = '#submission-form'; 
     var dataForm = $(formId);
     console.log('URL: ', dataForm.attr('action'));
-    
+    // TODO: Switch this to be http://stackoverflow.com/a/6723501
     var inputs = dataForm.find('input');
     $.ajax({
         type: 'POST',

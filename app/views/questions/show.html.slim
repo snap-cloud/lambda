@@ -2,7 +2,7 @@
     title
         = @question.title
 
-.hidden(style='display: none')
+.hidden
   = link_to 'Back', questions_path
   = form_tag(submission_question_path(params[:id]), id: 'submission-form', method: "post") do
     = text_field_tag(:score)
@@ -16,11 +16,9 @@ script
 / Controls for getting feedback and state and such.
 = render 'autograder_header'
 
-/ Snap is in it's own div to better allow us to set its size.
-#snap(style="width:100%;")
-    = render 'snap_base'
+= render 'snap_base'
 
 = render 'snap_autograder'
 = render 'autograder_help_results'
-   
+
 = render partial: 'partials/getfeedback'

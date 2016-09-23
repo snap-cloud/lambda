@@ -24,38 +24,70 @@
 
   <!-- Load snap + AG additions, similar to snap.html -->
   <script>
+  // Override Snap! / Morphic method to not take the full size of the window.
+  WorldMorph.prototype.fillPage = function () {
+      var agHeight = $('#ag-header').height();
+          clientHeight = $(window).height() - agHeight - 10,
+          clientWidth = window.innerWidth,
+          myself = this;
+
+      this.worldCanvas.style.position = "absolute";
+      this.worldCanvas.style.top = agHeight;
+      this.worldCanvas.style.left = "0px";
+      this.worldCanvas.style.right = "0px";
+      this.worldCanvas.style.width = "100%";
+      this.worldCanvas.style.height = "100%";
+
+      if (document.documentElement.scrollTop) {
+          // scrolled down b/c of viewport scaling
+          clientHeight = document.documentElement.clientHeight;
+      }
+      if (document.documentElement.scrollLeft) {
+          // scrolled left b/c of viewport scaling
+          clientWidth = document.documentElement.clientWidth;
+      }
+      if (this.worldCanvas.width !== clientWidth) {
+          this.worldCanvas.width = clientWidth;
+          this.setWidth(clientWidth);
+      }
+      if (this.worldCanvas.height !== clientHeight) {
+          this.worldCanvas.height = clientHeight;
+          this.setHeight(clientHeight);
+      }
+      this.children.forEach(function (child) {
+          if (child.reactToWorldResize) {
+              child.reactToWorldResize(myself.bounds.copy());
+          }
+      });
+  };
+  
   function RESET_WORLD_SIZE() {
     // The canvas size needs to manually be set so that morphic
     // knows the exact pixel dimensions to handle.
-    var jQworld, agHeight, snap;
-    jQworld = $('#world');
-    snap = $('#snap');
+    var $world, agHeight;
+    $world = $('#world');
     agHeight = $('#ag-header').height();
-    // $(document.body).style('height', $(window).height());
-    // $(document.body).style('overflow-y', 'hidden');
-    jQworld.attr('height', $(window).height() - agHeight - 10);
-    jQworld.attr('width', snap.width());
-    jQworld.css('top', agHeight);
-    jQworld.css('width', '100%');
-    snap.css('top', agHeight);
+    $world.attr('height', $(window).height() - agHeight - 10);
+    $world.attr('width', $(window).width());
+    $world.css('top', agHeight);
+    $world.css('width', '100%');
     if (world) {
         world.changed();
-      world.drawNew();
+        world.drawNew();
     }
   }
   // THIS SEEMS LIKE A HACK.
   // but this site is not edX....
-  isEDX = false;
+  window.isEDX = false;
   var world, world_canvas;
   window.onload = function () {
-    RESET_WORLD_SIZE();
-    $(window).on('resize', RESET_WORLD_SIZE);
-    var ide, grade_button;
+    // RESET_WORLD_SIZE();
+    // $(window).on('resize', RESET_WORLD_SIZE);
     world_canvas = document.getElementById('world')
     world = new WorldMorph(world_canvas, false); // do not autosize
     new IDE_Morph().openIn(world);
     // Start Snap Environment Loop
-    loop();
+    loop(world);
 
     // AUTOGRADER ADDITIONS:
     // Initialize AGSB button.
@@ -63,14 +95,15 @@
     world_canvas.addEventListener("mouseup", update_listener);
     // This is a link relative to /problems/N/
     starter_path = gon.starter_file_path;
-    <% if Rails.env == 'development' %>
-    loadTestJS();
-    <% else %>
+    // <% if Rails.env == 'development' %>
+    // loadTestJS();
+    // <% else %>
     initializeSnapAdditions(world, id);
-    <% end %>
+    // <% end %>
+    RESET_WORLD_SIZE();
   };
 
-  function loop() {
+  function loop(world) {
     requestAnimationFrame(loop);
     world.doOneCycle();
   }
