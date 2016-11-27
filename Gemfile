@@ -97,7 +97,7 @@ end
 
 group :test do
   # Note this requires qt on a mac
-  gem "capybara-webkit"
+  # gem "capybara-webkit"
   gem "database_cleaner"
   gem "formulaic"
   gem "launchy"
