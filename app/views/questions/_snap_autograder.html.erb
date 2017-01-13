@@ -65,16 +65,16 @@
     // The canvas size needs to manually be set so that morphic
     // knows the exact pixel dimensions to handle.
     var $world, agHeight;
-    $world = $('#world');
-    agHeight = $('#ag-header').height();
-    $world.attr('height', $(window).height() - agHeight - 10);
-    $world.attr('width', $(window).width());
-    $world.css('top', agHeight);
-    $world.css('width', '100%');
-    if (world) {
-        world.changed();
-        world.drawNew();
-    }
+    // $world = $('#world');
+    // agHeight = $('#ag-header').height();
+    // $world.attr('height', $(window).height() - agHeight - 10);
+    // $world.attr('width', $(window).width());
+    // $world.css('top', agHeight);
+    // $world.css('width', '100%');
+    // if (world) {
+    //     world.changed();
+    //     world.drawNew();
+    // }
   }
   // THIS SEEMS LIKE A HACK.
   // but this site is not edX....
@@ -95,11 +95,8 @@
     world_canvas.addEventListener("mouseup", update_listener);
     // This is a link relative to /problems/N/
     starter_path = gon.starter_file_path;
-    // <% if Rails.env == 'development' %>
-    // loadTestJS();
-    // <% else %>
+    loadTestJS();
     initializeSnapAdditions(world, id);
-    // <% end %>
     RESET_WORLD_SIZE();
   };
 
