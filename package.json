@@ -12,14 +12,14 @@
   "author": "Michael Ball",
   "license": "AGPL",
   "bugs": {
-    "url": "https://github.com/snap-cloud/snap-cloud/issues"
+    "url": "https://github.com/cycomachead/lambda/issues"
   },
-  "homepage": "https://github.com/snap-cloud/snap-cloud",
+  "homepage": "https://github.com/cycomachead/lambda",
   "dependencies": {
-    "bower": "^1.4.1"
+    "bower": "^1.x.x"
   },
   "engine": {
-    "node": "^4.2.x"
+    "node": "^6.x.x"
   },
   "scripts": {
     "postinstall": "./node_modules/bower/bin/bower install"

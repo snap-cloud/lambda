@@ -25,6 +25,7 @@ vendor/bower/
 public/assets/*
 !public/assets/google-icon.png
 
+node_modules
 
 # Don't commit the redis db
 dump.rdb
