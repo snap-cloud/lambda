@@ -27,7 +27,7 @@
   // Override Snap! / Morphic method to not take the full size of the window.
   WorldMorph.prototype.fillPage = function () {
       var agHeight = $('#ag-header').height();
-          clientHeight = $(window).height() - agHeight - 10,
+          clientHeight = $(window).height() - agHeight,
           clientWidth = window.innerWidth,
           myself = this;
 
@@ -61,49 +61,33 @@
       });
   };
   
-  function RESET_WORLD_SIZE() {
-    // The canvas size needs to manually be set so that morphic
-    // knows the exact pixel dimensions to handle.
-    var $world, agHeight;
-    // $world = $('#world');
-    // agHeight = $('#ag-header').height();
-    // $world.attr('height', $(window).height() - agHeight - 10);
-    // $world.attr('width', $(window).width());
-    // $world.css('top', agHeight);
-    // $world.css('width', '100%');
-    // if (world) {
-    //     world.changed();
-    //     world.drawNew();
-    // }
-  }
   // THIS SEEMS LIKE A HACK.
   // but this site is not edX....
   window.isEDX = false;
-  var world, world_canvas;
   window.onload = function () {
     // RESET_WORLD_SIZE();
     // $(window).on('resize', RESET_WORLD_SIZE);
     world_canvas = document.getElementById('world')
-    world = new WorldMorph(world_canvas, false); // do not autosize
-    new IDE_Morph().openIn(world);
+    world = new WorldMorph(world_canvas); // do not autosize
+    var ide = new IDE_Morph().openIn(world);
     // Start Snap Environment Loop
-    loop(world);
+    loop();
+
+    function loop() {
+      requestAnimationFrame(loop);
+      world.doOneCycle();
+    }
 
     // AUTOGRADER ADDITIONS:
     // Initialize AGSB button.
-    $("#autograding_button").click(doExecAndDisplayTests);
-    world_canvas.addEventListener("mouseup", update_listener);
-    // This is a link relative to /problems/N/
-    starter_path = gon.starter_file_path;
-    loadTestJS();
-    initializeSnapAdditions(world, id);
-    RESET_WORLD_SIZE();
+    // $("#autograding_button").click(doExecAndDisplayTests);
+    // world_canvas.addEventListener("mouseup", update_listener);
+    // // This is a link relative to /problems/N/
+    // starter_path = gon.starter_file_path;
+    // loadTestJS();
+    // initializeSnapAdditions(world, id);
   };
 
-  function loop(world) {
-    requestAnimationFrame(loop);
-    world.doOneCycle();
-  }
   
   function loadTestJS() {
     var query = queryString.parse(location.hash.slice(1)),
