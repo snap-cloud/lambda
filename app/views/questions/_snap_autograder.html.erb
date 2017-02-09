@@ -76,7 +76,8 @@
     // This is a link relative to /problems/N/
     starter_path = gon.starter_file_path;
     loadTestJS();
-    initializeSnapAdditions(world, ide);
+    // The global id variable in set by the JS file.
+    initializeSnapAdditions(world, id);
   };
 
   function loop() {
@@ -87,15 +88,16 @@
   function loadTestJS() {
     var query = queryString.parse(location.hash.slice(1)),
         problem_js = query.test_file,
-        tag = document.createElement('script');
-    if (problem_js) {
-      tag.src = problem_js;
-      tag.onload = function () {
-          starter_path = gon.starter_file_path;
-          initializeSnapAdditions(world, id);
-      };
-      document.head.appendChild(tag);
-    }
+        tag;
+        
+    if (!problem_js) { return; }
+    tag = document.createElement('script')
+    tag.src = problem_js;
+    tag.onload = function () {
+        starter_path = gon.starter_file_path;
+        initializeSnapAdditions(world, id);
+    };
+    document.head.appendChild(tag);
   }
   </script>
 <% end %>

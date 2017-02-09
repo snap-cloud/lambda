@@ -13,6 +13,7 @@ gem 'pg'
 
 # Frontend Utilities
 # Use SCSS for stylesheets
+# TODO: Upgrade to v4
 gem 'bootstrap-sass'
 gem 'sass-rails', '~> 5.0'
 gem 'slim-rails' # Templates
