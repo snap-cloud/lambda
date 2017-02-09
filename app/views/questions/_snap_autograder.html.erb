@@ -32,16 +32,15 @@
           myself = this;
 
       this.worldCanvas.style.position = "absolute";
-      this.worldCanvas.style.top = agHeight;
       this.worldCanvas.style.left = "0px";
       this.worldCanvas.style.right = "0px";
       this.worldCanvas.style.width = "100%";
-      this.worldCanvas.style.height = "100%";
+      this.worldCanvas.style.height = clientHeight + 'px';
 
-      if (document.documentElement.scrollTop) {
-          // scrolled down b/c of viewport scaling
-          clientHeight = document.documentElement.clientHeight;
-      }
+      // if (document.documentElement.scrollTop) {
+      //     // scrolled down b/c of viewport scaling
+      //     clientHeight = document.documentElement.clientHeight;
+      // }
       if (document.documentElement.scrollLeft) {
           // scrolled left b/c of viewport scaling
           clientWidth = document.documentElement.clientWidth;
@@ -65,30 +64,41 @@
   // but this site is not edX....
   window.isEDX = false;
   window.onload = function () {
+      $('#canvas-container').height(
+          $(document).height() - $('#ag-header').height()
+      );
+      $('#canvas-container').width($(document).width());
     // RESET_WORLD_SIZE();
     // $(window).on('resize', RESET_WORLD_SIZE);
-    world_canvas = document.getElementById('world')
-    world = new WorldMorph(world_canvas); // do not autosize
+    world_canvas = document.getElementById('world');
+    setCanvasSize();
+    world = new WorldMorph(world_canvas);
     var ide = new IDE_Morph().openIn(world);
     // Start Snap Environment Loop
     loop();
 
-    function loop() {
-      requestAnimationFrame(loop);
-      world.doOneCycle();
-    }
-
     // AUTOGRADER ADDITIONS:
     // Initialize AGSB button.
-    // $("#autograding_button").click(doExecAndDisplayTests);
-    // world_canvas.addEventListener("mouseup", update_listener);
-    // // This is a link relative to /problems/N/
-    // starter_path = gon.starter_file_path;
-    // loadTestJS();
-    // initializeSnapAdditions(world, id);
+    $("#autograding_button").click(doExecAndDisplayTests);
+    world_canvas.addEventListener("mouseup", update_listener);
+    // This is a link relative to /problems/N/
+    starter_path = gon.starter_file_path;
+    loadTestJS();
+    initializeSnapAdditions(world, id);
   };
 
-  
+  function loop() {
+    requestAnimationFrame(loop);
+    world.doOneCycle();
+  }
+
+  function setCanvasSize() {
+      var scale = window.devicePixelRatio;
+      
+      world_canvas.width = window.innerWidth / scale;
+      world_canvas.height = (window.innerHeight - $('#ag-header').height()) / scale;
+  }
+
   function loadTestJS() {
     var query = queryString.parse(location.hash.slice(1)),
         problem_js = query.test_file,
