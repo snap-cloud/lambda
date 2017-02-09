@@ -1,11 +1,11 @@
 <style type="text/css">
 
-body, .snap {
-    overflow-y: hidden;
+body {
+    overflow: hidden;
     padding: 0;
     margin: 0;
-    line-height: 1;
 }
+
 #numtips {
     border: 1px solid #666;
     border-radius: 4px;
@@ -88,7 +88,7 @@ body, .snap {
             <span class="btn" id="numtips">No Tips Yet</span>
         </div>
     </div>
-    
+
     <div class="container navbar-right" id="question-title">
       <%= @question.title %>
     </div>
