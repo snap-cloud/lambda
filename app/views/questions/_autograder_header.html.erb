@@ -2,96 +2,90 @@
 
 body {
     overflow: hidden;
-    padding: 0;
+    padding-top: 50px;
     margin: 0;
 }
 
 #numtips {
-    border: 1px solid #666;
-    border-radius: 4px;
-}
-
-/* TODO: Rename this stuff */
-.llab-nav {
-  background: #FFF;
-  margin: 0;
-  width: 100%;
-  padding: .5em 1em;
-  vertical-align: middle;
-}
-
-#question-title {
-    padding: 4px;
-    line-height: 1.2;
-    float: left;
-    font-size: 1.2em;
-    min-width: 50%;
-    max-width: 80%;
-    font-variant: small-caps;
-    color: #003A70;
-    vertical-align: middle;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-variant: small-caps;
+  font-weight: bold;
 }
 
 
-.nav-btns {
-  float: left;
-  z-index: 9999;
-  min-width: 15em;
-  margin-bottom: 0; /* Bootstrap override for ul, defaults 10 otherwise */
-  font-weight: 900;
-  position: relative;
-  vertical-align: middle;
-}
-
-.dropdown-menu {
-  width: 15em;
-  white-space: nowrap;
-  overflow-x: hidden;  /* Text truncation */
+span.question-title {
+  font-weight: bold;
+  font-family: serif;
+  font-variant: small-caps;
+  color: #003A70;
+  overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.dropdown-item {
-    padding: 4px 8px;
-    font-weight: normal;
-    font-size: 10pt;
-    text-align: left;
 }
 </style>
 
 
 <!-- TODO: Remove LLAB Stuff -->
-<nav class="llab-nav navbar navbar-default navbar-static-top" role="navigation" id="ag-header">
-    <div class="nav navbar-nav navbar-left" id="autograding_bar">
-        <div class="nav-btns btn-group">
-            <div class="btn-group dropdown" id="onclick-menu">
-                <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle AG Menu</span>
-                    <span title="Menu">&#9776;</span>
-                    <div class='hover_darken'></div>
-                </a>
-                <ul class="dropdown-menu" role="menu" aria-labeledby="Autograder Controls Menu">
-                    <li class="dropdown-item" role="presentation" id="show-results-button" onclick="openResults();">Show Test Results</li>
-                    <li class="divider" role="separator"></li>
-                    <li class="dropdown-item" role="presentation" id="undo-button">Revert to Last Attempt</li>
-                    <li class="dropdown-item" role="presentation" id="revert-button">Rest to Best Attempt</li>
-                    <li class="divider" role="separator"></li>
-                    <li class="dropdown-item" role="presentation" id="reset-button">Reset</li>
-                    <li class="divider" role="separator"></li>
-                    <li class="dropdown-item" onclick="openPopup();" id="help-button" role="presentation">Help</li>
-                </ul>
-            </div>
-            <button class="btn btn-default" id="autograding_button">Get Feedback</button>
-            <!-- Add a 'Show Feedback' thing that doesn't run tests. -->
-            <span class="btn" id="numtips">No Tips Yet</span>
-        </div>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="ag-header">
+  <div class="container-fluid">
+    <div class="navbar-left" id="autograding_bar">
+      <div class="navbar-brand">
+        <span class="question-title">Exercise: <%= @question.title %></span>
+      </div>
+      <div class="navbar-header">
+        <div class="btn-toolbar" role="group" aria-label="...">
+          <div class="nav-btns btn-group">
+            <button class="btn btn-info navbar-btn" id="autograding_button">
+              Get Feedback
+            </button>
+            <div class="btn-group dropdown" id="ag-action-menu">
+              <button class="btn btn-primary navbar-btn dropdown-toggle"
+                 type="button" data-toggle="dropdown" id="ag-controls"
+                 aria-haspopup="true" aria-expanded="false">
+                Options
+                <span class="caret"></span>
+                <span class="sr-only">Toggle AG Menu</span>
+              </button>
+              <ul class="dropdown-menu" role="menu" aria-labeledby="ag-controls">
+                <li>
+                  <a href="#" id="show-results-button" onclick="openResults();">
+                    Show Test Results
+                  </a>
+                </li>
+                <li class="divider" role="separator"></li>
+                <li class="disabled">
+                  <a href="#" id="undo-button">
+                    Revert to Last Attempt
+                  </a>
+                </li>
+                <li class="disabled">
+                  <a href="#" id="revert-button">
+                    Reset to Best Attempt
+                  </a>
+                </li>
+                <li class="divider" role="separator"></li>
+                <li>
+                  <a href="#" class="danger" id="reset-button">
+                    Reset
+                  </a>
+                </li>
+                <li class="divider" role="separator"></li>
+                <li class="disabled">
+                  <a href="#" onclick="openPopup();" id="help-button">
+                    Help
+                  </a>
+                </li>
+              </ul>
+            </div> <!-- /dropdown -->
+          </div>
+          <div class="btn-group">
+            <!-- Connect to 'Show Feedback' thing that doesn't run tests. -->
+            <button class="btn btn-default navbar-btn tips-msg"
+                    disabled="disabled" id="numtips">
+              <span class="badge">0</span> Tips
+            </button>
+          </div>
+        </div> <!-- .btn-toolbar -->
+      </div>
     </div>
-
-    <div class="container navbar-right" id="question-title">
-      <%= @question.title %>
-    </div>
+  </div>
 </nav>
-
 

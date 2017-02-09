@@ -11,6 +11,7 @@
 
   <!-- Main autograder components -->
   <script src='/autograder/ag-files/ag-util.js'></script>
+  <script src='/autograder/ag-files/help-content.js'></script>
   <script src='/autograder/ag-files/spriteEventLog.js'></script>
   <script src='/autograder/ag-files/scriptAnalysis.js'></script>
   <script src="/autograder/ag-files/AGAgent.js"></script>
@@ -25,6 +26,8 @@
   <!-- Load snap + AG additions, similar to snap.html -->
   <script>
   // Override Snap! / Morphic method to not take the full size of the window.
+  // TODO: extract into AG function that builds this.
+  // It should take in a width and height.
   WorldMorph.prototype.fillPage = function () {
       var agHeight = $('#ag-header').outerHeight();
           clientHeight = $(window).height() - agHeight,
@@ -34,17 +37,9 @@
       this.worldCanvas.style.position = "absolute";
       this.worldCanvas.style.left = "0px";
       this.worldCanvas.style.right = "0px";
-      this.worldCanvas.style.width = "100%";
+      this.worldCanvas.style.width = clientWidth + 'px';
       this.worldCanvas.style.height = clientHeight + 'px';
 
-      // if (document.documentElement.scrollTop) {
-      //     // scrolled down b/c of viewport scaling
-      //     clientHeight = document.documentElement.clientHeight;
-      // }
-      if (document.documentElement.scrollLeft) {
-          // scrolled left b/c of viewport scaling
-          clientWidth = document.documentElement.clientWidth;
-      }
       if (this.worldCanvas.width !== clientWidth) {
           this.worldCanvas.width = clientWidth;
           this.setWidth(clientWidth);
@@ -68,14 +63,11 @@
           $(window).height() - $('#ag-header').outerHeight()
       );
       $('#canvas-container').width($(window).width());
-    // RESET_WORLD_SIZE();
-    // $(window).on('resize', RESET_WORLD_SIZE);
-    world_canvas = document.getElementById('world');
-    setCanvasSize();
-    world = new WorldMorph(world_canvas);
-    var ide = new IDE_Morph().openIn(world);
-    // Start Snap Environment Loop
-    loop();
+      world_canvas = document.getElementById('world');
+      world = new WorldMorph(world_canvas);
+      var ide = new IDE_Morph().openIn(world);
+      // Start Snap Environment Loop
+      loop();
 
     // AUTOGRADER ADDITIONS:
     // Initialize AGSB button.
@@ -84,19 +76,12 @@
     // This is a link relative to /problems/N/
     starter_path = gon.starter_file_path;
     loadTestJS();
-    initializeSnapAdditions(world, id);
+    initializeSnapAdditions(world, ide);
   };
 
   function loop() {
     requestAnimationFrame(loop);
     world.doOneCycle();
-  }
-
-  function setCanvasSize() {
-      var scale = window.devicePixelRatio;
-      
-      world_canvas.width = window.innerWidth / scale;
-      world_canvas.height = (window.innerHeight - $('#ag-header').height()) / scale;
   }
 
   function loadTestJS() {
