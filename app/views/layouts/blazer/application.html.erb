@@ -16,8 +16,14 @@
 <% end %>
 
 
-<div style="margin-top: 60px">
+<div class="blazer-container">
   <%= yield %>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.blazer-container > div').first().attr('style', '');
+    });
+</script> 
 
 <% parent_layout 'application' %>
