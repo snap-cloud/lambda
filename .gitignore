@@ -29,3 +29,6 @@ node_modules
 
 # Don't commit the redis db
 dump.rdb
+
+# Don't commit temp sql dumps
+*.dump
