@@ -1,5 +1,5 @@
 PATH
-  remote: ./dce-lti/
+  remote: dce-lti
   specs:
     dce_lti (0.5.4)
       activerecord-session_store (~> 0.1.1)
@@ -479,4 +479,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.13.6
+   1.14.6
