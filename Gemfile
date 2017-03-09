@@ -55,6 +55,8 @@ gem 'pghero' # Analyze DB performance.
 gem 'canvas-api'
 
 group :development do
+  gem 'annotate'
+  
   gem "refills"
   gem "spring"
   gem "spring-commands-rspec"
