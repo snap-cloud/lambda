@@ -1,3 +1,4 @@
+- require 'digest/md5'
 - content_for :head do
   title
     | Users Dashboard
@@ -27,7 +28,7 @@ h2
         - submissions = Submission.where(dce_lti_user_id: user.id)
         tr
           / Temporary Shuffle Method for demo
-          td = user.lis_person_name_full&.split("")&.shuffle&.join
+          td = Digest::MD5.hexdigest(user.lis_person_name_full || '')
           td = submissions.map(&:question_id).uniq.count
           td = submissions.count
           td LTI
