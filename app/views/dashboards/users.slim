@@ -21,7 +21,7 @@ h2
       - User.all.each do |user|
         tr
           td =user.name
-          td = user.submissions.map(&:question_id).uniq.count
+          td =user.submissions.map(&:question_id).uniq.count
           td =user.submissions.count
           td Google
       - DceLti::User.all.each do |user|
