@@ -85,13 +85,17 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'question was successfully destroyed.' }
+      format.html {
+        redirect_to(questions_url,
+                    notice: 'question was successfully destroyed.')
+      }
       format.json { head :no_content }
     end
   end
 
   # LIT Submit grade
   # POST /questions/1/submission
+  # TODO: Move to a submission model
   def submit_grade
     @provider ||= get_tool_provider
     score = normalize_score(params[:score], @question.points)

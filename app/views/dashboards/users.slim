@@ -2,13 +2,26 @@
   title
     | Users Dashboard
 
-h1
+h2
   | Google OAuth Users
 
-h3
-  | Coming Soon............
+.table-responsive
+  table.table.table-striped
+    thead
+      th
+        | User Name
+      th
+        | Questions Attempted
+      th
+        | Total Submissions
+    tbody
+      - User.all.each do |user|
+        tr
+          td =user.name
+          td = user.submissions.map(&:question_id).uniq.count
+          td =user.submissions.count
 
-h1
+h2
   | LTI Users
 
 .table-responsive
@@ -21,3 +34,9 @@ h1
       th
         | Total Submissions
     tbody
+      - DceLti::User.all.each do |user|
+        - submissions = Submission.where(dce_lti_user_id: user.id)
+        tr
+          td = user.lis_person_name_full
+          td = submissions.map(&:question_id).uniq.count
+          td = submissions.count
