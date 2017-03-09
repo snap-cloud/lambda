@@ -32,3 +32,6 @@ dump.rdb
 
 # Don't commit temp sql dumps
 *.dump
+
+# Don't commit w/ an authtoken
+ngrok.yml

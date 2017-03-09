@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   def get_tool_provider
     launch_params = session[:launch_params]
     if launch_params
-      course = Course.find_by(consumer_key: launch_params[:oauth_consumer_key])   
+      course = Course.find_by(consumer_key: launch_params[:oauth_consumer_key])
       if !course
         # TODO: render invalid, and display error.
         return nil
