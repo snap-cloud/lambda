@@ -27,7 +27,7 @@ h2
         - submissions = Submission.where(dce_lti_user_id: user.id)
         tr
           / Temporary Shuffle Method for demo
-          td = user.lis_person_name_full.split("").shuffle.join
+          td = user.lis_person_name_full&.split("")&.shuffle&.join
           td = submissions.map(&:question_id).uniq.count
           td = submissions.count
           td LTI
