@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   # We store the original request parameters in the session for use later on.
   # This allows us to re-create a tool provider instance whenever we need.
   # The TP instance could be used from any controller
+  # TODO: Store TP instance.
   def get_tool_provider
     launch_params = session[:launch_params]
     if launch_params
