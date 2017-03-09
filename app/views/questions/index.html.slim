@@ -20,17 +20,24 @@ h1
           tr
             - if current_user && current_user.admin
               td.vert-align = question.id
-            td.vert-align = link_to question.title, question
-            td.vert-align = question.points
-            td.vert-align = truncate question.content
-            td.vert-align = link_to 'View Starter File', starter_file_question_path(question.id)
+            td.vert-align
+               = link_to question.title, question
+            td.vert-align
+              = question.points
+            td.vert-align
+              = truncate question.content
+            td.vert-align
+              = if question.starter_file then link_to 'View Starter File', starter_file_question_path(question.id) else ''
             - if current_user && current_user.admin
-              td.vert-align = link_to 'View Test File', test_file_question_path(question.id)
-              td.vert-align = link_to 'Edit', edit_question_path(question)
-              td.vert-align = link_to  raw('<strong>&times;</strong>'), question, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+              td.vert-align
+                = link_to 'View Test File', test_file_question_path(question.id)
+              td.vert-align
+                = link_to 'Edit', edit_question_path(question)
+              td.vert-align
+                = link_to  raw('<strong>&times;</strong>'), question, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
 
 .container
-    - if current_user && current_user.admin
-          br
-          a.btn.btn-success(href=new_question_path role='button')
-            | New Question
+  - if current_user && current_user.admin
+    br
+    a.btn.btn-success(href=new_question_path role='button')
+      | New Question
