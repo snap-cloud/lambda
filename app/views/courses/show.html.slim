@@ -1,5 +1,5 @@
 .container
-  h2 Course Details "#{@course.name}"
+  h2 "#{@course.name}" Details
   .col-md-9
     p
       strong Name
@@ -19,6 +19,7 @@
       = @course.consumer_secret
     p
       strong Configuration
+
     .table-responsive
       table.table.table-striped
         thead
@@ -34,5 +35,5 @@
                 = Course.VALID_CONFIG_OPTIONS[key.to_sym][:name]
               td.col-xs-6
                 = value
-    
-    = link_to 'Edit', edit_course_path(@course), class: 'btn btn-success'
+
+    = link_to 'Edit', edit_course_path(@course), class: 'btn btn-info'
