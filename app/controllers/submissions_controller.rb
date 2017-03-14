@@ -1,9 +1,10 @@
 class SubmissionsController < ApplicationController
+
   # GET /submissions/1
   def show
     set_submission
-    render '404' unless @submission
-    # error case for permissions
+    # TODO: better not found path.
+    redirect_to '/404' and return unless user_can_view?
 
     render xml: @submission.code_submission
   end
@@ -40,6 +41,13 @@ class SubmissionsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_submission
     @submission = Submission.find(params[:id])
+  end
+
+  def user_can_view?
+    return false unless current_user
+    return true if current_user.admin?
+    @submission.user_id == current_user.id ||
+      @submission.dce_lti_user_id == current_user.id
   end
 
   def submission_params
