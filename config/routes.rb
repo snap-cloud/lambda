@@ -9,8 +9,12 @@ Rails.application.routes.draw do
       post 'submission', to: 'questions#submit_grade'
       get 'starter-file', to: 'questions#starter_file'
       get 'test-file', to: 'questions#test_file'
+      get 'best_submission', to: 'questions#best_submission'
+      get 'previous_submission', to: 'questions#previous_submission'
     end
   end
+
+  resources :submissions
 
   # Oauth Account URLs
   get '/auth/:provider/callback', to: 'sessions#create'
