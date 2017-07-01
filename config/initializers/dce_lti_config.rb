@@ -32,7 +32,7 @@ DceLti::Engine.setup do |lti|
   # The consumer_secret and consumer_key should be a lambda that will be
   # evaluated in the context of your application. You might use a service
   # object or model proper to find key and secret pairs. Example:
-  lti.consumer_secret = ->(launch_params) {
+  lti.consumer_secret = -> (launch_params) {
     result = Course.find_by(consumer_key: launch_params[:oauth_consumer_key])
     if result.nil?
       (ENV['LTI_CONSUMER_SECRET'] || 'consumer_secret')
