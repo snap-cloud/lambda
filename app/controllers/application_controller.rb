@@ -11,24 +11,24 @@ class ApplicationController < ActionController::Base
   # The TP instance could be used from any controller
   # TODO: Store TP instance.
   def get_tool_provider
-    launch_params = session[:launch_params]
-    if launch_params
-      course = Course.find_by(consumer_key: launch_params[:oauth_consumer_key])
-      if !course
-        # TODO: render invalid, and display error.
-        return nil
-      end
-      IMS::LTI::ToolProvider.new(
-        course.consumer_key, course.consumer_secret, launch_params
-      )
-    else
-      return nil
-    end
+    @tool_provider ||= setup_tool_provider
   end
 
   private
 
+  def setup_tool_provider
+    launch_params = session[:launch_params]
+    return unless launch_params
+    course = Course.find_by(consumer_key: launch_params[:oauth_consumer_key])
+    return unless course # TODO: render invalid, and display error.
+    IMS::LTI::ToolProvider.new(
+      course.consumer_key, course.consumer_secret, launch_params
+    )
+  end
+
   def require_admin
+    return true if Rails.env.development?
+
     if !current_user || (current_user && !current_user.admin)
       flash[:error] = "Visiting '#{request.fullpath}' requires an administrator account"
       redirect_to '/' and return

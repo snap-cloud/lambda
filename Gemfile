@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby "2.3.3"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7'
+gem 'rails', '4.2.7.1'
 
 # Use Puma as the app server
 gem 'puma'
@@ -42,9 +42,11 @@ gem "newrelic_rpm", ">= 3.9.8"
 gem "rack-canonical-host"
 
 # User Accounts & LTI
+# TODO: Eventually remove this...2
 gem 'dce_lti', path: './dce-lti/'
 # Not using postgres due to Heroku's r/ow limit.
 gem 'redis-session-store'
+# TODO: OmniAuth?
 gem 'omniauth-google-oauth2'
 
 # Admin Dashboard-y Things
@@ -54,9 +56,16 @@ gem 'pghero' # Analyze DB performance.
 # SPECIFIC APIS BECAUSE EDUC APIS ARE HELL
 gem 'canvas-api'
 
+# INVESTIGATE:
+# Clientside validation for forms
+# gem 'jquery-validation-rails'
+# gem 'histogram'
+
+
 group :development do
   gem 'annotate'
 
+  gem 'foreman'
   gem "refills"
   gem "spring"
   gem "spring-commands-rspec"
@@ -94,10 +103,22 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "pry-byebug"
   gem "pry-rails"
+
+
+  gem 'jazz_fingers'
+
+  # Generate fake user data.
+  gem 'faker'
+
+  # gem 'rspec'
   gem "rspec-rails", "~> 3.4.0"
+
+  # Test / Code quality utils
+
 end
 
 group :test do
+  gem "capybara"
   # Note this requires qt on a mac
   # gem "capybara-webkit"
   gem "database_cleaner"
