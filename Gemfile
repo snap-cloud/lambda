@@ -57,7 +57,7 @@ gem 'canvas-api'
 group :development do
   gem 'annotate'
 
-  gem "refills"
+   gem "refills"
   gem "spring"
   gem "spring-commands-rspec"
 
@@ -98,6 +98,7 @@ group :development, :test do
 end
 
 group :test do
+  gem "capybara"
   # Note this requires qt on a mac
   # gem "capybara-webkit"
   gem "database_cleaner"
