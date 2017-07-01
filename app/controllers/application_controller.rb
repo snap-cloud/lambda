@@ -29,6 +29,8 @@ class ApplicationController < ActionController::Base
   private
 
   def require_admin
+    return if Rails.env == 'development'
+
     if !current_user || (current_user && !current_user.admin)
       flash[:error] = "Visiting '#{request.fullpath}' requires an administrator account"
       redirect_to '/' and return
