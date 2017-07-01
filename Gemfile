@@ -65,6 +65,7 @@ gem 'canvas-api'
 group :development do
   gem 'annotate'
 
+  gem 'foreman'
   gem "refills"
   gem "spring"
   gem "spring-commands-rspec"
