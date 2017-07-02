@@ -8,6 +8,8 @@
 #  consumer_key    :string
 #  consumer_secret :string
 #  configuration   :hstore
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #
