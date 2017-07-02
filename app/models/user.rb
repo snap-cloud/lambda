@@ -52,4 +52,11 @@ class User < ActiveRecord::Base
     user.save!
     user
   end
+  
+  def auth_methods
+    methods = []
+    methods << 'Google' if provider
+    methods << 'LTI' if lti_user_id
+    methods.join(', ')
+  end
 end
