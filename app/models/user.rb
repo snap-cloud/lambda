@@ -25,9 +25,7 @@
 class User < ActiveRecord::Base
   has_many :submissions
 
-  validates :lti_user_id,
-    uniqueness: true,
-    length: { maximum: 255 }
+  # validates :lti_user_id, uniqueness: true, length: { maximum: 255 }
 
   def roles=(roles)
     super roles.map{|role| role.downcase}
