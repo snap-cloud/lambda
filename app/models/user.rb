@@ -25,6 +25,18 @@
 class User < ActiveRecord::Base
   has_many :submissions
 
+  validates :lti_user_id,
+    uniqueness: true,
+    length: { maximum: 255 }
+
+  def roles=(roles)
+    super roles.map{|role| role.downcase}
+  end
+
+  def has_role?(role)
+    roles.include?(role.to_s.downcase)
+  end
+  
   def self.from_omniauth(auth_hash)
     user = find_or_create_by(
       uid: auth_hash['uid'],
