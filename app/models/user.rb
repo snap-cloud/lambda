@@ -21,6 +21,10 @@
 #  user_image                       :string
 #  roles                            :string           default([]), is an Array
 #
+# Indexes
+#
+#  index_users_on_lti_user_id  (lti_user_id) UNIQUE
+#
 
 class User < ActiveRecord::Base
   has_many :submissions

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170702042412) do
+ActiveRecord::Schema.define(version: 20170702050541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -157,5 +157,7 @@ ActiveRecord::Schema.define(version: 20170702042412) do
     t.string   "user_image"
     t.string   "roles",                            default: [],                 array: true
   end
+
+  add_index "users", ["lti_user_id"], name: "index_users_on_lti_user_id", unique: true, using: :btree
 
 end
