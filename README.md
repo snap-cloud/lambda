@@ -1,9 +1,9 @@
 # λ : lambda
-> TODO: CodeCov, CI, CodeClimate badges
-
 Lambda is an LTI app for autograding [Snap<em>!</em>][1] programs.
 
-It is currently in active development.
+λ maintains a database of questions and submissions, and will allow students to
+log in through LTI - which means that their scores can be saved to whatever
+LMS you're course is using, like Canvas or edX.
 
 [1]: http://snap.berkeley.edu
 
@@ -17,7 +17,15 @@ We have:
 
 ## LTI Overview
 
-## Configurations
+### Running in Development
+If you're developing against a public LMS, like a hosted edX course or Canvas
+instance, then you'll need ngrok or another tool to expose your dev environment
+to the internet. 
+
+The ngrok configuration is mostly setup, but you'll need an API key. Once that
+is set, you can use `./launch-lti` to get it running.
+
+### Configurations
 LTI Config TODO.
 
 * Launch URL: `https://lambda.cs10.org/lti/sessions`
@@ -35,7 +43,6 @@ None Yet...
 
 * Pass the tool 'public' information
 
-
 ---
 
 ## Cloning
@@ -45,8 +52,6 @@ If you've already cloned without `--recursive` do:
 
 * `git submodule init`
 * `git submodule update`
-
-
 
 ## Development Getting Started
 Once things are setup, use `./run` to launch Rails and start ngrok.
@@ -59,22 +64,12 @@ with the necessary dependencies to run and test this app:
 It assumes you have a machine equipped with Ruby, Postgres, etc. If not, set up
 your machine with `brew` (on a Mac).
 
-
-## Guidelines
-
-Use the following guides for getting things done, programming well, and
-programming in style.
-
-* [Protocol](http://github.com/thoughtbot/guides/blob/master/protocol)
-* [Best Practices](http://github.com/thoughtbot/guides/blob/master/best-practices)
-* [Style](http://github.com/thoughtbot/guides/blob/master/style)
-
 ---
 
 
 ## Requirements and Setup
 * Ruby version
-	* 2.3.0
+	* 2.3.3
 * System dependencies
 	* Postgres, qt, ngrok
 	* `brew install postgres qt`

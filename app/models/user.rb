@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   def has_role?(role)
     roles.include?(role.to_s.downcase)
   end
-  
+
   def self.from_omniauth(auth_hash)
     user = find_or_create_by(
       uid: auth_hash['uid'],
