@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170702000618) do
+ActiveRecord::Schema.define(version: 20170702042412) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
   enable_extension "hstore"
-  enable_extension "pg_stat_statements"
 
   create_table "blazer_audits", force: :cascade do |t|
     t.integer  "user_id"
@@ -59,11 +59,13 @@ ActiveRecord::Schema.define(version: 20170702000618) do
   end
 
   create_table "courses", force: :cascade do |t|
-    t.string "name"
-    t.string "url"
-    t.string "consumer_key"
-    t.string "consumer_secret"
-    t.hstore "configuration"
+    t.string   "name"
+    t.string   "url"
+    t.string   "consumer_key"
+    t.string   "consumer_secret"
+    t.hstore   "configuration"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "courses", ["name"], name: "index_courses_on_name", unique: true, using: :btree
