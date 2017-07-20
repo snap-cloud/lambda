@@ -1,9 +1,11 @@
+// TODO: Put this inline w/ Snap! init files.
 IDE_Morph.prototype.resourceURL = function () {
     var args = Array.prototype.slice.call(arguments, 0);
     return '/snap/' + args.join('/');
 };
 
-// TODO: Move this:
+// TODO: Move this to app JS code
+// Move AG stuff to ag repo
 function submitAutograderResults(ag_log) {
     console.log('submitting AG');
     var xml, score, results, ide;
@@ -35,13 +37,13 @@ function submitAutograderResults(ag_log) {
     }
     
     var formId = '#submission-form'; 
-    var dataForm = $(formId);
-    console.log('URL: ', dataForm.attr('action'));
+    var $form = $(formId);
+    console.log('URL: ', $form.attr('action'));
     // TODO: Switch this to be http://stackoverflow.com/a/6723501
-    var inputs = dataForm.find('input');
+    var inputs = $form.find('input');
     $.ajax({
         type: 'POST',
-        url: dataForm.attr('action'),
+        url: $form.attr('action'),
         data: {
             'score': score,
             'code_submission': xml,
