@@ -6,18 +6,18 @@ module DceLti
       end
     end
 
-    def get_tool_provider
-      puts 'Controller TP method'
-    end
+    # def get_tool_provider
+    #   puts 'Controller TP method'
+    # end
 
-    def current_user
-      @current_user ||=
-        if ENV['FAKE_USER_ID']
-          User.find_by(id: ENV['FAKE_USER_ID'])
-        else
-          User.find_by(id: session[:current_user_id])
-        end
-    end
+    # def current_user
+    #   @current_user ||=
+    #     if ENV['FAKE_USER_ID']
+    #       User.find_by(id: ENV['FAKE_USER_ID'])
+    #     else
+    #       User.find_by(id: session[:current_user_id])
+    #     end
+    # end
 
     def cookieless_session?
       cookie = env.fetch('HTTP_COOKIE', '')

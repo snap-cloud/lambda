@@ -1,0 +1,4 @@
+# Start a tunnel
+bin/ngrok start -config=$HOME/.ngrok2/ngrok.yml -config=ngrok.yml rails-web
+# Show an LTI Instance
+open https://bcourses.berkeley.edu/courses/1268501/assignments/7182763

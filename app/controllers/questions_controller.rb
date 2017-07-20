@@ -95,7 +95,7 @@ class QuestionsController < ApplicationController
 
   # LIT Submit grade
   # POST /questions/1/submission
-  # TODO: Move to a submission model
+  # TODO: Move to a submission controller
   def submit_grade
     @provider ||= get_tool_provider
     score = normalize_score(params[:score], @question.points)
