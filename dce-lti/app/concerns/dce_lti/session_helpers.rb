@@ -1,9 +1,13 @@
 module DceLti
   module SessionHelpers
     def valid_lti_request?(request)
-      tool_provider.valid_request?(request) &&
-        Nonce.valid?(tool_provider.oauth_nonce) &&
-        TimestampValidator.valid?(tool_provider.oauth_timestamp)
+      tp_valid? = tool_provider.valid_request?(request)
+      puts "Tool Provider Valid? #{tp_valid?}"
+      nonce_valid? = Nonce.valid?(tool_provider.oauth_nonce)
+      puts "Nonce Valid? #{nonce_valid?}"
+      timestamp_valid? = TimestampValidator.valid?(tool_provider.oauth_timestamp)
+      puts "Timestamp Valid? #{timestamp_valid?}"
+      tp_valid? && nonce_valid? && timestamp_valid?
     end
 
     def launch_params
