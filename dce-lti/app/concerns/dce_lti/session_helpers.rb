@@ -1,7 +1,11 @@
 module DceLti
   module SessionHelpers
     def valid_lti_request?(request)
-      tp_valid = tool_provider.valid_request?(request)
+      puts "Request #{request}"
+      puts "Consumer Key #{consumer_key}"
+      puts "Consumer Secret #{consumer_secret}"
+      #binding.pry
+      tp_valid = tool_provider.valid_request!(request)
       puts "Tool Provider Valid? #{tp_valid}"
       nonce_valid = Nonce.valid?(tool_provider.oauth_nonce)
       puts "Nonce Valid? #{nonce_valid}"
