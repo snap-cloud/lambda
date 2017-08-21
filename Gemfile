@@ -42,9 +42,10 @@ gem "newrelic_rpm", ">= 3.9.8"
 gem "rack-canonical-host"
 
 # User Accounts & LTI
-# TODO: Eventually remove this...2
-gem 'dce_lti', path: './dce-lti/'
-# Not using postgres due to Heroku's r/ow limit.
+gem 'ims-lti'
+gem 'rack-plastic'
+gem 'p3p'
+# LTI data is stored in a session, and is too big for a cookie
 gem 'redis-session-store'
 # TODO: OmniAuth?
 gem 'omniauth-google-oauth2'
