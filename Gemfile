@@ -37,9 +37,6 @@ gem 'uglifier', '>= 1.3.0'
 # TODO: need this?
 gem "flutie"
 gem "high_voltage"
-gem "newrelic_rpm", ">= 3.9.8"
-
-gem "rack-canonical-host"
 
 # User Accounts & LTI
 gem 'ims-lti'
@@ -67,7 +64,7 @@ group :development do
   gem 'annotate'
 
   gem 'foreman'
-  gem "refills"
+  # gem "refills"
   gem "spring"
   gem "spring-commands-rspec"
 
@@ -105,7 +102,6 @@ group :development, :test do
   gem "pry-byebug"
   gem "pry-rails"
 
-
   gem 'jazz_fingers'
 
   # Generate fake user data.
@@ -122,18 +118,22 @@ group :test do
   gem "capybara"
   # Note this requires qt on a mac
   # gem "capybara-webkit"
-  gem "database_cleaner"
+  # gem "database_cleaner"
   gem "formulaic"
   gem "launchy"
   gem "shoulda-matchers"
   gem "simplecov", require: false
-  gem "timecop"
-  gem "webmock"
+  # gem "timecop"
+  # gem "webmock"
 end
 
 group :staging, :production do
+  gem "newrelic_rpm", ">= 3.9.8"
+
   gem "rails_stdout_logging"
   gem "rack-timeout"
   # For Heroku:
   gem "rails_12factor"
+  # Redirects for Heroku
+  gem "rack-canonical-host"
 end

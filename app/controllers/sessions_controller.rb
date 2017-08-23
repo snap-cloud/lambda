@@ -3,9 +3,12 @@ class SessionsController < ApplicationController
 
   # include DceLti::SessionHelpers
   # TODO: LTI thing, refactor
-  # skip_before_filter :create, :verify_authenticity_token, :authenticate_via_lti
+  skip_before_filter :create, :verify_authenticity_token #, :authenticate_via_lti
 
   def create
+    flash[:success] = "Testing"
+    redirect_to root_path and return
+
     auth_hash = request.env['omniauth.auth']
 
     begin

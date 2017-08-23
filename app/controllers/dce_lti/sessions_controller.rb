@@ -7,6 +7,11 @@ module DceLti
     skip_before_filter :verify_authenticity_token, :authenticate_via_lti
 
     def create
+      puts '\n\n\n'
+      puts '=='*40
+      puts 'CALLED LTI SESSIONS CREATE'
+      puts '=='*40
+      puts '\n\n\n'
       session[:launch_params] = launch_params
       if valid_lti_request?(request)
         user = UserInitializer.find_from(tool_provider)
