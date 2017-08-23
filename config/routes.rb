@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   scope '/lti' do
+    mount DceLti::Engine, at: '/'
     # resources :sessions, only: [:create] do
     #   collection do
     #     get :invalid
@@ -23,16 +24,6 @@ Rails.application.routes.draw do
     # end
     #
     # resources :configs, only: [:index]
-
-    DceLti::Engine.routes.draw do
-      resources :sessions, only: [:create] do
-        collection do
-          get :invalid
-        end
-      end
-
-      resources :configs, only: [:index]
-    end
   end
 
   resources :courses
