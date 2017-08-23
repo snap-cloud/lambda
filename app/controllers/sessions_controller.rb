@@ -1,9 +1,9 @@
 class SessionsController < ApplicationController
   # Based heavily on: http://www.sitepoint.com/rails-authentication-oauth-2-0-omniauth/
 
-  include SessionHelpers
+  # include DceLti::SessionHelpers
   # TODO: LTI thing, refactor
-  skip_before_filter :create, :verify_authenticity_token, :authenticate_via_lti
+  # skip_before_filter :create, :verify_authenticity_token, :authenticate_via_lti
 
   def create
     auth_hash = request.env['omniauth.auth']
