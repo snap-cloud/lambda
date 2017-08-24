@@ -19,7 +19,8 @@ h2
       - User.includes(:submissions).all.each do |user|
         tr
           td = user.id
-          td =Digest::MD5.hexdigest(user.name || '')
+          / td =Digest::MD5.hexdigest(user.name || '')
+          td =user.name
           //td =Digest::MD5.hexdigest(user.email || '')
           td =user.submissions.map(&:question_id).uniq.count
           td =user.submissions.count
