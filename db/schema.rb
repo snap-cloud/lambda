@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170824054417) do
+ActiveRecord::Schema.define(version: 20170702051347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,14 @@ ActiveRecord::Schema.define(version: 20170824054417) do
 
   add_index "courses", ["name"], name: "index_courses_on_name", unique: true, using: :btree
 
+  create_table "dce_lti_nonces", force: :cascade do |t|
+    t.string   "nonce"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "dce_lti_nonces", ["nonce"], name: "index_dce_lti_nonces_on_nonce", unique: true, using: :btree
+
   create_table "dce_lti_users", force: :cascade do |t|
     t.string   "lti_user_id"
     t.string   "lis_person_contact_email_primary"
@@ -81,14 +89,6 @@ ActiveRecord::Schema.define(version: 20170824054417) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "nonces", force: :cascade do |t|
-    t.string   "nonce"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "nonces", ["nonce"], name: "index_nonces_on_nonce", unique: true, using: :btree
 
   create_table "pghero_query_stats", force: :cascade do |t|
     t.text     "database"
