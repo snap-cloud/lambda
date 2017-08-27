@@ -21,6 +21,11 @@ require 'digest'
 
 class Course < ActiveRecord::Base
   after_create :after_initialize
+
+  validates_presence_of :name, unique: true
+  validates_presence_of :consumer_key, unique: true
+  validates_presence_of :url
+
   
   # This determines the paramters and methods for update course attributes
   @@VALID_CONFIG_OPTIONS = {
@@ -80,8 +85,4 @@ class Course < ActiveRecord::Base
   def self.VALID_CONFIG_OPTIONS
     @@VALID_CONFIG_OPTIONS
   end
-
-  validates_presence_of :name, unique: true
-  validates_presence_of :consumer_key, unique: true
-  validates_presence_of :url
 end

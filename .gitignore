@@ -28,10 +28,13 @@ public/assets/*
 node_modules
 
 # Don't commit the redis db
-dump.rdb
+*.rdb
 
 # Don't commit temp sql dumps
 *.dump
 
 # Don't commit w/ an authtoken
 ngrok.yml
+
+# From the db clone command
+wget-log*

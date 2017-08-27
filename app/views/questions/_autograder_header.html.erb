@@ -11,7 +11,6 @@ body {
   font-weight: bold;
 }
 
-
 span.question-title {
   font-weight: bold;
   font-family: serif;
@@ -44,20 +43,21 @@ span.question-title {
                 <span class="caret"></span>
                 <span class="sr-only">Toggle AG Menu</span>
               </button>
-              <ul class="dropdown-menu" role="menu" aria-labeledby="ag-controls">
+              <ul class="dropdown-menu"
+                  role="menu" aria-labeledby="ag-controls">
                 <li>
-                  <a href="#" id="show-results-button" onclick="openResults();">
+                  <a href="#" id="show-results-button" onclick="openResults()">
                     Show Test Results
                   </a>
                 </li>
                 <li class="divider" role="separator"></li>
                 <li class="disabled">
-                  <a href="#" id="undo-button">
+                  <a href="#" id="undo-button" disabled>
                     Revert to Last Attempt
                   </a>
                 </li>
                 <li class="disabled">
-                  <a href="#" id="revert-button">
+                  <a href="#" id="revert-button" disabled>
                     Reset to Best Attempt
                   </a>
                 </li>
@@ -69,9 +69,7 @@ span.question-title {
                 </li>
                 <li class="divider" role="separator"></li>
                 <li class="disabled">
-                  <a href="#" onclick="openPopup();" id="help-button">
-                    Help
-                  </a>
+                  <a href="#" onclick="openPopup()" id="help-button">Help</a>
                 </li>
               </ul>
             </div> <!-- /dropdown -->
@@ -79,7 +77,8 @@ span.question-title {
           <div class="btn-group">
             <!-- Connect to 'Show Feedback' thing that doesn't run tests. -->
             <button class="btn btn-default navbar-btn tips-msg"
-                    disabled="disabled" id="numtips">
+                    id="numtips"
+                    onClick="openResults()">
               <span class="badge">0</span> Tips
             </button>
           </div>
