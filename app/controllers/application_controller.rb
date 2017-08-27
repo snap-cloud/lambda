@@ -4,6 +4,19 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id])
+  end
+
+  def require_admin
+    return true if Rails.env.development?
+
+    if !current_user || (current_user && !current_user.admin)
+      flash[:error] = "Visiting '#{request.fullpath}' requires an administrator account"
+      redirect_to '/' and return
+    end
+  end
+
   # We store the original request parameters in the session for use later on.
   # This allows us to re-create a tool provider instance whenever we need.
   # The TP instance could be used from any controller
@@ -30,22 +43,4 @@ class ApplicationController < ActionController::Base
       course.consumer_key, course.consumer_secret, launch_params
     )
   end
-
-  def require_admin
-    return true if Rails.env.development?
-
-    if !current_user || (current_user && !current_user.admin)
-      flash[:error] = "Visiting '#{request.fullpath}' requires an administrator account"
-      redirect_to '/' and return
-    end
-  end
-
-  helper_method :require_admin
-
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
-  end
-
-  helper_method :current_user
-
 end
