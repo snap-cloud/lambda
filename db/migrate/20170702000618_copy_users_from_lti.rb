@@ -10,7 +10,7 @@ class CopyUsersFromLti < ActiveRecord::Migration
   |
   def change
     DceLti::User.find_each do |lti_user|
-      user = User.find_by_email(lti_user.lis_person_contact_email_primary)
+      user = User.find_by(lti_user_id: lti_user.id)
       user ||= User.create
       # Yes, these are stored twice. This will be fixed later.
       user.email = lti_user.lis_person_contact_email_primary
