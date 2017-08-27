@@ -6,9 +6,6 @@ class SessionsController < ApplicationController
   skip_before_filter :create, :verify_authenticity_token #, :authenticate_via_lti
 
   def create
-    flash[:success] = "Testing"
-    redirect_to root_path and return
-
     auth_hash = request.env['omniauth.auth']
 
     begin
@@ -34,16 +31,16 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
-  def create_lti_session
-    session[:launch_params] = launch_params
-    if valid_lti_request?(request)
-      user = UserInitializer.find_from(tool_provider)
-      session[:current_user_id] = user.id
-      session.merge!(captured_attributes_from(tool_provider))
-      redirect_to redirect_after_successful_auth
-    else
-      puts 'SESSION ERROR'
-      render :invalid
-    end
-  end
+  # def create_lti_session
+  #   session[:launch_params] = launch_params
+  #   if valid_lti_request?(request)
+  #     user = UserInitializer.find_from(tool_provider)
+  #     session[:current_user_id] = user.id
+  #     session.merge!(captured_attributes_from(tool_provider))
+  #     redirect_to redirect_after_successful_auth
+  #   else
+  #     puts 'SESSION ERROR'
+  #     render :invalid
+  #   end
+  # end
 end
