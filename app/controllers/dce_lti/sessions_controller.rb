@@ -7,11 +7,6 @@ module DceLti
     skip_before_filter :verify_authenticity_token, :authenticate_via_lti
 
     def create
-      puts '\n\n\n'
-      puts '=='*40
-      puts 'CALLED LTI SESSIONS CREATE'
-      puts '=='*40
-      puts '\n\n\n'
       session[:launch_params] = launch_params
       if valid_lti_request?(request)
         user = UserInitializer.find_from(tool_provider)
@@ -19,7 +14,6 @@ module DceLti
         session.merge!(captured_attributes_from(tool_provider))
         redirect_to redirect_after_successful_auth
       else
-        puts 'SESSION ERROR'
         render 'sessions/invalid'
       end
     end

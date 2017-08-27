@@ -4,9 +4,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  # Session helpers give usaccess to consumer_key and consumer_secret
-  # include DceLti::SessionHelpers
-
   # We store the original request parameters in the session for use later on.
   # This allows us to re-create a tool provider instance whenever we need.
   # The TP instance could be used from any controller
