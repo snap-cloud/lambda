@@ -15,7 +15,17 @@ Rails.application.routes.draw do
   # Oauth Account URLs
   get '/auth/:provider/callback', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-  mount DceLti::Engine => '/lti'
+
+  # mount DceLti::Engine, at: '/lti'
+  scope '/lti',  module: 'dce_lti' do
+    resources :sessions, only: [:create] do
+      collection do
+        get :invalid
+      end
+    end
+
+    resources :configs, only: [:index]
+  end
 
   resources :courses
 

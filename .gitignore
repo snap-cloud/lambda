@@ -35,3 +35,6 @@ node_modules
 
 # Don't commit w/ an authtoken
 ngrok.yml
+
+# From the db clone command
+wget-log*

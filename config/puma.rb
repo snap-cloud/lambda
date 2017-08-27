@@ -1,5 +1,9 @@
 # https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
 
+# if Rails.env.development?
+#   worker_timeout 360000
+# end
+
 # The environment variable WEB_CONCURRENCY may be set to a default value based
 # on dyno size. To manually configure this value use heroku config:set
 # WEB_CONCURRENCY.

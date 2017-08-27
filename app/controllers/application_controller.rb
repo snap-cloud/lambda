@@ -1,10 +1,8 @@
 class ApplicationController < ActionController::Base
+  helper :all
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-
-  # Session helpers give usaccess to consumer_key and consumer_secret
-  include DceLti::SessionHelpers
 
   # We store the original request parameters in the session for use later on.
   # This allows us to re-create a tool provider instance whenever we need.
@@ -12,6 +10,13 @@ class ApplicationController < ActionController::Base
   # TODO: Store TP instance.
   def get_tool_provider
     @tool_provider ||= setup_tool_provider
+  end
+
+  # TODO: Better check for LTI?
+  def authenticate_via_lti
+    if ! current_user
+      redirect_to Engine.routes.url_helpers.invalid_sessions_path
+    end
   end
 
   private
