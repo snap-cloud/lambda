@@ -1,9 +1,13 @@
 module DceLti
   module SessionHelpers
     def valid_lti_request?(request)
+      puts 'Valid 0'
       tp_valid = tool_provider.valid_request?(request)
+      puts "Valid 1 #{tp_valid}"
       nonce_valid = Nonce.valid?(tool_provider.oauth_nonce)
+      puts "Valid 2 #{nonce_valid}"
       timestamp_valid = TimestampValidator.valid?(tool_provider.oauth_timestamp)
+      puts "Valid 3 #{timestamp_valid}"
       tp_valid && nonce_valid && timestamp_valid
     end
 
@@ -20,16 +24,19 @@ module DceLti
     end
 
     def find_from_config(attribute)
-      value = Engine.config.send(attribute)
-      if value.respond_to?(:call)
-        value.call(launch_params)
-      else
-        value
-      end
+      lti_course.send(attribute)
     end
 
     def redirect_after_successful_auth
       Engine.config.redirect_after_successful_auth.call(self)
+    end
+
+    def lti_course
+      return @lti_course if defined? @lti_course
+      @lti_course = Course.find_by(
+        consumer_key: launch_params[:oauth_consumer_key]
+      )
+      # TODO: Error if no course?
     end
 
     def tool_provider
