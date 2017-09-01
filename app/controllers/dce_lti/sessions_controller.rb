@@ -14,6 +14,11 @@ module DceLti
         session.merge!(captured_attributes_from(tool_provider))
         redirect_to redirect_after_successful_auth
       else
+        @errors = []
+        if current_user&.admin?
+          @errors << "Consumer Key: #{consumer_key}"
+          @errors << "Consumer Secret: #{consumer_secret}"
+        end
         render 'sessions/invalid'
       end
     end

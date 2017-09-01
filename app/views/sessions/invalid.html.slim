@@ -2,3 +2,8 @@ h2
   | Invalid Session
 p
   | Oops. You were unable to be logged in.
+
+- if current_user&.admin?
+  h2 Admin Error Info
+  - for error in (@errors || [])
+    p = error
