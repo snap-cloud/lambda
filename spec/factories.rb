@@ -1,4 +1,4 @@
-FactoryGirl.define do  factory :submission do
+FactoryBot.define do  factory :submission do
     question_id 1
 score 1.5
 code_submission "MyString"
