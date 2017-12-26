@@ -39,7 +39,7 @@ gem "flutie"
 gem "high_voltage"
 
 # User Accounts & LTI
-gem 'oauth'
+gem 'oauth', '0.5.2'
 gem 'ims-lti', '< 2'
 gem 'rack-plastic'
 gem 'p3p'
