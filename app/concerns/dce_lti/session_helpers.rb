@@ -2,7 +2,7 @@ module DceLti
   module SessionHelpers
     def valid_lti_request?(request)
       puts 'Valid 0'
-      tp_valid = tool_provider.valid_request?(request)
+      tp_valid = tool_provider.valid_request!(request)
       puts "Valid 1 #{tp_valid}"
       nonce_valid = Nonce.valid?(tool_provider.oauth_nonce)
       puts "Valid 2 #{nonce_valid}"
