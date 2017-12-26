@@ -23,6 +23,7 @@ class Nonce < ActiveRecord::Base
       true
     rescue => e
       Rails.logger.warn(%Q|Creating nonce failed: "#{nonce}"|)
+      Rails.logger.warn(e)
       false
     end
   end

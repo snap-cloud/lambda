@@ -44,7 +44,7 @@ module DceLti
       puts 'key'
       puts consumer_key
       puts 'secret'
-      consumer_secret
+      puts consumer_secret
       puts 'params'
       puts launch_params
 
