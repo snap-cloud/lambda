@@ -54,7 +54,6 @@ GEM
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
-    bindata (2.4.1)
     binding_of_caller (0.7.3)
       debug_inspector (>= 0.0.1)
     blazer (1.8.0)
@@ -131,8 +130,6 @@ GEM
       i18n (>= 0.7)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
-    faraday_middleware (0.12.2)
-      faraday (>= 0.7.4, < 1.0)
     fattr (2.3.0)
     ffi (1.9.18)
     flay (2.10.0)
@@ -165,13 +162,9 @@ GEM
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
-    ims-lti (2.2.2)
-      addressable (~> 2.5, >= 2.5.1)
-      builder (~> 3.2)
-      faraday (~> 0.8)
-      faraday_middleware (~> 0.8)
-      json-jwt (~> 1.7)
-      simple_oauth (= 0.2)
+    ims-lti (1.2.2)
+      builder
+      oauth (>= 0.4.5, < 0.6)
     jazz_fingers (4.0.1)
       awesome_print (~> 1.6)
       hirb (~> 0.7)
@@ -180,11 +173,6 @@ GEM
       pry-coolline (~> 0.2)
       pry-doc (~> 0.6)
     json (2.1.0)
-    json-jwt (1.8.3)
-      activesupport
-      bindata
-      securecompare
-      url_safe_base64
     json_pure (2.1.0)
     jwt (1.5.6)
     launchy (2.4.3)
@@ -231,6 +219,7 @@ GEM
     newrelic_rpm (4.7.1.340)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
+    oauth (0.5.4)
     oauth2 (1.4.0)
       faraday (>= 0.8, < 0.13)
       jwt (~> 1.0)
@@ -386,11 +375,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    securecompare (1.0.0)
     sexp_processor (4.10.0)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
-    simple_oauth (0.2.0)
     simplecov (0.15.1)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -441,7 +428,6 @@ GEM
       equalizer (~> 0.0.9)
       parser (>= 2.3.1.2, < 2.5)
       procto (~> 0.0.2)
-    url_safe_base64 (0.2.2)
     xpath (2.1.0)
       nokogiri (~> 1.3)
     yard (0.9.12)
@@ -470,11 +456,12 @@ DEPENDENCIES
   formulaic
   gon
   high_voltage
-  ims-lti
+  ims-lti (< 2)
   jazz_fingers
   launchy
   metric_fu
   newrelic_rpm (>= 3.9.8)
+  oauth
   omniauth-google-oauth2
   p3p
   pg
@@ -503,7 +490,7 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
 
 RUBY VERSION
-   ruby 2.3.3p222
+   ruby 2.5.0p0
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
