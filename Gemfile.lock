@@ -219,7 +219,7 @@ GEM
     newrelic_rpm (4.7.1.340)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
-    oauth (0.5.4)
+    oauth (0.5.2)
     oauth2 (1.4.0)
       faraday (>= 0.8, < 0.13)
       jwt (~> 1.0)
@@ -461,7 +461,7 @@ DEPENDENCIES
   launchy
   metric_fu
   newrelic_rpm (>= 3.9.8)
-  oauth
+  oauth (= 0.5.2)
   omniauth-google-oauth2
   p3p
   pg (= 0.20.0)

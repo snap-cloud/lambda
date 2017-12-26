@@ -1,4 +1,4 @@
-require 'oauth/request_proxy/action_controller_request'
+require 'oauth/request_proxy/rack_request'
 
 module DceLti
   class SessionsController < ApplicationController
