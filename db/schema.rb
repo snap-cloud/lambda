@@ -90,6 +90,14 @@ ActiveRecord::Schema.define(version: 20170824054417) do
     t.datetime "updated_at"
   end
 
+  create_table "nonces", force: :cascade do |t|
+    t.string   "nonce"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "nonces", ["nonce"], name: "index_nonces_on_nonce", unique: true, using: :btree
+
   create_table "pghero_query_stats", force: :cascade do |t|
     t.text     "database"
     t.text     "query"

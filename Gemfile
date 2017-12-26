@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.5.0"
+ruby "2.4.3"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.10'
@@ -9,7 +9,7 @@ gem 'rails', '4.2.10'
 gem 'puma'
 
 # Always use postgres as the db
-gem 'pg'
+gem 'pg', '0.20.0'
 
 # Frontend Utilities
 # Use SCSS for stylesheets
