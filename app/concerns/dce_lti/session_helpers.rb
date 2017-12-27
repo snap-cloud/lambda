@@ -2,7 +2,22 @@ module DceLti
   module SessionHelpers
     def valid_lti_request?(request)
       puts 'Valid 0'
+      puts 'REQUEST'
+      puts request
+      puts request.methods
+      puts 'TRY OAUTH'
+      oauthSig = OAuth::Signature.build(request, :consumer_secret => @consumer_secret)
+      puts oauthSig
+      puts 'Verifying....'
+      puts oauthSig.verify()
+      begin
       tp_valid = tool_provider.valid_request!(request)
+      rescue Exception => e
+        puts 'ERROR: '
+        puts e
+        puts e.message
+        puts e.backtrace.inspect
+      end
       puts "Valid 1 #{tp_valid}"
       nonce_valid = Nonce.valid?(tool_provider.oauth_nonce)
       puts "Valid 2 #{nonce_valid}"
@@ -40,14 +55,6 @@ module DceLti
     end
 
     def tool_provider
-      puts 'Getting tool provider'
-      puts 'key'
-      puts consumer_key
-      puts 'secret'
-      puts consumer_secret
-      puts 'params'
-      puts launch_params
-
       @tool_provider ||= IMS::LTI::ToolProvider.new(
         consumer_key, consumer_secret, launch_params
       )

@@ -1,3 +1,8 @@
+require 'oauth/request_proxy/rack_request'
+
+OAUTH_10_SUPPORT = true
+
+# TODO: Move this logic to LTI controller.
 DceLti::Engine.setup do |lti|
   # "provider_*" attributes are used to describe this tool to the consumer,
   # where "consumer" is an LMS like Canvas. The defaults are below, uncomment
