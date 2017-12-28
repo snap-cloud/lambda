@@ -3,10 +3,13 @@ module DceLti
     def valid_lti_request?(request)
       puts 'Valid 0'
       puts 'REQUEST'
-      puts request
-      puts request.methods
+      puts request.body.to_json
+      # puts 'REQUEST BASE SIG'
+      # puts request.signature_base_string
+      puts 'REQUEST SIGNATURE'
+      puts request[:oauth_signature]
       puts 'TRY OAUTH'
-      oauthSig = OAuth::Signature.build(request, :consumer_secret => @consumer_secret)
+      oauthSig = OAuth::Signature.build(request, consumer_secret: consumer_secret)
       puts oauthSig
       puts 'Verifying....'
       puts oauthSig.verify()
@@ -38,6 +41,7 @@ module DceLti
       find_from_config(:consumer_secret)
     end
 
+    # TODO: Clean this up / replace with just lti_course
     def find_from_config(attribute)
       lti_course.send(attribute)
     end
@@ -47,6 +51,7 @@ module DceLti
     end
 
     def lti_course
+      puts 'Called LTI Course'
       return @lti_course if defined? @lti_course
       @lti_course = Course.find_by(
         consumer_key: launch_params[:oauth_consumer_key]

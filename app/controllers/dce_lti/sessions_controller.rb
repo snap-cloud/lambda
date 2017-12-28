@@ -1,5 +1,3 @@
-require 'oauth/request_proxy/rack_request'
-
 module DceLti
   class SessionsController < ApplicationController
     include SessionHelpers
@@ -9,6 +7,7 @@ module DceLti
     def create
       puts "Create 0"
       session[:launch_params] = launch_params
+      puts launch_params
       puts "Session"
       if valid_lti_request?(request)
         puts "Valid true"

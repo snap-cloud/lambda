@@ -20,6 +20,7 @@ DceLti::Engine.setup do |lti|
   # The default post-auth redirect includes the session key and session id so
   # that we can instantiate a successful cookieless session if needed.
   lti.redirect_after_successful_auth = ->(controller) {
+    puts 'Called Redirect from config'
     session_key_name = Rails.application.config.session_options[:key]
     if controller.params[:question_id]
       Rails.application.routes.url_helpers.question_path(
@@ -38,6 +39,7 @@ DceLti::Engine.setup do |lti|
   # evaluated in the context of your application. You might use a service
   # object or model proper to find key and secret pairs. Example:
   lti.consumer_secret = -> (launch_params) {
+    puts 'Called Secret from config...'
     result = Course.find_by(consumer_key: launch_params[:oauth_consumer_key])
     if result.nil?
       (ENV['LTI_CONSUMER_SECRET'] || 'consumer_secret')
@@ -45,7 +47,9 @@ DceLti::Engine.setup do |lti|
       result.consumer_secret
     end
   }
+
   lti.consumer_key = ->(launch_params) {
+    puts 'Called consumer key from config'
     result = Course.find_by(consumer_key: launch_params[:oauth_consumer_key])
     if result.nil?
       (ENV['LTI_CONSUMER_KEY'] || 'consumer_key')
