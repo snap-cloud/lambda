@@ -461,7 +461,6 @@ DEPENDENCIES
   launchy
   metric_fu
   newrelic_rpm (>= 3.9.8)
-  oauth (= 0.5.2)
   omniauth-google-oauth2
   p3p
   pg (= 0.20.0)
