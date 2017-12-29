@@ -11,9 +11,10 @@ module DceLti
       puts 'REQUEST SIGNATURE'
       puts request[:oauth_signature]
       puts 'TRY OAUTH'
-      binding.pry
+      # binding.pry
       oauthSig = OAuth::Signature.build(request, consumer_secret: consumer_secret)
       puts oauthSig
+      puts oauthSig.signature
       puts 'Verifying....'
       puts oauthSig.verify()
       begin
