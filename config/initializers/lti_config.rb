@@ -34,32 +34,6 @@ DceLti::Engine.setup do |lti|
     end
   }
 
-
-  # The consumer_secret and consumer_key should be a lambda that will be
-  # evaluated in the context of your application. You might use a service
-  # object or model proper to find key and secret pairs. Example:
-  lti.consumer_secret = -> (launch_params) {
-    puts 'Called Secret from config...'
-    result = Course.find_by(consumer_key: launch_params[:oauth_consumer_key])
-    if result.nil?
-      (ENV['LTI_CONSUMER_SECRET'] || 'consumer_secret')
-    else
-      result.consumer_secret
-    end
-  }
-
-  lti.consumer_key = ->(launch_params) {
-    puts 'Called consumer key from config'
-    result = Course.find_by(consumer_key: launch_params[:oauth_consumer_key])
-    if result.nil?
-      (ENV['LTI_CONSUMER_KEY'] || 'consumer_key')
-    else
-      result.consumer_key
-    end
-  }
-
-  # Simple function to pass all keys to the next page
-  # TODO: This is only for testing, oauth data should be filtered.
   lti.copy_launch_attributes_to_session = %w|
   resource_link_title
   resource_link_description
@@ -76,8 +50,6 @@ DceLti::Engine.setup do |lti|
   tool_consumer_instance_contact_email
   lis_outcome_service_url
   |
-  #   ext_outcome_data_values_accepted
-
 
   # `lti.copy_launch_attributes_to_session` is an array of attributes to copy
   # to the default rails session from the IMS::LTI::ToolProvider instance after

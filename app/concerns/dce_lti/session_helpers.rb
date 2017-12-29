@@ -1,14 +1,17 @@
+# require 'oauth/request_proxy/rack_request'
+
 module DceLti
   module SessionHelpers
     def valid_lti_request?(request)
       puts 'Valid 0'
       puts 'REQUEST'
-      puts request.body.to_json
+      puts request.body.to_yaml
       # puts 'REQUEST BASE SIG'
       # puts request.signature_base_string
       puts 'REQUEST SIGNATURE'
       puts request[:oauth_signature]
       puts 'TRY OAUTH'
+      binding.pry
       oauthSig = OAuth::Signature.build(request, consumer_secret: consumer_secret)
       puts oauthSig
       puts 'Verifying....'
@@ -17,9 +20,13 @@ module DceLti
       tp_valid = tool_provider.valid_request!(request)
       rescue Exception => e
         puts 'ERROR: '
-        puts e
-        puts e.message
+        # puts e.message
+        error = OAuth::Unauthorized.new(request)
+        # binding.pry
+        @errors ||= []
+        @errors.push(e.backtrace.inspect)
         puts e.backtrace.inspect
+        return false
       end
       puts "Valid 1 #{tp_valid}"
       nonce_valid = Nonce.valid?(tool_provider.oauth_nonce)
@@ -51,10 +58,10 @@ module DceLti
     end
 
     def lti_course
-      puts 'Called LTI Course'
       return @lti_course if defined? @lti_course
+      puts 'Called LTI Course'
       @lti_course = Course.find_by(
-        consumer_key: launch_params[:oauth_consumer_key]
+        consumer_key: params[:oauth_consumer_key]
       )
       # TODO: Error if no course?
     end
