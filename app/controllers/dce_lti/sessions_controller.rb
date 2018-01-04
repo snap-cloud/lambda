@@ -6,8 +6,13 @@ module DceLti
 
     def create
       puts "Create 0"
+      puts "LAUNCH PARAMS"
       session[:launch_params] = launch_params
       puts launch_params
+      puts "PARAMS KEYS"
+      puts params.keys
+      puts "LAUNCH PARAMS KEYS"
+      puts launch_params.keys
       puts "Session"
       if valid_lti_request?(request)
         puts "Valid true"
