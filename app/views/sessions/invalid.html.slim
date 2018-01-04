@@ -8,10 +8,10 @@ p
   - for error in (@errors || [])
     p = error
     
-  h2 Params
+  h3 Params
   table.table.table-striped
     tbody
-      - for key in params
+      - for param in params
         tr
-          th = key
-          td = params[key]
+          th = param[0]
+          td = param[1]

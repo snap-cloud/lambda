@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(version: 20170824054417) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
   enable_extension "hstore"
 
@@ -68,14 +69,6 @@ ActiveRecord::Schema.define(version: 20170824054417) do
   end
 
   add_index "courses", ["name"], name: "index_courses_on_name", unique: true, using: :btree
-
-  create_table "dce_lti_nonces", force: :cascade do |t|
-    t.string   "nonce"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "dce_lti_nonces", ["nonce"], name: "index_dce_lti_nonces_on_nonce", unique: true, using: :btree
 
   create_table "dce_lti_users", force: :cascade do |t|
     t.string   "lti_user_id"
