@@ -7,3 +7,11 @@ p
   h2 Admin Error Info
   - for error in (@errors || [])
     p = error
+    
+  h2 Params
+  table.table.table-striped
+    tbody
+      - for key in params
+        tr
+          th = key
+          td = params[key]
