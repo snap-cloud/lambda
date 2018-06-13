@@ -3,8 +3,8 @@
 module DceLti
   module SessionHelpers
     def valid_lti_request?(request)
-        binding.pry
-      puts 'Valid 0'
+      # binding.pry
+      puts 'Valid_lti_request 0'
       puts 'REQUEST SIGNATURE'
       puts request[:oauth_signature]
       puts 'TRY OAUTH'
@@ -18,6 +18,7 @@ module DceLti
       tp_valid = tool_provider.valid_request!(request)
       rescue Exception => e
         puts 'ERROR: '
+        puts e
         # puts e.message
         error = OAuth::Unauthorized.new(request)
         # binding.pry
@@ -56,9 +57,8 @@ module DceLti
     end
 
     def lti_course
-      return @lti_course if defined? @lti_course
-      puts 'Called LTI Course'
-      @lti_course = Course.find_by(
+      puts 'Called lti_course'
+      @lti_course ||= Course.find_by(
         consumer_key: params[:oauth_consumer_key]
       )
       # TODO: Error if no course?
