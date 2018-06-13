@@ -2,6 +2,7 @@ module DceLti
   class SessionsController < ApplicationController
     include SessionHelpers
 
+    skip_before_filter :create, :verify_authenticity_token
     skip_before_filter :verify_authenticity_token, :authenticate_via_lti
 
     def create

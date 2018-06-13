@@ -3,11 +3,8 @@
 module DceLti
   module SessionHelpers
     def valid_lti_request?(request)
+        binding.pry
       puts 'Valid 0'
-      puts 'REQUEST'
-      puts request.body.to_yaml
-      # puts 'REQUEST BASE SIG'
-      # puts request.signature_base_string
       puts 'REQUEST SIGNATURE'
       puts request[:oauth_signature]
       puts 'TRY OAUTH'
