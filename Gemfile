@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby "2.4.3"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.10'
+gem 'rails', '5.0.0'
 
 # Use Puma as the app server
 gem 'puma'
@@ -73,7 +73,7 @@ group :development do
   gem "binding_of_caller"
 
   # Disable logging Assets in the Server log
-  gem 'quiet_assets'
+  # gem 'quiet_assets'
 
   # Code Linting
   gem 'rubocop', require: false
@@ -108,7 +108,7 @@ group :development, :test do
   gem 'faker'
 
   # gem 'rspec'
-  gem "rspec-rails", "~> 3.4.0"
+  gem "rspec-rails", "~> 3.8"
 
   # Test / Code quality utils
 
