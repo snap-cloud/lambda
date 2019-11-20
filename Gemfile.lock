@@ -430,7 +430,7 @@ GEM
       procto (~> 0.0.2)
     xpath (2.1.0)
       nokogiri (~> 1.3)
-    yard (0.9.12)
+    yard (0.9.20)
 
 PLATFORMS
   ruby
