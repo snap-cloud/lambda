@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.4.3"
+ruby "2.5.5"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.10'
@@ -45,7 +45,8 @@ gem 'rack-plastic'
 gem 'p3p'
 # LTI data is stored in a session, and is too big for a cookie
 gem 'redis-session-store'
-gem 'omniauth-google-oauth2'
+gem 'omniauth'
+gem 'omniauth-google-oauth2', '~> 0.8.0'
 
 # Admin Dashboard-y Things
 gem 'blazer' #, path: '../blazer/' # write and save queries
