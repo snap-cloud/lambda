@@ -17,22 +17,9 @@ class SubmissionsController < ApplicationController
     @submissions = @question.submissions
   end
 
-  # GET /submissions/new
-  # def new
-  # end
-
-  # GET /submissions/1/edit
-  # def edit
-  # end
-
   # POST /submissions
   # POST /submissions.json
   # def create
-  # end
-
-  # PATCH/PUT /submissions/1
-  # PATCH/PUT /submissions/1.json
-  # def update
   # end
 
   # DELETE /submissions/1
@@ -41,7 +28,7 @@ class SubmissionsController < ApplicationController
   # end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_submission
     @submission = Submission.find(params[:id])
   end
