@@ -5,7 +5,9 @@ Lambda is an LTI app for autograding [Snap<em>!</em>][1] programs.
 log in through LTI - which means that their scores can be saved to whatever
 LMS you're course is using, like Canvas or edX.
 
-[1]: http://snap.berkeley.edu
+**N.B.** As of 2019, the LTI functionality is in a poor state, but the rest of the app works.
+
+[1]: https://snap.berkeley.edu
 
 ## Overview
 
@@ -20,7 +22,7 @@ We have:
 ### Running in Development
 If you're developing against a public LMS, like a hosted edX course or Canvas
 instance, then you'll need ngrok or another tool to expose your dev environment
-to the internet. 
+to the internet.
 
 The ngrok configuration is mostly setup, but you'll need an API key. Once that
 is set, you can use `./launch-lti` to get it running.
@@ -54,25 +56,19 @@ If you've already cloned without `--recursive` do:
 * `git submodule update`
 
 ## Development Getting Started
-Once things are setup, use `./run` to launch Rails and start ngrok.
+Once things are setup, use `./run` to launch Rails and start ngrok. You can skip this if you're not using LTI.
 
-After you have cloned this repo, run this setup script to set up your machine
-with the necessary dependencies to run and test this app:
-
-    % ./bin/setup
-
-It assumes you have a machine equipped with Ruby, Postgres, etc. If not, set up
-your machine with `brew` (on a Mac).
+**A working instance (even locally) requires both Redis and Postgres to be running**.
 
 ---
 
-
 ## Requirements and Setup
 * Ruby version
-	* 2.3.3
+	* 2.5.5
 * System dependencies
-	* Postgres, qt, ngrok
-	* `brew install postgres qt`
+	* Postgres
+	* Redis
+	* `brew install postgres qt redis`
 	* OSX Install postgres:
 	```sh
 	# To have launchd start postgresql at login:
@@ -92,10 +88,14 @@ your machine with `brew` (on a Mac).
 * Database initialization
 	* TODO create seeds file
 * How to run the test suite
-* Services (job queues, cache servers, search engines, etc.)
-* Deployment instructions
 
+## Start the App:
+
+```sh
+foreman start -f Procfile.dev
+```
+
+This ensures redis and postgres are running on your dev machine.
 
 ## Canvas Testing Configuration
 URL: https://bcourses.berkeley.edu/courses/1268501/settings/configurations
-
