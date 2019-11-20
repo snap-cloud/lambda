@@ -1,9 +1,37 @@
+# require 'oauth/request_proxy/rack_request'
+
 module DceLti
   module SessionHelpers
     def valid_lti_request?(request)
+      # binding.pry
+      puts 'Valid_lti_request 0'
+      puts 'REQUEST SIGNATURE'
+      puts request[:oauth_signature]
+      puts 'TRY OAUTH'
+      # binding.pry
+      oauthSig = OAuth::Signature.build(request, consumer_secret: consumer_secret)
+      puts oauthSig
+      puts oauthSig.signature
+      puts 'Verifying....'
+      puts oauthSig.verify()
+      begin
       tp_valid = tool_provider.valid_request!(request)
+      rescue Exception => e
+        puts 'ERROR: '
+        puts e
+        # puts e.message
+        error = OAuth::Unauthorized.new(request)
+        # binding.pry
+        @errors ||= []
+        @errors.push(e.backtrace.inspect)
+        puts e.backtrace.inspect
+        return false
+      end
+      puts "Valid 1 #{tp_valid}"
       nonce_valid = Nonce.valid?(tool_provider.oauth_nonce)
+      puts "Valid 2 #{nonce_valid}"
       timestamp_valid = TimestampValidator.valid?(tool_provider.oauth_timestamp)
+      puts "Valid 3 #{timestamp_valid}"
       tp_valid && nonce_valid && timestamp_valid
     end
 
@@ -19,17 +47,21 @@ module DceLti
       find_from_config(:consumer_secret)
     end
 
+    # TODO: Clean this up / replace with just lti_course
     def find_from_config(attribute)
-      value = Engine.config.send(attribute)
-      if value.respond_to?(:call)
-        value.call(launch_params)
-      else
-        value
-      end
+      lti_course.send(attribute)
     end
 
     def redirect_after_successful_auth
       Engine.config.redirect_after_successful_auth.call(self)
+    end
+
+    def lti_course
+      puts 'Called lti_course'
+      @lti_course ||= Course.find_by(
+        consumer_key: params[:oauth_consumer_key]
+      )
+      # TODO: Error if no course?
     end
 
     def tool_provider

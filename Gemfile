@@ -1,19 +1,20 @@
 source 'https://rubygems.org'
 
-ruby "2.3.3"
+ruby "2.5.5"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7.1'
+gem 'rails', '4.2.11.1'
 
 # Use Puma as the app server
 gem 'puma'
 
 # Always use postgres as the db
-gem 'pg'
+gem 'pg', '0.21.0'
 
 # Frontend Utilities
 # Use SCSS for stylesheets
 # TODO: Upgrade to v4
+# TODO: Move to webpacker?
 gem 'bootstrap-sass'
 gem 'sass-rails', '~> 5.0'
 gem 'slim-rails' # Templates
@@ -39,13 +40,14 @@ gem "flutie"
 gem "high_voltage"
 
 # User Accounts & LTI
-gem 'ims-lti'
+# gem 'oauth', '0.5.2'
+gem 'ims-lti', '< 2'
 gem 'rack-plastic'
 gem 'p3p'
 # LTI data is stored in a session, and is too big for a cookie
 gem 'redis-session-store'
-# TODO: OmniAuth?
-gem 'omniauth-google-oauth2'
+gem 'omniauth'
+gem 'omniauth-google-oauth2', '~> 0.8.0'
 
 # Admin Dashboard-y Things
 gem 'blazer' #, path: '../blazer/' # write and save queries
@@ -98,7 +100,7 @@ group :development, :test do
 
   gem "bundler-audit", require: false
   gem "dotenv-rails"
-  gem "factory_girl_rails"
+  gem "factory_bot_rails"
   gem "pry-byebug"
   gem "pry-rails"
 

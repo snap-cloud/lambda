@@ -1,3 +1,8 @@
+require 'oauth/request_proxy/rack_request'
+
+OAUTH_10_SUPPORT = true
+
+# TODO: Move this logic to LTI controller.
 DceLti::Engine.setup do |lti|
   # "provider_*" attributes are used to describe this tool to the consumer,
   # where "consumer" is an LMS like Canvas. The defaults are below, uncomment
@@ -15,6 +20,7 @@ DceLti::Engine.setup do |lti|
   # The default post-auth redirect includes the session key and session id so
   # that we can instantiate a successful cookieless session if needed.
   lti.redirect_after_successful_auth = ->(controller) {
+    puts 'Called Redirect from config'
     session_key_name = Rails.application.config.session_options[:key]
     if controller.params[:question_id]
       Rails.application.routes.url_helpers.question_path(
@@ -28,29 +34,6 @@ DceLti::Engine.setup do |lti|
     end
   }
 
-
-  # The consumer_secret and consumer_key should be a lambda that will be
-  # evaluated in the context of your application. You might use a service
-  # object or model proper to find key and secret pairs. Example:
-  lti.consumer_secret = -> (launch_params) {
-    result = Course.find_by(consumer_key: launch_params[:oauth_consumer_key])
-    if result.nil?
-      (ENV['LTI_CONSUMER_SECRET'] || 'consumer_secret')
-    else
-      result.consumer_secret
-    end
-  }
-  lti.consumer_key = ->(launch_params) {
-    result = Course.find_by(consumer_key: launch_params[:oauth_consumer_key])
-    if result.nil?
-      (ENV['LTI_CONSUMER_KEY'] || 'consumer_key')
-    else
-      result.consumer_key
-    end
-  }
-
-  # Simple function to pass all keys to the next page
-  # TODO: This is only for testing, oauth data should be filtered.
   lti.copy_launch_attributes_to_session = %w|
   resource_link_title
   resource_link_description
@@ -67,8 +50,6 @@ DceLti::Engine.setup do |lti|
   tool_consumer_instance_contact_email
   lis_outcome_service_url
   |
-  #   ext_outcome_data_values_accepted
-
 
   # `lti.copy_launch_attributes_to_session` is an array of attributes to copy
   # to the default rails session from the IMS::LTI::ToolProvider instance after

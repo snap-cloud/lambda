@@ -2,3 +2,16 @@ h2
   | Invalid Session
 p
   | Oops. You were unable to be logged in.
+
+- if current_user&.admin?
+  h2 Admin Error Info
+  - for error in (@errors || [])
+    p = error
+    
+  h3 Params
+  table.table.table-striped
+    tbody
+      - for param in params
+        tr
+          th = param[0]
+          td = param[1]

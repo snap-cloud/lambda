@@ -1,4 +1,3 @@
 web: bundle exec bin/rails s
 redis: redis-server
-postgres: postgres -D /usr/local/var/postgres/
-
+postgres: pg_ctl stop -D /usr/local/var/postgres/ && postgres -D /usr/local/var/postgres/

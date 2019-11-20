@@ -1,4 +1,6 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :developer unless Rails.env.production?
+
   provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_SECRET"],
     {
       name: "google",
@@ -9,8 +11,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       image_size: 50
     }
 
- OmniAuth.config.on_failure = Proc.new do |env|
-   SessionsController.action(:auth_failure).call(env)
- end
+  OmniAuth.config.on_failure = Proc.new do |env|
+    SessionsController.action(:auth_failure).call(env)
+  end
 end
-
