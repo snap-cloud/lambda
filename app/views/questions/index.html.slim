@@ -14,6 +14,7 @@ h1
         - if current_user && current_user.admin
           th Test File
           th Edit
+          th Submissions
           th Delete
       tbody
         - @questions.each do |question|
@@ -33,6 +34,8 @@ h1
                 = link_to 'View Test File', test_file_question_path(question.id)
               td.vert-align
                 = link_to 'Edit', edit_question_path(question)
+              td.vert-align
+                = link_to 'Submissions', submissions_path(question)
               td.vert-align
                 = link_to  raw('<strong>&times;</strong>'), question, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
 

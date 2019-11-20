@@ -1,0 +1,18 @@
+h1 Submissions for #{@question.title}
+
+p
+  strong #{@submissions.count} Submissions
+
+table.table.table-striped.table-bordered
+  thead
+    tr
+      td User Id
+      td Submitted At
+      td View
+  tbody
+     - @submissions.each do |submission|
+        tr
+          td = submission.user_id
+          td = submission.created_at
+          td
+            a(href = submission_path(submission)) XML
