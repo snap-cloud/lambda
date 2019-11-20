@@ -131,7 +131,7 @@ GEM
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     fattr (2.3.0)
-    ffi (1.9.18)
+    ffi (1.11.2)
     flay (2.10.0)
       erubis (~> 2.7.0)
       path_expander (~> 1.0)
