@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   if ENV.fetch("HEROKU_APP_NAME", "").include?("staging-pr-")
     ENV["APPLICATION_HOST"] = ENV["HEROKU_APP_NAME"] + ".herokuapp.com"
   end
+
   config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
   config.cache_classes = true
   config.eager_load = true
@@ -21,4 +24,3 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.default_url_options = { host: ENV.fetch("APPLICATION_HOST") }
 end
-Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
