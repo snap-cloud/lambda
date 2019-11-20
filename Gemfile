@@ -3,17 +3,18 @@ source 'https://rubygems.org'
 ruby "2.5.5"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.10'
+gem 'rails', '4.2.11.1'
 
 # Use Puma as the app server
 gem 'puma'
 
 # Always use postgres as the db
-gem 'pg', '0.20.0'
+gem 'pg', '0.21.0'
 
 # Frontend Utilities
 # Use SCSS for stylesheets
 # TODO: Upgrade to v4
+# TODO: Move to webpacker?
 gem 'bootstrap-sass'
 gem 'sass-rails', '~> 5.0'
 gem 'slim-rails' # Templates
