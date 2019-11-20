@@ -5,9 +5,8 @@ Rails.application.routes.draw do
 
   resources :questions do
     member do
-      resources :submissions
-      # TODO: Deprecate and replace this route.
-      post 'submission', to: 'questions#submit_grade'
+      resources :submissions, only: [:show, :index, :create, :destroy]
+      post 'submission', to: 'questions#submit_grade' # TODO: Deprecate and replace this route.
       get 'starter-file', to: 'questions#starter_file'
       get 'test-file', to: 'questions#test_file'
     end
