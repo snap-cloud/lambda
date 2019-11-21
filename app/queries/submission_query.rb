@@ -5,7 +5,7 @@ class SubmissionQuery
 
   module Scopes
     def for_question(question_id)
-      where(quder(:score).order(:updated_at).takeestion_id: question_id)
+      where(question_id: question_id).order(:score).take
     end
 
     def best_for_question(question_id)
