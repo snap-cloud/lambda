@@ -28,10 +28,10 @@ h1
             td.vert-align
               = truncate question.content
             td.vert-align
-              = if question.starter_file then link_to 'View Starter File', starter_file_question_path(question.id) else ''
+              = question.starter_file ? link_to('View', starter_file_question_path(question)) : ''
             - if current_user && current_user.admin
               td.vert-align
-                = link_to 'View Test File', test_file_question_path(question.id)
+                = link_to 'View', test_file_question_path(question.id)
               td.vert-align
                 = link_to 'Edit', edit_question_path(question)
               td.vert-align
