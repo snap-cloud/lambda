@@ -13,7 +13,6 @@ Bundler.require(*Rails.groups)
 # FIXME: Why is this necessary.
 Dotenv::Railtie.load if Rails.env == 'development'
 
-
 module Lambda
   class Application < Rails::Application
     config.i18n.enforce_available_locales = true

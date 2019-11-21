@@ -7,7 +7,7 @@ data_sources:
     # statement timeout, in seconds
     # applies to PostgreSQL only
     # none by default
-    timeout: 10
+    timeout: 30
 
     # time to cache results, in minutes
     # can greatly improve speed
@@ -41,7 +41,7 @@ user_class: User
 # user_name: name
 
 # optional auth method to use as a before_action (default: nil)
-before_action: :require_admin
+before_action_method: :require_admin
 
 # email to send checks from
 from_email: admin@<%= ENV["APPLICATION_HOST"] %>
